@@ -1,0 +1,141 @@
+@charset "utf-8";
+/* CSS Document */
+html,body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0;}
+body{font-size:16px;font-family:"MS Serif", "New York", serif, "微软雅黑";}
+img{border:none;}
+li{list-style:none;}
+input,select,textarea{outline:none;border:none;}
+textarea{resize:none;}
+a{text-decoration:none;color:#000;}
+/*清除浮动*/
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+.fl{float:left}
+.fr{float:right}
+
+.top{
+	width:100%;
+	background-color:#f7f7f7;
+	}
+.top_middle {
+	width:1000px;
+	height:60px;
+	margin:0 auto;
+	}
+.top_img{
+	height:60px;
+	padding-top:15px;
+	float:left;
+	}
+.top_ul {
+	margin-left:60px;
+	float:left;
+	line-height:60px;}
+.top_ul li{
+	float:left;
+	}
+/*.top_ul li:nth-child(2){
+	margin:0 20px;}*/
+.top_ul p{
+	padding:0 10px;}
+.top_ul a:hover{
+	color:#3CF;
+	}
+.top_deng {
+	padding-left:46px;
+	background:url(../image/logo_xin_03.png) no-repeat 0 12px;
+	}
+.top_deng p{
+	float:left;
+	line-height:60px;
+	}
+.top_deng p:nth-child(2){
+	margin:0 36px;}
+/*--------------------------------------------------------------------------------*/	
+.main{
+	width:1000px;
+	margin:0 auto;
+	}
+.main_top_ad{
+	height:90px;
+	margin-bottom:30px;}
+.main_tabs ul li{
+	float:left;
+	height:40px;
+	width:71px;
+	line-height:40px;
+	background-color:#2076ce;
+	color:#fff;
+	text-align:center;
+	}
+.main_tabs ul li:last-child{
+	height:40px;
+	width:6px;
+	background-color:#2076ce;
+	}
+.main_tabs ul a{
+	color:#fff;}
+.main_tabs ul a:hover {
+	color:#FF0}
+.main_tabs ul li:first-child{
+	background-color:#bc1a00;
+	}
+.main_info {
+	height:40px;
+	width:100%;
+	background-color:#f6f6f6;
+	}
+.main_upDown p{
+	line-height:40px;
+	text-align:center;
+	padding: 0 50px 0 18px;
+	background:url(../image/sanjiao_03.png) no-repeat right center;
+	}
+.main_ol li{
+	float:left;
+	margin-left:20px;
+	line-height:40px;
+	padding-left:10px
+	}
+.main_ol li:nth-child(2),.main_ol li:nth-child(3){
+	background:url(../image/sanUp_03.png) no-repeat left 12px;
+	}
+.main_search{
+	height:64px;
+	}
+.main_search_ol li,.main_search_ol p{
+	float:left;
+	line-height:64px;
+	}
+.main_search_ol p{
+	padding:0 10px;}
+.main_search_ol a{
+	color:#00F;}
+.main_search_form{
+	height:48px;
+	padding-top:16px;}
+.main_search_form .submit{
+	line-height:32px;
+	width:274px;
+	border:1px solid #03F;
+	text-indent:5px;
+	background:url(../image/search_form_03.png) no-repeat right center;
+	padding-right:26px;
+	}
+/*--------------------------------------------------------------------------*/
+.bottom{
+	width:100%;
+	}
+.bottom_center{
+	height:500px;
+	margin:0;
+	margin-left:260px;
+	margin-right:260px;
+	background:#C6C;
+	}
+.botton_right{
+	background:#000;
+	}	
+.botton_left_center table{
+	text-align:center;}
+	
