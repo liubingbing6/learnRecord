@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload=function(){
+	var oAdd=document.getElementById('add');
+	var oAddBefore=document.getElementById('addBefore');
+	var oDelet=document.getElementById('delet');
+	var oText=document.getElementById('text');
+	var oUl=document.getElementsByTagName('ul')[0];
+	oAdd.onclick=function(){
+		var oLi=document.createElement('li');
+		oLi.innerHTML=oText.value;
+		oUl.appendChild(oLi);
+		};
+	oDelet.onclick=function(){
+		var oLi=document.getElementsByTagName('li');
+		if(oLi.length>0){
+			oUl.removeChild(oLi[oLi.length-1]);
+			}
+		};
+		
+	oAddBefore.onclick=function(){
+		var oLi=document.getElementsByTagName('li');
+		var tLi=document.createElement('li');
+		if(oLi.length>0){
+			tLi.innerHTML=oText.value;
+			oUl.insertBefore(tLi,oLi[0]);
+			}
+		else{
+			oUl.appendChild(tLi);
+			}
+		};
+	};
+</script>
+</head>
+
+<body>
+<input type='button' value="添加" id='add'/>&nbsp;&nbsp;&nbsp;
+<input type="button" value="插入到指定节点前" id="addBefore"/>&nbsp;&nbsp;&nbsp;
+<input type="button" value="删除" id="delet"/><br/>
+<input type="text" id='text'/>
+<ul>
+	
+</ul>
+</body>
+</html>

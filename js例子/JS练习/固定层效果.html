@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;}
+#div1{
+	width:100%;
+	height:100px;
+	background:#06C;
+	position:fixed;
+	top:0;}
+#div2{
+	width:1004px;
+	height:20000px;
+	margin:0 auto;
+	background:#000;
+	margin:110px auto 0;
+	}
+#div3{
+	width:1004px;
+	height:50px;
+	background:#906;
+	}
+.active{
+	position:fixed;
+	top:100px;
+	}
+</style>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+$(function(){
+	$(window).bind('scroll',function(){
+		//var clHeight=document.documentElement.clientHeight;
+		var osTop=$("body").scrollTop();
+		console.log(osTop);
+		if(osTop>=1000){
+			$("#div3").addClass("active");
+		}	
+		else{
+			$("#div3").removeClass("active");
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+<div id="div2">
+	<div id="div3"></div>
+</div>
+</body>
+</html>

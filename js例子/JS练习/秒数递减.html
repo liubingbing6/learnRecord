@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+ 
+</head>
+
+<body>
+<h4>操作成功</h4>
+    <p><span id="time">5</span>秒后回到主页<a href="javascript:history.back()">返回</a></p>
+   
+</body>
+<script type="text/javascript">
+ 
+	 var num = document.getElementById("time").innerHTML;
+	 num = parseInt(num, 10)
+	 //alert(typeof num)
+      /* var i = setInterval("if(num > 1){document.getElementById('time').innerHTML = --num;}else{window.close(this);}", 1000);*/
+       function dre() {
+       	var i = setTimeout(function () {
+       		if (num<1) {
+       			return;
+       		}else{
+       			num--;
+       			dre();
+       		}
+       		document.getElementById('time').innerHTML = num;
+       	}, 1000)
+       }
+       dre();
+    </script>
+</html>

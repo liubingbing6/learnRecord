@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1{
+	width:100px;
+	height:200px;
+	position:absolute;
+	right:0;
+	bottom:0;
+	background:#F00;}
+body{
+	height:20000px;}
+</style>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="../JS练习/move.js"></script>
+<script>
+/*window.onscroll=function(){
+	var oDiv=document.getElementById('div1');
+	var clHeight=document.documentElement.clientHeight;
+	var oHeight=oDiv.offsetHeight;
+	var scTop=document.documentElement.scrollTop||document.body.scrollTop;
+	var ht=clHeight-oHeight+scTop+'px';
+	oDiv.style.top=ht;
+	};*/
+$(function(){
+	//var oDiv=document.getElementById('div1');
+	//var oHeight=oDiv.offsetHeight;
+	var oHeight=$("#div1").height();
+	$(window).bind('scroll',function(){
+		var clHeight=$(window).height();
+		var scTop=$(document).scrollTop();
+		var ht=clHeight-oHeight+scTop+'px';
+		$("#div1").animate({top:ht},30);
+	});
+});
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>

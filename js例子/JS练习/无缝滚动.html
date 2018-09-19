@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{margin:0;
+padding:0;}
+#div1{
+	position:relative;
+	height:240px;
+	width:1280px;
+	margin:100px auto;
+	overflow:hidden;}
+#oUl{
+	position:absolute;
+	left:0;
+	top:0;
+	}
+#div1 li{
+	list-style:none;
+	float:left;
+	height:240px;
+	width:320px;
+	}
+</style>
+<script>
+var speed=-2;
+window.onload=function(){
+	var oUl=document.getElementById('oUl');
+	var oLi=oUl.getElementsByTagName('li');
+	var btnLeft=document.getElementById('btnLeft');
+	var btnRight=document.getElementById('btnRight');
+	var timer=null;
+	
+	oUl.innerHTML+=oUl.innerHTML;
+	oUl.style.width=oLi[0].offsetWidth*oLi.length+'px';
+	timer=setInterval(move,30);
+	oUl.onmouseover=function(){
+		clearInterval(timer);
+		};
+	oUl.onmouseout=function(){
+		timer=setInterval(move,30);
+		};
+		
+	btnLeft.onclick=function(){
+		speed=-2;
+		};
+	btnRight.onclick=function(){
+		speed=2;
+		};
+	};
+	
+function move(){
+	if(oUl.offsetLeft<-oUl.offsetWidth/2){
+		oUl.style.left='0';
+		}
+	else
+	if(oUl.offsetLeft>0){
+		oUl.style.left=-oUl.offsetWidth/2+'px';
+		}
+	oUl.style.left=oUl.offsetLeft+speed+'px';				 
+	}
+
+</script>
+</head>
+
+<body>
+<input type="button" id="btnLeft" value="向左走"/>
+<input type='button' id="btnRight" value="向右走"/>
+<div id="div1">
+    <ul id='oUl'>
+        <li><a href="javascript:(0)"><img src="picture/images/1.png"/></a></li>
+        <li><a href="javascript:(0)"><img src="picture/images/2.png"/></a></li>
+        <li><a href="javascript:(0)"><img src="picture/images/3.png"/></a></li>
+        <li><a href="javascript:(0)"><img src="picture/images/4.png"/></a></li>
+    </ul>
+</div>
+</body>
+</html>

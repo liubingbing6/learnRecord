@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+font{
+	font-size:100px}
+</style>
+<script>
+function aUo(e){
+	if(e<10){
+		return '0'+e;
+		}
+	else{
+		return ''+e;
+		}
+	}
+window.onload=function(){
+	setInterval(change,1000);
+	function change(){	
+	var oImag=document.getElementsByTagName('img');
+	var time=new Date();
+	var str=aUo(time.getHours())+aUo(time.getMinutes())+aUo(time.getSeconds());
+	for(var i=0;i<oImag.length;i++){
+		oImag[i].src="picture/images/"+str.charAt(i)+"_03.png";
+		}						 
+	}
+	change();
+}
+
+</script>
+
+<!--<script src="JS练习/jquery-1.9.1.js"></script>
+<script>
+function aUo(e){
+	if(e<10){
+		return '0'+e;
+		}
+	else{
+		return ''+e;
+		}
+	}
+$(function(){
+	setInterval(change,1000);
+	//change();
+});
+function change(){
+	var time=new Date();
+	var str=aUo(time.getHours())+aUo(time.getMinutes())+aUo(time.getSeconds());
+	var oDiv=$('#oDiv img');
+	for(var i=0;i<oDiv.length;i++){
+		$('#oDiv>img').attr("src",'JS练习/picture/images/'+str.charAt()+'_03.png');
+		}
+	}
+</script>-->
+</head>
+
+<body>
+<div id="oDiv">
+    <img src="picture/images/0_03.png"/>
+    <img src="picture/images/0_03.png"/>
+    <font>:</font>
+    <img src="picture/images/0_03.png"/>
+    <img src="picture/images/0_03.png"/>
+    <font>:</font>
+    <img src="picture/images/0_03.png"/>
+    <img src="picture/images/0_03.png"/>
+</div>
+</body>
+</html>

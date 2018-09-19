@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#parent{
+	width:600px;
+	height:20px;
+	background:#CCC;
+	position:relative;
+	margin:10px auto;
+	}
+#div1{
+	width:20px;
+	height:20px;
+	background:red;
+	position:absolute;
+	left:0;
+	top:0;}
+#div2{
+	position:relative;
+	width:400px;
+	height:300px;
+	border:1px solid black;
+	overflow:hidden;}
+#div3{
+	position:absolute;
+	left:0;
+	top:0;}
+</style>
+<script>
+window.onload=function(){
+	var oParent=document.getElementById('parent');
+	var oChild=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var oDiv3=document.getElementById('div3');
+	var disX=null;
+	var disY=null;
+	oChild.onmousedown=function(ev){
+		var oEvent=ev||event;
+		disX=oEvent.clientX-oChild.offsetLeft;
+		document.onmousemove=function(ev){
+			var oEvent1=ev||event;
+			var l=oEvent1.clientX-disX;
+			if(l<0){
+				l=0;
+				}
+			else if(l>oParent.clientWidth-oChild.offsetWidth){
+				l=oParent.clientWidth-oChild.offsetWidth;
+				}
+			oChild.style.left=l+'px';
+			var scale=l/(oParent.offsetWidth-oChild.offsetWidth);
+			document.title=scale;
+			
+			oDiv3.style.top=-scale*(oDiv3.offsetHeight-oDiv2.offsetHeight)+'px';
+			};
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+			};
+		return false;
+		};
+	};
+</script>
+</head>
+
+<body>
+<div id="parent">
+	<div id="div1"></div>
+</div>
+<div id="div2">
+	<div id="div3">
+    	昨日，在俄罗斯阿拉比诺靶场展开的“坦克两项-2015”锦标赛完成第三、第四组比赛。根据俄媒发布的消息，目前单车赛的四组比赛已经结束，中国、俄罗斯、塞尔维亚、哈萨克斯坦分别取得本小组冠军。比赛成绩前四名则由俄罗斯、哈萨克斯坦、亚美尼亚、中国四个代表团获得。8月6日将进行决赛。另据报道，中国队在“伞兵排”竞赛中处于领先地位，而在“里海赛马”项目中中国队三个车组分列1、4、5名，总分第一。
+        刚刚见完投资人的韩坤很兴奋，自己第三次创业的视频产品迄今为止已经拥有了超5亿的播放量，韩坤直言这是他之前都不敢想象的数字。
+
+这个数据上的飞跃来源于秒拍于今年五月底推出的一款APP——小咖秀，借助提供类似后舍男生当年的“对口型”表演方式，再嵌入当下热门的影视剧资源，小咖秀在微博上复制了一阵又一阵的刷屏热潮，包括王珞丹、蒋欣、张歆艺在内的等明星都成为了该APP的坚实拥趸者，一位草根用户则得益于自身夸张的表演天赋微博粉丝数直接暴增了70多万。
+
+截止日前，小咖秀日活目前已达500万，总用户量1500多万，日均原创短视频达到120万条，连续8天在App Store的总榜单上排名第一，同时也带动母应用秒拍的排名闯入前三。
+
+“爆红就是因为逗比接地气？”
+
+“爆红是个意外，我们曾预想到它会火，但没有想到会像现在这么火。”小咖秀的直接产品负责人雷涛说。据他透露，小咖秀的产品开发只用了团队不到两天的时间，现在产品在宣传上几乎没花一分钱。
+
+而创始人韩坤对于爆红原因的解释则更为简单直接：逗比接地气。这位70后大叔对90后文化的推崇有着高涨的热情，他自我调侃道，开发小咖秀产品就是为了全方位释放90后鬼马恶搞的天性和表演欲望。
+
+在社会化传播所具有的强大助推力量下，小咖秀在微博话题上的热度居高不下，根据对秒拍产品团队、投资人及使用者的走访，凤凰科技总结该产品爆红的原因主要有以下几点：
+
+1、国外类似的成功产品的样本作用。在小咖秀之前，美国有一款名为“Dubsmash”的同类应用在今年年初爆红，短时间内登上德、英、法等二十余国AppStore榜首，陈意涵、罗志祥、水原希子等明星亦是Dubsmash的忠实用户。不过，因为种种原因Dubsmash并没有在中国获得普及，雷涛表示这样的契机让小咖秀产品团队看到了机会。
+
+2、秒拍产品和团队自身的经验积累。秒拍产品团队的构成人员基本上都拥有视频行业超10年的工作经验，因此能在两天内迅速打造一款产品；另外通过对秒拍产品后台数据的分析发现对口视频所占比重较大，故而萌发做小咖秀产品的想法。
+
+3、新浪微博平台的传播作用。新浪微博同时具备的媒体和社交的属性提供了热门话题快速持续发酵的土壤，并且新浪微博同时也是小咖秀产品的A轮领投方，在推广位资源上给了小咖秀产品很大倾斜；另一方面，曾主动找到王珞丹等明星使用产品，通过明星们先期在新浪微博上的示范效应（小咖秀咖秀产品的投资方之一就是由李冰冰、任泉组成的Star VC传统，他们同时也在微博上不遗余力的推广该产品)，带动了普通用户的大规模参与。
+
+4、“病毒性”的接地气的内容提供。不同于样本产品Dubsmash对音乐MV类内容的侧重，小咖秀则选择了更为本地化的热门影视剧和综艺资源。据悉，从小咖秀后台数据来看，使用率排名靠前的素材包括社会摇“金星橙汁”、“Grace姐姐胖嘟嘟”、“岳云鹏五环之歌”、“甜馨我们白着呢”、“小萝莉背乘法口诀”等。
+
+5、全民娱乐的时代背景。当下的年轻人爱show，乐于表现自己，崇尚与众不同，另一方面恶搞文化、段子文化也是社交平台上的传播热点所在，小咖秀恰恰给了年轻人展现自己的机会，这也让该平台上足够丰富的内容被生产出来。另外，小咖秀提供的有趣的声音库，夸张的表情也是人们愿意去传播的最大助力。
+    </div>
+</div
+></body>
+</html>

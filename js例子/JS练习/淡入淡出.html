@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1{
+	width:100px;
+	height:600px;
+	background-color:#F00;
+	position:absolute;
+	left:-100px;}
+#div1 span{
+	width:20px;
+	height:50px;
+	background-color:#093;
+	right:-20px;
+	top:5px;
+	position:absolute;}
+</style>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+$(function(){
+	$("#btn").click(function(){
+		var div1=$("#div1");
+		//$("#div1").fadeTo(800,0.5,function(){div1.fadeTo(800,1)});
+		
+			div1.fadeOut(2000,function(){div1.fadeIn(2000)});
+	});		
+	var oDiv=$("#div1");
+	oDiv.mouseover(function(){
+		oDiv.stop();
+		oDiv.animate({left:0},500);					
+	});
+	oDiv.mouseout(function(){
+		oDiv.stop();
+		oDiv.animate({left:-100},500);					
+	});
+});
+</script>
+</head>
+
+<body>
+<input type="button" id="btn" value="点击"/>
+<div id="div1">
+	<span>分享</span>
+</div>
+</body>
+</html>

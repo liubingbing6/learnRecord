@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body{
+	margin:0;
+	padding:0;}
+div{
+	margin:40px auto 0;
+	width:360px;
+	height:240px;
+	position:relative;
+	border:5px solid #ccc;
+	background:#000}
+div a{
+	position:absolute;
+	border:8px solid #000;
+	width:40px;
+	height:40px;
+	color:#fff;
+	top:92px;
+	font-size:30px;
+	line-height:40px;
+	text-align:center;
+	font-weight:bold;
+	text-decoration:none;
+	filter:alpha(opacity:30);
+	opacity:0.3;
+	z-index:999;
+	display:none;}
+div a:hover{
+	filter:alpha(opacity:100);
+	opacity:1;}
+div #prev{
+	position:absolute;
+	left:10px;
+	}
+div #next{
+	position:absolute;
+	right:10px;
+}
+#topNext,#bottomNext{
+	position:absolute;
+	width:360px;
+	height:30px;
+	line-height:30px;
+	background:#000;
+	color:#fff;
+	left:0;
+	display:block;
+	z-index:10;
+	text-align:center;
+	filter:alpha(opacity:50);
+	opacity:0.5;
+	}
+div #topNext{
+	top:0;
+	margin-top:0;
+	}
+div #bottomNext{
+	bottom:0;
+	}
+div #img1{
+	position:absolute;
+	top:0;
+	left:0;
+	width:360px;
+	height:240px;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var oPrev=document.getElementById('prev');
+	var oNext=document.getElementById('next');
+	var topNext=document.getElementById('topNext');
+	var bottomNext=document.getElementById('bottomNext');
+	var oImage=document.getElementById('img1');
+	var arrImage=["picture/images/1.jpg","picture/images/2.jpg","picture/images/3.jpg","picture/images/4.jpg","picture/images/5.jpg"];
+	var arrWords=["这是第一张图片","这是第二张图片","这是第三张图片","这是第四张图片","这是第五张图片"];
+	var now=0;
+	function cTab(){
+		topNext.innerHTML=now+1+"/"+arrImage.length;
+		bottomNext.innerHTML=arrWords[now];
+		oImage.src=arrImage[now];
+		}
+	cTab();
+		oNext.onclick=function(){
+		now++;
+		if(now==arrImage.length){
+			now=0;
+			}
+		cTab()
+		};
+	oPrev.onclick=function(){
+		now--;
+		if(now==-1){
+			now=arrImage.length-1;
+			}
+		cTab();
+		 };
+	/*setInterval(function(){
+		now++;
+		if(now==arrImage.length){
+			now=0;
+			}
+		cTab();		 				 
+		},2000);*/
+	oDiv.onmouseover=function(){
+		oPrev.style.display='block';
+		oNext.style.display='block';
+		};
+	oDiv.onmouseout=function(){
+		oPrev.style.display='none';
+		oNext.style.display='none';
+	};
+	};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <a href="javascript:(0)" id="prev">&lt;</a>
+    <a href="javascript:(0)" id="next">&gt;</a>
+    <p id="topNext"></p>
+    <span id="bottomNext"></span>
+    <img src="picture/images/1.jpg" id="img1"/>
+</div>
+</body>
+</html>

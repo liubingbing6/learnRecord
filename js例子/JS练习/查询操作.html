@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+th,td,table{
+	border:1px solid #000;
+	width:300px;
+	margin:0 auto;
+	text-align:center;
+	}
+</style>
+<script>
+window.onload=function(){
+	var oTbody=document.getElementById('tb1');
+	var oText=document.getElementById('text1');
+	var oSearch=document.getElementById('search');
+	oSearch.onclick=function(){
+		//var oText=document.getElementById('text1');
+		for(var i=0;i<oTbody.rows.length;i++){
+			
+			var oInner=oTbody.rows[i].cells[1].innerHTML.toLowerCase();
+			
+			var oTxt=oText.value.toLowerCase();
+			var arr=oTxt.split(' ');//对输入的字符串进行分割，然后查询
+			oTbody.rows[i].style.background='';//背景色全部设置为空；
+			for(var j=0;j<arr.length;j++){//查找字符串
+				//oTbody.rows[i].style.display='none';//查找时全部隐藏
+				if(oInner.search(arr[j])!=-1 && oTxt != ''){
+				oTbody.rows[i].style.background='yellow';
+				//oTbody.rows[i].style.display='block';//查找到了就显示出来
+				}
+				
+				}
+			
+			}
+		};
+	};
+</script>
+</head>
+
+<body>
+<input type="text" id="text1"/>
+<input type="button" id="search" value="搜索"/>
+    <div id="div1">
+      <table style="border:1px solid #000;">
+      	<thead>
+        	<tr>
+            	<th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tb1">
+        	<tr>
+            	<td>1</td>
+                <td>张三</td>
+                <td>22</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>2</td>
+                <td>李四</td>
+                <td>23</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>3</td>
+                <td>王二</td>
+                <td>221</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>4</td>
+                <td>赵武</td>
+                <td>35</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>5</td>
+                <td>王五</td>
+                <td>35</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>6</td>
+                <td>赵武</td>
+                <td>35</td>
+                <td></td>
+            </tr>
+        </tbody>
+      </table>  
+    </div>
+</body>
+</html>

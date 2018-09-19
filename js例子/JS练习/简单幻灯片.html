@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;}
+.play{
+	width:1920px;
+	height:769px;
+	position:relative;
+	overflow:hidden;}
+.play ol{
+	position:absolute;
+	bottom:0;
+	left:50%;
+	list-style:none;
+	z-index:11;}
+.play ol>li{
+	float:left;
+	margin:0 15px;
+	padding:0 4px;
+	border:1px solid #F90;
+	cursor:pointer;}
+.active{
+	background:#099;
+	}
+	
+.play ul{
+	height:769px;
+	position:absolute;
+	top:0;
+	left:0;
+	list-style:none;
+	}
+.play ul>li{
+	float:left;
+}
+
+</style>
+<script src="js/move.js"></script>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('play');
+	var oLi=oDiv.getElementsByTagName('ol')[0].getElementsByTagName('li');
+	var oUl=oDiv.getElementsByTagName('ul')[0];
+	var uLi=oUl.getElementsByTagName("li");
+	var timer=null;
+	oUl.style.width=uLi[0].offsetWidth*uLi.length+'px';
+
+	var now=0;
+	for(var i=0;i<oLi.length;i++){
+		oLi[i].index=i;
+		oLi[i].onclick=function(){
+			now=this.index;
+			tab();
+			};
+		}
+	function tab(){
+		for(var j=0;j<oLi.length;j++){
+				oLi[j].className='';
+		}
+		oLi[now].className='active';
+		//startMove(uLi[now-1],{opacity:30});
+		startMove(oUl,{left:-(uLi[0].offsetWidth)*now});
+
+	   }
+		   
+	function next(){
+		now++;
+		if(now==oLi.length){
+			now=0;
+		}
+			tab();
+		}
+	
+	timer=setInterval(next,3000);
+	oUl.onmouseover=function(){
+		clearInterval(timer);
+		};
+	oUl.onmouseout=function(){
+		timer=setInterval(next,3000);
+		};
+	
+	};
+</script>
+</head>
+
+<body>
+<div class="play" id="play">
+	<ol>
+    	<li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ol>
+    <ul>
+    	<li><a href="javascript:(0)"><img src="picture/images/mipad-7.jpg"/></a></li>
+        <li><a href="javascript:(0)"><img src="picture/images/mipad-5.jpg"/></a></li>
+        <li><a href="javascript:(0)"><img src="picture/images/mipad-8.jpg"/></a></li>
+        <li><a href="javascript:(0)"><img src="picture/images/mipad-9.jpg"/></a></li>
+    </ul>
+</div>
+</body>
+</html>

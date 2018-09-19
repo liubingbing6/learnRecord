@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+//事件委托好处之二，新添加的元素也会有之前的事件
+window.onload = function (){
+	var oUl = document.getElementsByTagName('ul')[0];
+	var aLi = oUl.getElementsByTagName('li');
+	var num = 4;
+	var oInput = document.getElementById('input1');
+	
+	oUl.onmouseover = function (ev){
+		var ev = ev || window.event;
+		var target = ev.target || ev.srcElement;
+		if(target.nodeName.toLowerCase() == 'li'){
+			target.style.background = 'red';	
+		}
+	};
+	oUl.onmouseout = function (ev){
+		var ev = ev || window.event;
+		var target = ev.target || ev.srcElement;
+		if(target.nodeName.toLowerCase() == 'li'){
+			target.style.background = '';	
+		}
+	};
+	
+	oInput.onclick = function (){
+		num++;
+		var oLi = document.createElement('li');
+		oLi.innerHTML = 111 * num;
+		oUl.appendChild(oLi);
+	};
+	
+	
+};
+</script>
+</head>
+
+<body>
+<input type="button" value="增加" id="input1" />
+<ul>
+	<li>123</li>
+    <li>123</li>
+    <li>123</li>
+    <li>123</li>
+</ul>
+</body>
+</html>

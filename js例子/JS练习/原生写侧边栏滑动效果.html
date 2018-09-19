@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1{
+	width:100px;
+	height:150px;
+	background-color:#060;
+	position:absolute;
+	bottom:0;
+	right:0;}
+</style>
+<script src="move.js"></script>
+<script>
+	window.onscroll=function(){
+		var oDiv=document.getElementById('div1');
+		var st=document.documentElement.scrollTop || document.body.scrollTop;
+	   // var Itop=document.documentElement.clientHeight-oDiv.offsetHeight+st+"px";
+		//var offTop=oDiv.offsetTop;
+			//startMove(oDiv,{top:Itop});
+		move((document.documentElement.clientHeight-oDiv.offsetHeight)/2+st);
+		};
+var timer=null
+function move(iTaget){
+	clearInterval(timer);
+	timer=setInterval(function(){
+		var oDiv=document.getElementById('div1');
+		var speed=(iTaget-oDiv.offsetTop)/8;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		if(iTaget==oDiv.offsetTop){
+			clearInterval(timer);
+			}
+		else{
+			oDiv.style.top=oDiv.offsetTop+speed+'px';
+			}
+		},30);
+	}
+</script>
+</head>
+
+<body style="height:200000px">
+<div id="div1"></div>
+</body>
+</html>

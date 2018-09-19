@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;}
+.parent{position:relative;left:30%;text-align:center;line-height:60px;}
+.child{position:absolute;width:500px;height:60px;background-color:red;z-index:2;clip:rect(0px,0px,60px,0px)}
+.child2{position:absolute;width:500px;height:59px;border:1px solid #000;z-index:1}
+</style>
+</head>
+
+<body>
+<div class="parent">
+	<div class="child" id="child">0%</div>
+    <div class="child2" id="child2">0%</div>
+</div>
+<script>
+window.onload = function(){
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[attr];
+		}else{
+			return getComputedStyle(obj,false)[attr];	
+		}
+	}	
+	function move(degree){
+		var oChild = document.getElementById('child');	
+		var oChild2 = document.getElementById('child2');
+		var itarget = parseInt(getStyle(oChild,'width'));
+		
+		oChild.style.clip = "rect(0px,"+degree+"px,60px,0px)";
+		degree = Math.floor((degree/itarget).toFixed(2) * 100);
+		oChild.innerHTML = degree + "%";
+		oChild2.innerHTML = degree + "%";
+		
+	}
+	//move(300);
+	function progress(speed){
+		var num = speed;
+		var _this = document.getElementById('child');
+		var itarget = parseInt(getStyle(_this,'width'));
+		var timer = setInterval(function(){
+				num++;
+				if(num >= itarget){
+					num = itarget;
+					clearInterval(timer);	
+				}
+				move(num);
+			},30)	
+	}
+	progress(20)
+}
+</script>
+</body>
+</html>

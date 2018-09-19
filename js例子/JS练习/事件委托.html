@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload = function () {
+	var oUl = document.getElementById('oUl');
+	var aLi = oUl.getElementsByTagName('li');
+		
+		oUl.onmouseover = function (ev){
+			var ev = ev || window.event;
+			var target = ev.srcElement || ev.target;
+			if (target.nodeName.toLowerCase() == 'li'){
+				target.style.background = 'red';		
+			}
+		};
+		oUl.onmouseout = function (ev){
+			var ev = ev || window.event;
+			var target = ev.target || ev.srcElement;
+			if(target.nodeName.toLowerCase() == 'li'){
+				target.style.background = '';	
+			}
+		}
+		document.getElementById('btn').onclick = function  () {
+			 var li = document.createElement('li');
+			 li.innerHTML = '456' ;
+			 oUl.appendChild(li);
+		}
+	/*	aLi[i].onmouseover = function (){
+			this.style.background = 'red';	
+		};
+		aLi[i].onmouseout = function (){
+			this.style.background = '';	
+		};	*/
+}
+</script>
+</head>
+
+<body>
+<input type="button" value="点击" id="btn" />
+<ul id="oUl">
+	<li>123</li>
+    <li>123</li>
+    <li>123</li>
+    <li>123</li>
+    <li>123</li>
+</ul>
+</body>
+</html>

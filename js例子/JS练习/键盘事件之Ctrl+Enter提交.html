@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload=function(){
+		
+		var txt1=document.getElementById('text1');
+		var txt2=document.getElementById('text2');
+		var btn=document.getElementById('btn');
+		txt1.onkeyup=function(ev){
+			var oEvent=ev||event;
+			console.log(oEvent.keyCode);
+			if(oEvent.keyCode==13/*&&oEvent.ctrlKey*/){
+				txt2.value+=txt1.value+"\n";
+				txt1.value="";
+				}
+			};
+		};
+</script>
+</head>
+
+<body>
+<input type="text" id="text1" />
+<input type="button" id="btn" value="提交"/><br/><hr />
+<textarea id="text2" rows="10" cols="40">
+</textarea>
+</body>
+</html>

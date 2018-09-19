@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+#div1{
+	width:1004px;
+	margin:0 auto;
+	}
+#div1 li{
+	list-style:none;
+	width:90px;
+	height:20px;
+	background:#09C;
+	position:relative;
+	
+	padding:5px;
+	text-align:center;
+	}
+
+.div2{
+	position:absolute;
+	width:200px;
+	height:200px;
+	left:100px;
+	top:0;
+	background:#963;
+	display:none;
+	}
+.active{
+	background:#3C6;
+	display:block;}
+</style>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+$(function(){
+	//普通方式
+	$("#div1 ul>li").bind('mouseover',function(){
+		$("#div1 ul>li").css("background","#09c");
+		$(this).css('background','#3c6');
+		$("#div1 ul>li .div2").css("display",'none');
+		$("#div1 ul>li .div2").eq($(this).index()).css("display","block");
+	}).bind('mouseout',function(){
+		$("#div1 ul>li").css("background","");	
+		$("#div1 ul>li .div2").css("display",'none');
+
+	});
+	//第二种方式，事件委托
+	/*$('#div1').on('mouseover', 'li', function(event) {
+		$(this).css({
+			background: '#3c6',
+		});
+		$(this).find('div').css({
+			display: 'block',
+		});
+		event.preventDefault();
+	
+	}).on('mouseout', 'li', function(event) {
+		$(this).css({
+			background: '#09C',
+		});
+		$(this).find('div').css({
+			display: 'none',
+		});
+		event.preventDefault();
+	});*/
+});
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<ul>
+    	<li>aa
+        	<div class="div2">111</div>
+        </li>
+        <li>bb
+        	<div class="div2">222</div>
+        </li>
+        <li>cc
+        	<div class="div2">333</div>
+        </li>
+        <li>dd
+        	<div class="div2">444</div>
+        </li>
+        <li>ee
+        	<div class="div2">444</div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body{
+	margin:0;
+	padding:0;}
+#canvas{
+	background:#FC3;}
+</style>
+<script>
+window.onload=function(){
+	var oCanvas=document.getElementById('canvas');
+	var ocan=oCanvas.getContext('2d');
+	ocan.beginPath();//开启路径
+	ocan.lineWidth=3;
+	ocan.strokeStyle='green';
+	ocan.arc(100,100,50,0,360,false);
+	ocan.stroke();
+	ocan.closePath();//关闭路径
+	//绘制线条
+	ocan.beginPath();
+	ocan.lineWidth=10;
+	ocan.strokeStyle='#ff9900';
+	ocan.moveTo(20,20);
+	ocan.lineTo(50,20);
+	ocan.stroke();
+	ocan.closePath();
+	//画圆
+	ocan.beginPath();
+	ocan.arc(200,200,50,0,360,false);
+	ocan.fillStyle="red";
+	ocan.fill();
+	ocan.strokeStyle="blue";
+	ocan.lineWidth=1;
+	ocan.stroke();
+	ocan.closePath();
+	//画正方形
+	ocan.beginPath();
+	ocan.rect(100,100,100,100);
+	ocan.stroke();
+	ocan.fillStyle="red";
+	ocan.fill();
+	ocan.closePath();
+	//填充正方形的另一种方法
+	ocan.fillRect(0,0,100,100);
+	//绘制文字
+	ocan.beginPath();
+	ocan.font="40px 黑体";
+	ocan.fillStyle="black";
+	ocan.strokeStyle="yellow";
+	ocan.fillText("黄金钱包",300,200);
+	ocan.strokeText("黄金钱包",300,300);
+	ocan.closePath();
+	//画多边形
+	ocan.beginPath();
+	ocan.moveTo(300,50);
+	ocan.lineTo(300,100);
+	ocan.lineTo(400,50);
+	ocan.lineTo(400,100);
+	ocan.lineTo(450,75);
+	ocan.closePath();
+	ocan.stroke();
+	ocan.fill();
+	//旋转图像
+	ocan.save();//保存前面内容，并重置环境，相当于建立异次元空间
+	ocan.translate(0,0);//重置异次元空间起点位置
+	ocan.rotate(45*Math.PI/180);//设置旋转的弧度，弧度=角度*Math.PI/180;
+	ocan.lineWidth10;
+	ocan.beginPath();
+	ocan.moveTo(300,200);
+	ocan.lineTo(300,300);
+	ocan.stroke();
+	ocan.closePath();
+	ocan.restore();//将旋转之后的元素放回原画布
+	//注意：过程不可颠倒，先设置起点，再设置旋转角度，然后画图。
+	
+	};
+
+</script>
+</head>
+
+<body>
+<div>
+	<canvas id='canvas' width='500px' height='500px'></canvas>
+</div>
+
+</body>
+</html>

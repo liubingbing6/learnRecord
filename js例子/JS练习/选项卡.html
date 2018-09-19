@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#oUl{
+	padding:2px 5px;
+	font-size:18px;
+	color:#C60;
+	font-family:"微软雅黑";
+	width:800px;
+	margin:0 auto;}
+li{
+	list-style:none;}
+#oUl>li{
+	float:left;
+	width:100px;
+	text-align:center;
+	background-color:#93C;
+	margin:0 5px;
+	}
+#oUl>li ul{
+	width:100px;
+	padding:5px 0;
+	background-color:#C9C;
+	display:none;
+	}
+#oUl>li ul li{
+	text-align:center;
+	}
+.active{
+	display:none;}
+</style>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+$(function(){
+	$("#oUl>li").mouseover(function(){
+		$("#oUl>li ul").eq($(this).index()).stop(true,false).slideDown(800);
+	});
+	$("#oUl>li").mouseout(function(){
+		$("#oUl>li ul").stop(true,false).slideUp(500);						
+	});
+});
+
+</script>
+</head>
+
+<body>
+<ul id="oUl">
+	<li>语文
+    	<ul>
+            <li><a href="javaScript:(0)">荷塘月色</a></li>
+            <li><a href="javaScript:(0)">三味书屋</a></li>
+            <li><a href="javaScript:(0)">红楼梦</a></li>
+            <li><a href="javaScript:(0)">倚天屠龙记</a></li>
+            <li><a href="javaScript:(0)">阿甘正传</a></li>
+		</ul>
+    </li>
+    <li>数学
+    	<ul>
+            <li>离散数学</li>
+            <li>几何图形</li>
+            <li>勾股定理</li>
+            <li>模糊数学</li>
+            <li>高等数学</li>
+		</ul>
+    </li>
+    <li>物理
+    	<ul>
+            <li三大定理</li>
+            <li>天体运动</li>
+            <li>摩擦与运动</li>
+            <li>趣味小球</li>
+            <li>小明的一天</li>
+		</ul>
+    </li>
+    <li>化学</li>
+    <li>生物</li>
+</ul>
+</body>
+</html>

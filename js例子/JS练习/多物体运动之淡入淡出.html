@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+div{
+	width:200px;
+	height:200px;
+	background-color:#30F;
+	filter:alpha(opacity:30);
+	opacity:0.3;
+	float:left;
+	margin:10px;
+	border:1px solid black;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementsByTagName('div');
+	for(var i=0;i<oDiv.length;i++){
+		oDiv[i].alp=30;
+		oDiv[i].timer=null;
+		oDiv[i].onmouseover=function(){
+			startOpacity(this,100,500);
+			};
+		oDiv[i].onmouseout=function(){
+			startOpacity(this,30,200);
+			};
+		}
+	};
+function startOpacity(obj,iTag,hei){
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){
+		var speed=(iTag-obj.alp)/100;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		var speedHeight=(hei-obj.offsetHeight)/8;
+		speedHeight=speedHeight>0?Math.ceil(speedHeight):Math.floor(speedHeight);
+		if(obj.alp==iTag&&hei==obj.offsetHeight){
+			clearInterval(obj.timer);
+			}
+		else{
+			obj.alp+=speed;
+			obj.style.filter='alpha(opacity:'+obj.alp+')';
+			obj.style.opacity=obj.alp/100;
+			obj.style.height=obj.offsetHeight+speedHeight+'px';
+			}
+								   
+		},30);
+	}
+</script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

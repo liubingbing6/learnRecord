@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+th,td,table{
+	border:1px solid #000;
+	width:300px;
+	margin:0 auto;
+	text-align:center;
+	}
+</style>
+<script>
+window.onload=function(){
+	var oldColor='';
+	var oDiv=document.getElementById('div1');
+	var oTbody=document.getElementById('tb1');
+	var oTr=oTbody.getElementsByTagName('tr');
+	var id=oTbody.rows.length+1;
+
+	//添加	
+	var oAdd=document.getElementById('add');
+	
+	var oText1=document.getElementById('text1');
+	var oText2=document.getElementById('text2');
+	oAdd.onclick=function(){
+		var oTr=document.createElement('tr');
+		var oTd=document.createElement('td');
+		oTd.innerHTML=id++;
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oText1.value;
+		oTr.appendChild(oTd);
+		
+		var oTd=document.createElement('td');
+		oTd.innerHTML=oText2.value;
+		oTr.appendChild(oTd);
+		//删除添加
+		var oTd=document.createElement('td');
+		oTd.innerHTML="<a href='javaScript:;'>删除</a>";
+		oTr.appendChild(oTd);
+		//删除操作
+		oTd.getElementsByTagName('a')[0].onclick=function(){
+				oTbody.removeChild(this.parentNode.parentNode);
+			};
+		
+		oTbody.appendChild(oTr);
+		
+		
+		};
+
+	//添加背景颜色
+	for(var i=0;i<oTbody.rows.length;i++){
+		
+		if(i%2==0){
+			oTr[i].style.background='red';
+			}
+		
+		oTr[i].onmouseover=function(){
+			oldColor=this.style.background;
+			this.style.background='green';
+			};
+		oTr[i].onmouseout=function(){
+			this.style.background=oldColor;
+			};
+		}
+		
+	};
+</script>
+</head>
+
+<body>
+<input type="button" id="add" value="添加"/>
+<input type="button" id="delet" value="删除"/><br/>
+姓名：<input type="text" id="text1"/>
+年龄：<input type="text" id="text2"/>
+    <div id="div1">
+      <table style="border:1px solid #000;">
+      	<thead>
+        	<tr>
+            	<th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tb1">
+        	<tr>
+            	<td>1</td>
+                <td>张三</td>
+                <td>22</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>2</td>
+                <td>李四</td>
+                <td>23</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>3</td>
+                <td>王二</td>
+                <td>221</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>4</td>
+                <td>赵武</td>
+                <td>35</td>
+                <td></td>
+            </tr>
+        </tbody>
+      </table>  
+    </div>
+</body>
+</html>
