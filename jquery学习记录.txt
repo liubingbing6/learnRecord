@@ -1,0 +1,151 @@
+$('prev+next')//获取prev节点的下一个兄弟节点
+$('prev~next')//获取prev节点后面的所有兄弟节点
+$('parent>child')//获取parent节点下的所有子节点，不包括“孙子”节点
+获得一组相同标签元素中的元素
+$(li:first)//:first过滤选择器，获得li标签的第一个li标签
+$(li:last)//获取li标签的最后一个li标签
+$(li:eq(index))//获得指定下标（index）的li标签
+$(li:contains(text))//获得包含文本（text）的li标签
+$(li:has(selector))//获取包含元素（selector）的li标签
+$(li:hidden)//获取li中被隐藏的li标签
+$(li:visible)//获取li中显示的li标签
+$(li[attribute=value])//获取li中属性（attribute）值为value的li标签
+$(li[attribute!=value])//
+$(li[attribute*=value])//获取所有属性为attribute且值中有value的li标签
+$(li:first-child)//获取所有ul标签下的第一个li标签；这个返回的是一个集合
+$(li:last-child)//
+
+表单选择器
+$(“#form:input”)//获取表单中的所有元素，他选择的表单是最广的；
+$(":text")//获取表单中type为text的标签
+$(":password")//获取表单中type为password的标签
+$(":radio")//获取表单中type为radio的标签
+$(":checkbox")//获取表单中type为checkbox的标签
+$(":submit")//获取表单中type为submit的标签
+$(":image")//获取表单中type为image的标签
+$(":button")//获取表单中type为button的标签
+$(":checked")//获取表单中checked为选中状态的标签
+$(":selected")//获取表单中下拉列表中被选中的
+
+操作DOM元素
+attr(属性名)//此格式是获取属性名的值
+attr(属性名，属性值)//此格式是设置元素属性名的值
+html(),text()//操作元素，如果括号中为空时，则是获取此元素的内容。如果有参数，则表示将参数设置为元素内容。
+addClass()//括号中的参数为增加元素的样式名称
+css()//直接将样式属性内容写在括号中。
+removeAttr(name)//移除属性
+removeClass(class)//移除样式
+append()//向指定的元素中追加内容
+appendTo()//向指定的元素内插入内容，格式为$(content).appendTo(selector)
+before()//在元素的前面插入内容，格式为$(selector).before(content);
+after()//在元素的后面插入内容,格式为$(selector).after(content);
+clone()//生成一个备选元素的副本
+
+replaceWith()和replaceAll()//替换元素或替换元素中的内容，
+注意：内容和被替换元素所在的位置不同，$(selector).replaceWith(content)和$(content).replaceAll(selector)
+
+wrap()和wrapInner()//包裹元素和内容；$(selector).wrap(wrapper)和$(selector).wrapInner(wrapper);
+
+each()//遍历指定的元素集合，在遍历时，通过回调函数返回遍历元素的序列号。
+
+remove()和empty()//前者删除所选元素本身和子元素，后者则只删除所选元素的子元素。
+------------------------------------------------------
+一个委派事件的方法只在一个元素上绑定一个事件处理程序，下面的代码是绑定在tbody元素上，从被点击的tr 到 tbody ）:例如下
+$( "#dataTable tbody" ).on( "click", "tr", function() {
+  console.log( $( this ).text() );
+});
+
+1.检测浏览器  注: 在版本jQuery 1.4中，$.support 替换掉了$.browser 变量
+$(document).ready(function() {
+   //Example 1: Every link will open in a new window
+   $('a[href^="http://"]').attr("target", "_blank");
+ 
+   //Example 2: Links with the rel="external" attribute will only open in a new window
+   $('a[@rel$='external']').click(function(){
+      this.target = "_blank";
+   });
+});
+// how to use
+<a href="http://www.opensourcehunter.com" rel=external>open link</a>
+
+　　4. 检测浏览器
+
+　　注: 在版本jQuery 1.4中，$.support 替换掉了$.browser 变量
+
+$(document).ready(function() {
+// Target Firefox 2 and above
+if ($.browser.mozilla && $.browser.version >= "1.8" ){
+    // do something
+}
+
+// Target Safari
+if( $.browser.safari ){
+    // do something
+}
+
+// Target Chrome
+if( $.browser.chrome){
+    // do something
+}
+
+// Target Camino
+if( $.browser.camino){
+    // do something
+}
+
+// Target Opera
+if( $.browser.opera){
+    // do something
+}
+
+// Target IE6 and below
+if ($.browser.msie && $.browser.version <= 6 ){
+    // do something
+}
+
+// Target anything above IE6
+if ($.browser.msie && $.browser.version > 6){
+    // do something
+}
+});
+
+2.返回顶部按钮
+$('a.top').click(function () {
+  $(document.body).animate({scrollTop: 0}, 800);
+  return false;
+});
+
+3.预加载图片
+$.preloadImages = function () {
+  for (var i = 0; i < arguments.length; i++) {
+    $('<img>').attr('src', arguments[i]);
+  }
+};
+
+$.preloadImages('img/hover1.png', 'img/hover2.png');
+
+4.检查图片是否加载完成
+$('img').load(function () {
+  console.log('image load successful');
+});
+
+5.自动修改破损图像
+如果你碰巧在你的网站上发现了破碎的图像链接，你可以用一个不易被替换的图像来代替它们。添加这个简单的代码可以节省很多麻烦：
+$('img').on('error', function () {
+  $(this).prop('src', 'img/broken.png');
+});
+
+6.让两个 DIV 高度相同
+var $columns = $('.column');
+var height = 0;
+$columns.each(function () {
+  if ($(this).height() > height) {
+    height = $(this).height();
+  }
+});
+$columns.height(height);
+
+7.通过文本查找元素
+通过使用jQuery中的contains() 选择器，你可以找到元素内容的文本。如果文本不存在，那就隐藏该元素：
+var search = $('#search').val();
+$('div:not(:contains("' + search + '"))').hide();

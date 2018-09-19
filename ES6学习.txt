@@ -1,0 +1,214 @@
+ES6学习：
+let命令：用来声明一个变量，和var非常类似
+1、使用let声明的变量，所声明的变量只在命令所在的代码块内有效
+2、使用let命令声明的变量在预解析的时候不会被提升
+3、let不允许在同一个作用域下声明已经存在的变量
+4、let在for循环中的使用
+    注意:在循环语句之内是一个父作用域，在循环体之中是一个子作用域
+
+
+const命令：用来声明一个常量，常量就是不可以变化的量
+const命令同样有上面let的1、2、3条特点。除此之外，还要注意两点
+1、声明的时候必须赋值
+2、声明的常量存储简单的数据类型时候不可改变其值，如果存储的是对象，那么引用不可以被改变，至于对象里面到底数据如何变化，是没有关系的
+
+
+变量的解构赋值
+基本概念：本质上就是一种匹配模式，只要等号两边的模式相同，那么左边的变量就可以被赋予对应的值。
+解构赋值主要分为：
+    1、数组的解构赋值
+    2、对象的解构赋值
+    3、基本类型的解构赋值
+    4、null和undefined不能进行解构赋值
+
+
+数据解构Set
+集合的基本概念：集合是由一组无序且唯一（即不能重复）的项组成的。这个数据结构使用了与有限集合相同的数学概念，在应用在计算机的数据结构中。
+
+特点：key和value相同，没有重复的value
+
+ES6提供了数据结构Set复的值
+1、如何创建一个Set
+    const s = new Set([1,2,3]);
+2、Set类的属性
+    s.size;
+3、Set类的方法
+   s.add(value)//添加一个数组，返回Set结构本身
+   s.delete(value)//删除指定数据，返回一个布尔值
+   s.has(value)//判断该值是否为Set的成员，返回一个布尔值
+   s.clear()//清除所有数据，没有返回值。
+   s.keys()//返回键名的遍历器
+   s.values()//返回键值的遍历器
+   s.entries()//返回键值对的遍历器
+   s.forEach()//使用回调函数遍历每个成员
+
+
+
+数据结构Map
+字典：使用来存储不重复key的Hash结构。不同于集合(Set)的是，字典使用的是[键，值]的形式来存储数据
+
+* JavaScript的对象(Object:{})只能用字符串当做键。这给它的使用带来了很大的限制。
+
+*为了解决这个问题，ES6提供了Map数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值(包括对象)都是可以当作键。也就是说，Object结构提供了“字符串-值”的对应，Map结构提供了“值-值”的对应，是一种更完善的Hash结构实现。如果你需要键值对的数据结构，Map比Object更合适。
+
+1、如何创建一个Map
+const map = new Map([
+    ['a',1],
+    ['b',2]
+])
+
+2、Map类的属性
+    map.size;
+
+3、Map类的方法
+1）、map.set(key,value)设置键名key对应的键值为value，然后返回整个Map结构，如果key已经有值，则键值会被更新，否则就新生成该键。
+    map.set('name','liubb');
+
+2)、get(key)get方法读取key对应的键值，如果找不到key，返回undefined
+    map.get('name')
+
+3)、delete(key)删除某个键，返回true。如果删除失败，返回false
+    map.delete('name');
+
+4)、has(key)方法返回一个布尔值，表示某个键是否在当前Map对象之中
+    map.has('name');
+
+5)、clear()清除所有数据，没有返回值
+
+6）、keys()返回键名的遍历器
+
+7）、values()返回键值的遍历器
+
+8)、entries()返回键值对的遍历器
+
+9)、forEach()使用回调函数遍历每个成员
+    map.forEach(function(key,value,map){
+
+    })
+10)、Map在使用中的一些注意事项
+    map.set(NaN).set(NaN,10);只添加一次
+    map.set({},'x').set({},'y');这是两个值，引用地址不一样
+
+11）、map里面的key的排列顺序是按照添加顺序进行排列的
+
+
+Iterator和for...of循环
+Iterator：它是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署Iterator接口，就可以完成遍历操作，而且这种遍历操作是依次处理该数据结构的所有成员。
+
+Iterator遍历器的作用：
+1、为各种数据结构提供一个统一的的简便的访问接口
+2、使用数据结构的成员能够按耨中次序排列
+3、ES6新增了遍历命令for...of循环，Iterator接口主要供for...of消费。
+
+* 凡事具有Symbol.iterator属性的数据结构都具有Iterator接口
+
+*具备iterator接口的数据结构都可以进行如下操作
+    -解构赋值
+    -扩展运算符
+
+class语法
+
+JS语言的传统方法是通过构造函数，定义并生成新对象，是一种基于原型的面向对象系统。这种写法跟传统的面向对象语言差异很大，很容易让新学习这门语言的人感到困惑。所以，在ES6中新增加了类的概念，可以使用class关键字声明一个类，之后以这个类来实例化对象。
+
+定义一个类
+class Miaov{
+    constructor(a,b){
+	this.a = a;
+	this.b = b;
+	return this;
+    }
+    print(){
+	console.log(this.a + ":"+ this.b);
+    }
+}
+1、Miaov中的constructor方法是构造方法，this关键字则代表了实例对象。也就是说，ES5的构造函数Miaov，对应ES6的Miaov这个类的构造方法。
+
+2、Miaov这个类除了构造方法，还定义了一个print方法。注意，定义"类"的方法的时候，前面不需要加上function这个关键字，直接把函数定义放进去了就可以了，另外，方法间不需要逗号分隔，加了会报错。
+
+3、构造函数的prototype属性，在ES6的类上面继续存在，而且类的所有方法都定义在类的prototype属性上面
+
+4、定义在类中的方法都是不可以枚举的
+
+5、constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显示定义，一个空的constructor方法会被默认添加。
+
+
+class的继承
+//extends、super、static
+子类继承父类使用extends关键字
+为父类指定静态方法，使用static方法名字
+super：
+    -在构造函数中可以当一个函数来使用，相当于调用父类的构造函数
+    -在原型方法中，可以当一个对象来使用，相当于父类的原型对象，并且会自动绑定this到子类上
+
+
+Symbol
+是独一无二的值，它是js中的第七种数据类型
+基本的数据类型：Null,Nndefined,Number,Boolean,String,Symbol
+ 引用数据类型：Object
+
+    let s1 = Symbol();
+
+1、Symbol函数前不能使用new 否则会报错，原因在于symbol是一个原始类型的值，不是对象。
+
+2、Symbol函数接收一个字符串作为函数，表示对Symbol的描述，主要是为了在控制台显示，或者转为字符串的时候，比较容易区分。
+
+3、Symbol数据类型的转换
+    String(Symbol('liu')) //Symbol(liubb)
+    console.log(!!Symbo()) //true
+
+4、作为对象的属性名
+
+5、不能用for...in循环遍历，虽然不能被遍历，但是也不是私有的属性，可以通过Object.getOwnPropertySymbols方法获得一个对象的所有Symbol属性。
+
+内置对象扩展
+1、模板字符串
+    
+2、数组扩展
+    Array.from()//将类数组转换为数组
+    Array.of(index)  
+    Array.find(callback)
+    Array.findIndex(callback)
+    Array.fill();
+
+3、对象扩展
+    Object.is()
+    Object.assign()//用于对象的合并
+
+4、函数扩展
+   1、函数设置默认值
+   2、rest参数形式(“...变量名”)，用于获取函数的多余参数，这样就不需要使用arguments对象了。rest参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
+   3、箭头函数
+        const fn = a =>a
+        const fn = function(a){//两者一个意思，上面简写
+	    return a;
+	}
+注意：
+1、箭头函体内没有自己的this对象，所以在使用的时候，其内部的this就是定义时所在环境的对象，而不是使用时所在环境的对象。
+2、不能给箭头函数使用call apply bind去改变其内部的this指向
+3、箭头函数内部没有arguments对象，可用rest参数代替
+     不可以当做构造函数，不可以使用new命令，否则会报错
+
+
+Promise
+是ES6中新增的一步编程解决方案，体现在代码中它就是一个对象，可以通过Promise构造函数实例化
+
+-new Promise(callback)  ==>实例的基本使用 Pending(进行中)ResoLved(已完成) Rejected(已失败)
+
+-两个原型方法;
+    -Promise.Prototype.then()
+    -Promise.prototype.catch()
+
+-两个常用的静态方法
+    -Promise.all()
+    -Promise.resoLve()
+
+
+
+
+
+
+
+
+
+
+

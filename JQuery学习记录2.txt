@@ -1,0 +1,128 @@
+正则表达式中符号的表示：
+&lt;	<	小于
+&gt;	>	大于
+&amp;	&	和号
+&apos;	'	单引号
+&quot;	"	引号
+&uml; ..        两点（拼音的u上的两点的表示）
+css记录
+fixed定位：特点是，位置固定不变，兄弟元素会从其下穿过
+设置偏移量：
+	有已定位祖先元素：以祖先元素为基准定位
+	无已定位祖先元素：以浏览器窗口为基准定位
+
+
+
+jQuery学习部分记录：
+事件：
+ready()事件：$(document).ready(function(){});等价于$(function(){});
+bind(event,function)方法：绑定元素事件
+hover(function1,function2);鼠标移动到所在元素上时，执行function1,移出时执行function2;
+
+toggle(function1,function2,function3)事件：实现元素在几个函数之间的跳转
+
+unbind(event,function)方法：移除事件
+
+one(even，function):绑定元素事件，一次性的
+
+trigger(event)方法：手动触发指定事件
+
+focus(event)事件：获取焦点事件
+blur(event)事件：失去焦点事件
+
+change(event)事件：改变事件
+
+live()方法:与bind()方法相同，但可以绑定动态元素，即使用代码添加的元素事件
+
+show(speed,[functon])和hide(speed,[function]):显示和隐藏方法
+
+toggle(speed,[function])
+
+slideUp(speed,[function])和slideDown(speed,[function]):向上滑动，与向下滑动
+
+slideToggle(speed,[function]):切换向上与向下的滑动
+
+fadeIn(speed,[function])与fadeOut(speed,[funciton]):前者淡入隐藏，后者淡出可见
+
+fadeTo(speed,opacity,[function]):淡入淡出到指定的值
+
+animate({param},speed,[function])方法:制作简单的动画效果
+
+stop([clearQueue],[goToEnd])方法：停止当前所有动画效果，两个参数默认都是false
+前者表示是否停止正在执行的动画，后者表示是否完成正在执行的动画
+
+delay(duration)延迟执行：duration为延迟值
+
+load(url,[data],[function]):向服务器请求加载一个指定页面的内容
+
+jQuery.getJSON(url,[data],[function])或$.getJSON(url,[data],[function]):异步加载json格式数据
+
+.getScript(url,[data],[function]):异步加载js文件
+
+$.ajax({          //ajax请求
+url:"",
+dataType:GET/POST,
+data:{},
+success:function(data){}
+});
+
+$.ajaxSetup([options]):设置ajax请求的一些全局性选项值
+
+$(selector).ajaxStart(function())和$(selector).ajaxStop(function());前者是当发送ajax请求前执行，后者是发送成功后执行ajaxStop函数
+
+jQuery获取scrollTop，clientHeight值
+可视区的宽高用原生写 即：
+var clientHeight=docuement.documentElement.clientHeight||document.body.clientHeight;
+
+$(document).scrollTop();//获取滚动条的距离
+$(document).height()//获取整个页面的高度
+$(window).height()//获取可视区的高度
+
+jQuery.parseHTML(str,document,true)//str是要插入的节点，str是插入在doucment节点之后的,true表示是否插入,<script>标签
+
+你要获取顶端 只需要获取到scrollTop()==0的时候  就是顶端了
+要获取底端  只要获取scrollTop()>=$(document).height()-$(window).height()  就可以知道已经滚动到底端了
+
+
+视频记录:
+DOM对象转换为jquer对象的方法：用$()把DOM对象包装起来就OK了；
+
+多个库之间的冲突：例如有两个库；jQuery库与Base库
+1、将jQuery库在Base库之前引入，那么“$”的所有权就归Base库所有，而jQuery可以直接用jQuery对象调用，或者创建一个“$$”符给jQuery使用。
+
+2、如果将jQuery库在Base库之后引入，那么“$”的所有权就归jQuery库所有，而Base库将会冲突而失去作用。这里，jQuery提供了一个方法：
+jQuery.noConfilict();//将$符所有权剔除
+var $$=jQuery;//接下来可以用$$符表示
+
+群组选择器$("#box,.pox,strong").css("","");
+后代选择器$("ul li a").css("","");
+注意：选择器越复杂，那么字符串解析就越慢；
+
+通配选择器：*；
+在全局范围使用*号，会极大的消耗资源，所以不建议在全局使用，而可以在局部使用
+
+
+$("#box>p").css()等价于$("#box").children("p").css()
+$("#box+p").css();等价于$("#box").next("p").css();//同级别的DOM元素
+$("#box~p").css();等价于$("#box").nextAll("p").css()
+$("#box").prev("p").css();//box前一个p标签
+$("#box").prevAll("p").css();//box前的所有p标签
+$("#box").siblings("p").css();//获取box前后的所有p标签
+
+$('li').filter('.red,:first,:last').css();
+
+toggleClass();//样式之间的切换
+
+position():获取某个元素相对于父元素的偏移位置
+
+$('div').detach();//保留事件的删除节点
+
+$("form").submit(fucntion(e){
+	e.preventDefault();//禁止表单提交
+})
+//阻止冒泡又禁止了默认行为
+$("a").click(function(e){
+	e.preventefault();
+	e.stopPropagation();
+	return false;//直接代替上面两句，达到效果
+})

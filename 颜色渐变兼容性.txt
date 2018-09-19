@@ -1,0 +1,28 @@
+IE系列
+
+filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#FF0000',endColorStr='#F9F900',gradientType='0');
+
+参数：startColorStr起始颜色 endColorStr结束颜色 gradientType为0时代表垂直，为1时代表水平
+
+Firefox
+
+background: -moz-linear-gradient(top, #FF0000, #F9F900);
+
+参数：top、bottom垂直，left、right水平 例如：top时从顶部由#FF0000到#F9F900渐变，bottom时从底部由#FF0000到#F9F900渐变
+
+Opera
+
+background: -o-linear-gradient(top,#FF0000, #F9F900);
+
+参数：top、bottom垂直，left、right水平 例如：top时从顶部由#FF0000到#F9F900渐变，bottom时从底部由#FF0000到#F9F900渐变
+
+webkit，如Chrome、Safari等
+
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF0000), to(#F9F900));
+
+参数：linear线性， x1 x2, x3 x4 x1与x3相同时垂直，x2与x4相同时水平 from起始颜色 to结束颜色
+
+
+//IE8下透明度加颜色渐变的写法
+filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0); 
+-ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);/*IE8*/ 

@@ -1,0 +1,152 @@
+Git remote  ==》
+git remote //列出所有远程主机名
+git remote -v //查看远程主机的网址
+git remote show //查看该主机的详细信息
+git remote add <主机名><网址> //添加远程主机
+git remote rm <主机名> //删除主机
+git remote rename <原主机名><新主机名> //更改远程主机的名字
+
+Git clone  ==》
+git clone <版本库的网址> //远程克隆一个版本库
+git clone <版本库的网址><本地目录名>
+
+Git fetch  ==》
+git fetch <远程主机名>  //将远程主机(所有分支)更新的文件取回本地
+git fetch <远程主机名><分支名>  //取回特定分支的更新
+
+Git branch  ==》
+git branch -r //查看远程分支
+git branch -a //查看所有分支
+
+Git checkout ==》
+git checkout -b newBrach origin/master  //在origin/master的基础上创建一个新的分支
+
+Git merge  ==》
+git merge origin/master 或者git rebase origin/master //在当前分支上，合并origin/master
+
+Git pull  ==》
+git pull <远程主机名><远程分支名>:<本地分支名>  //取回远程主机某个分支的更新，在与本地的指定分支合并。
+git pull origin next //如果远程分支与当前分支合并，则冒号后面的部分可以省略。
+
+git branch --set-upstream master origin/next //指定master分支追踪origin/next分支
+
+Git push  ==》
+git push <远程主机名><本地分支名>:<远程分支名> //将本地分支的更新推送到远程主机
+
+
+<embed id="embed" align="middle" width="1366" height="788.0769230769231" type="application/x-shockwave-flash" allowscriptaccess="always" quality="high" allowfullscreen="true" autostart="true" src="http://static.hdslb.com/live-static/swf/LivePlayerEx_1.swf?room_id=100467&cid=100467&state=LIVE">
+
+ var browser={
+        versions:function(){
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {//移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+            };
+        }(),
+        language:(navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+
+    var bili = 260/150;
+
+    var __H__ = window.W/bili;
+
+    var videoAddr = 'http://wshls.acgvideo.com/live/live_27843430_3350056/playlist.m3u8';
+    var flashAddr = 'http://static.hdslb.com/live-static/swf/LivePlayerEx_1.swf?room_id=100467&cid=100467&state=LIVE';
+
+    if(browser.versions.mobile && ( browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) ){
+        $('#video-flash-inner').html('<video width="'+window.W+'" height="'+__H__+'" src="'+videoAddr+'" controls autoplay>');
+    }
+
+    else {
+        $('#video-flash-inner').html('<embed id="embed" src="'+flashAddr+'" autostart="true" allowFullScreen="true" quality="high" width="'+window.W+'" height="'+__H__+'" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>');
+    }
+
+
+
+
+
+
+
+https://github.com/liubingbing6/MyFirstRepository.git
+git账号与密码
+用户名：liubingbing6
+密码：6959000liu
+此用户名与密码既是github上的也是用命令行提交代码时的。
+------------------------------------------------------------
+一个版本库只有一个主机名，需要提交一个单独的项目时，最好单独创建一个主机名（在github上），git push 时加上 -u <主机名><master>
+-----------------------------------------------------------------
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区
+-----------------------------------
+又到了小结时间。
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
+
+如下是对场景3“回退一节”的补充
+HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+---------------------------------------------
+
+版本回退
+  在Git中：
+用HEAD表示当前版本；
+上一个版本就是HEAD^；
+上上一个版本就是HEAD^^；
+往上100个版本写成HEAD~100；
+具体操作：用 git reset 命令
+例：git reset --hard HEAD^；
+ git reset --hard 3628163;指定到某一个版本，这里是commit id 号
+
+git reflog //这个命令用来记录你操作的每一次命令
+git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别
+
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+1、是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+2、是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态
+总之，就是让这个文件回到最近一次git commit或git add时的状态。
+
+git checkout -- file命令中的--很重要，没有--，就变成了“切换到另一个分支”的命令
+
+git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区
+
+-----------------------------------------------------------
+$git checkout -b dev
+git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
+$git branch dev
+$git checkout dev
+Switched to branch 'dev'
+
+用git branch命令查看当前分支
+$git checkout dev//切换分支
+git merge命令用于合并指定分支到当前分支
+$git merge dev //合并分支到主分支
+$git branch -d dev //删除dev分支 
+
+Fast-forward信息，Git告诉我们，这次合并是“快进模式”，也就是直接把master指向dev的当前提交，所以合并速度非常快。
+
+用带参数的git log也可以看到分支的合并情况:
+$ git log --graph --pretty=oneline --abbrev-commit
+
+准备合并dev分支，请注意--no-ff参数，表示禁用Fast forward
+$ git merge --no-ff -m "merge with no-ff" dev
+
+如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
+
+Git还提供了一个stash功能：git stash ，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作；git stash pop，回到工作现场。
+

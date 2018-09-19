@@ -1,0 +1,298 @@
+JS使用的一些方法技巧：
+1.给数组创建一个随机项 
+var items = [12, 548 , 'a' , 2 , 5478 , 'foo' , 8852, , 'Doe' , 2145 , 119];
+var  randomItem = items[Math.floor(Math.random() * items.length)];
+
+2.在特定范围里获得一个随机数 
+var x = Math.floor(Math.random()*(max-min+1)+min);
+
+3.打乱数字数组
+var numbers = [5, 458 , 120 , -215 , 228 , 400 , 122205, -85411];
+numbers = numbers.sort(function(){ return Math.random() - 0.5});
+
+4.将参数对象转换为数组
+var argArray = Array.prototype.slice.call(arguments);
+
+5.验证一个给定参数是否为数字 
+function isNumber(n){
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+isFinite() 函数用于检查其参数是否是无穷大。
+
+6.验证一个给定的参数为数组
+function isArray(obj){
+    return Object.prototype.toString.call(obj) === "[object Array]";
+}
+
+7.从数字数组中获得最大值和最小值
+var  numbers = [5, 458 , 120 , -215 , 228 , 400 , 122205, -85411]; 
+var maxInNumbers = Math.max.apply(Math, numbers); 
+var minInNumbers = Math.min.apply(Math, numbers);
+
+8.使用逻辑符号&&或者||进行条件判断
+var foo = 10;  
+foo == 10 && doSomething(); // is the same thing as if (foo == 10) doSomething(); 
+foo == 5 || doSomething(); // is the same thing as if (foo != 5) doSomething();
+也可以用来设置函数参数的默认值
+Function doSomething(arg1){ 
+    Arg1 = arg1 || 10；
+}
+
+9.使用map()方法来遍历数组 
+var squares = [1,2,3,4].map(function (val) {  
+    return val * val;  
+}); 
+
+10.舍入小数位数 
+var num =2.443242342;
+num = num.toFixed(4);
+
+11.使用for-in loop检查遍历对象属性 
+for (var name in object) {  
+    if (object.hasOwnProperty(name)) { 
+        // do something with name                    
+    }  
+}
+12.遇到数值范围时，可以选用switch/case 
+function getCategory(age) {  
+    var category = "";  
+    switch (true) {  
+        case isNaN(age):  
+            category = "not an age";  
+            break;  
+        case (age >= 50):  
+            category = "Old";  
+            break;  
+        case (age <= 20):  
+            category = "Baby";  
+            break;  
+        default:  
+            category = "Young";  
+            break;  
+    };  
+    return category;  
+}  
+getCategory(5);  // will return "Baby"
+
+13.程序化生成的字符串使用 join
+// good
+function inbox(messages) {
+  items = [];
+
+  for (i = 0; i < length; i++) {
+    // use direct assignment in this case because we're micro-optimizing.
+    items[i] = '<li>' + messages[i].message + '</li>';
+  }
+
+  return '<ul>' + items.join('') + '</ul>';
+}
+
+14.不要在一个非函数代码块(if,while等)中声明一个函数，把函数赋给一个变量。 
+// good
+var test;
+if (currentUser) {
+  test = function test() {
+    console.log('Yup.');
+  };
+}
+
+15.获取随机的唯一id，随机不重复，长度固定
+function getUUID(len){
+    len = len || 6;
+    len = parseInt(len,10);
+    len = isNaN(len)?6:len;
+    var seed = '0123456789abcdefghijklmnopqrstubwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ';
+    var seedLen = seed.length - 1;
+    var uuid = '';
+    while(len--){
+        uuid += seed[Math.round(Math.random()*seedLen)];
+    }
+    return uuid;
+}
+
+16.是否是函数
+function isFunciton(obj){
+    return Object.prototype.toString.call(obj) == '[object Function]'
+}
+
+17.是否是字符串
+function isString(obj){
+    return Object.prototype.toString.call(obj) == '[object String]';
+}
+
+18.是否是object对象
+function isObject(obj){
+    return Object.prototype.toString.call(obj) == '[object Object]';
+}
+
+19.是否是数组
+function isArray(obj){
+    return Object.prototype.toString.call(obj) == '[object Array]'
+}
+
+20.是否是window对象
+function isWindow(obj){
+    return obj != null && obj == obj.window;
+}
+<---------------------------------------------------->
+clientHeight = padding+content
+假如无padding无滚动
+clientWidth = style.width
+
+假如有padding无滚动
+clientWidth = style.width+style.padding*2
+
+假如有padding有滚动，且滚动显示
+clientWidth = style.width+style.padding*2-滚动轴宽度
+
+clientTop = border-top的border-width
+clientLeft = border-left的border-width
+
+<------------------------------------------------->
+
+假如无padding无滚动无border;
+offsetWidth=clientWidth=style.width
+
+假如有padding无滚动有border;
+offsetWidth=style.width+style.padding*2+border宽度*2
+offsetWidth=clientWidth+border宽度*2
+
+假如有padding有滚动，且滚动显示，有border;
+offsetWidth=style.width+style.padding*2+border宽度*2
+offsetWidth=clientWidth+滚动条宽度+border宽度*2
+
+<---------------------------------------------------------->
+
+在IE6/7中
+offsetLeft = (offsetParent的padding-left)+(当前元素的margin-left);
+
+在IE8/9/10及chrome中
+offsetLeft=(offsetParent的margin-left)+(offsetParent的border宽度)+(offsetParent的padding-left)+(当前元素的margin-left)
+
+在fireFox中
+offsetLeft=(offsetParent的margin-left)+(当前元素的margin-left)+(offsetParent的padding-left)
+
+<---------------------------------------------------------->
+document.body的scrollWidth和scrollHeight与div的scrollWidth和scrollHeight是有点区别的。
+1、document.body的scrollWidth和scrollHeight
+一、给定宽高小于浏览器窗口
+scrollWidth通常是浏览器窗口的宽度
+scrollHeight通常是浏览器窗口的高度
+二、给定宽高大于浏览器窗口，且内容小于给定宽高
+scrollWidth给定的宽度+其所有的padding、margin和border
+scrollHeight给定的宽度+其所有的padding、margin和border
+三、给定宽高大于浏览器窗口、且内容大于给定宽高
+scrollWidth给定的宽度+其所有的padding、margin和border
+scrollHeight给定的宽度+其所有的padding、margin和border
+
+2、在某div中scrollWidth和scrollHeight
+无滚动轴时：
+scrollWidth==clientWidth=style.width+style.padding*2;
+有滚动轴时：
+scrolWidth==实际内容的宽高+padding*2
+scrooHeight==实际内容的高度+padding*2
+
+
+倒计时原理
+var iNow = new Date();
+var iNew = new Date(2016,10,26,21,56,0);
+var t = Math.floor((iNew - iNow)/1000);
+
+天：Math.floor(t/86400);
+时：Math.floor(t%86400/3600);
+分：Math.fllor(t%86400%3600/60);
+秒：t%60;
+
+HTTP状态码
+100  Continue  继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200  OK   正常返回信息
+201  Created  请求成功并且服务器创建了新的资源
+202  Accepted  服务器已接受请求，但尚未处理
+301  Moved Permanently  请求的网页已永久移动到新位置。
+302 Found  临时性重定向。
+303 See Other  临时性重定向，且总是使用 GET 请求新的 URI。
+304  Not Modified  自从上次请求后，请求的网页未修改过。
+
+400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+401 Unauthorized  请求未授权。
+403 Forbidden  禁止访问。
+404 Not Found  找不到如何与 URI 相匹配的资源。
+
+500 Internal Server Error  最常见的服务器端错误。
+503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。
+
+常见算法总结
+1、判断一个单词是否是回文
+function checkPalindrom(str){
+    return str == str.split('').reverse().join('');
+};
+
+2、去掉一组整形数组中重复的值
+比如输入: [1,13,24,11,11,14,1,2] 
+输出: [1,13,24,11,14,2]
+需要去掉重复的11 和 1 这两个元素。
+var unique = function(arr){
+    var hashTable = {};
+    var data = [];
+    for(var i=0,l<arr.length;i<l;i++){
+	if(!hashTable[arr[i]]){
+	    hashTable[arr[i]] = true;
+	    data.push(arr[i]);
+	}	
+    };
+    return data;
+}
+
+3、统计一个字符串中出现最多的字母
+输入 ： afjghdfraaaasdenas 
+输出 ： a
+function findMaxDuplicateChar(str){
+    if(str.length == 1) return str;
+    var charObj = {};
+    for(var i=0,l<str.length;i<l;i++){
+	if(!charObj[str.charAt(i)]){
+	    charObj[str.charAt(i)] = 1;
+	}else{
+	    charObj[str.charAt(i)] += 1;
+	}
+    }
+
+    var maxChar = '',
+	maxValue = 1;
+    for(var k in charObj){
+	if(charObj[k] > maxValue){
+	    maxChar = k;
+	    maxValue = charObj[k];
+	}
+    }
+
+    return maxChar;
+};
+
+4、冒泡排序
+function bubbleSort(arr){
+    for(var i=0,l<arr.length;i<l-1;i++){
+	for(var j=i+1;j<l;j++){
+	    var tem = arr[i];
+	    arr[i] = arr[j];
+	    arr[j] = tem;
+	}
+    }
+    return arr;
+}
+
+5、快速排序
+function quickSort(arr){
+    if(arr.length == 1) return arr;
+    var leftArr = [];
+    var rightArr = [];
+    var q = arr[0];
+    for(var i=1,l=arr.length;i<l;i++){
+	if(arr[i] > q){
+	    rightArr.push(arr[i]);
+	}else{
+	    leftArr.push(arr[i]);
+	}
+    }
+    return [].concat(quickSort(leftArr),[q],quickSort(rightArr));
+}

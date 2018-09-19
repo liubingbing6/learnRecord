@@ -1,0 +1,391 @@
+JS中的数据类型：undefined,null,boolean,number,string,function,object
+
+var colors=["red","green","blue"];
+
+var colors2=colors.concat("yellow",["black","white","pink"]);
+
+ReturnDeletedNumber=colors.splice(startNumber,deletNumber,"addNumbuer")
+
+ReturnIndexNumber=indexOf(String)/lastIndexOf(String,selectIndexNumber);
+
+浏览器对JS解析的原理：分为两步
+1)“找一些东西”:var function 参数
+	所有的变量，在正式运行代码之前，都提前赋一个值：未定义
+	遇到重名的时候：留下函数的那一个
+2)逐行解读代码：
+	表达式：=+-*/%++--！参数......
+	表达式可以修改预解析中的值。
+
+一个函数中如果不写return或return的是基本类型，则"返回"的是this。否则返回的是return的那个对象
+
+H5中新增获取元素
+querySelector
+querySelectorAll
+getElementsByClassName
+获取class列表属性
+classList：
+-length;
+-add();添加class方法
+-remove();删除class方法
+-toggle();切换class方法
+
+dataset(获取自定义属性，标签中定义属性必须用‘data-’开头)
+
+历史管理
+onhashchange:改变hash值来管理
+window.location.hash = num;
+
+
+以下事件不冒泡：blur、focus、load、unload。
+
+document.cookie ="user="+encodeURIComponent("刘兵兵");//编码
+alert(decodeURIComponent(document.cookie));//解码
+不设置过期时间，关闭浏览器cookie就失效。
+
+document.cookie = "user=值;"[expires=失效时间;path=路径访问;domain=域名访问;secure=安全的http;]
+
+JS中的迭代遍历
+every();对数组中的每一项运行给定函数，如果该函数对每一项都为true，则返回true
+some();对数组中的每一项运行给定函数，如果函数对任意一项为true，则返回true
+map();键值对，对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组
+forEach();
+filter();对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组
+reduce(prev,cur,index,array) 前一个值，当前值，项的索引，数组对象。
+reduceRight(prev,cur,index,array)从后向前遍历
+
+var date=new Date();
+var now = Date.now();
+date.getFullYear();
+date.getMounth();
+date.getDate();
+date.getDay();
+date.getHourse();
+date.getMinutes();
+date.getSeconds();
+date.getMillinutes();
+
+当jQuery异步获取数据时eval的注意事项：
+1、对于服务器返回的JSON字符串，如果jQuery异步请求没做类型说明，或者以字符串方式接受，那么需要做一次对象化处理，方式不是太麻烦，就是将该字符串放入eval()中执行一次。即
+var dataObj = eval("("+data+")");//转换为json对象
+为什么要加("("+data+")")呢？
+因为eval本身的问题，由于json是以"{}"的方式来开始以及结束的，在JS中，它会被当成一个语句块来处理，所以必须强制性的将它转换成一种表达式。加上圆括号的目的是迫使eval函数处理JS代码的时候强制将括号内的表达式转化为对象，而不是作为语句来执行。例如
+alert(eval("{}"); // return undefined
+alert(eval("({})");// return object[Object]
+注：对于一般的js生成json对象，只需要将$.each()方法替换为for语句即可，其他不变。
+
+注意：
+eval()方法是动态执行其中字符串(可能是js脚本)的，这样很容易造成系统安全问题。
+
+2、对于服务器返回的JSON字符串，如果jquery异步请求将type（一般为这个配置属性）设为“json”，或者利 用$.getJSON()方法获得服务器返回，那么就不需要eval（）方法了，因为这时候得到的结果已经是json对象了，只需直接调用该对象即可，
+
+正则表达式：
+/：转义字符；
+^:匹配输入字符串的开始位置；
+$:匹配输入字符串的结束位置；
+*:匹配前面子表达式任意次；
++:匹配前面的子表达式一次或多次；
+?:匹配前面的子表达式零次或一次；
+{n}:匹配确定的n次；
+{n,}:至少匹配n次；
+{n,m}最少匹配n次，最多匹配m次；
+\d:匹配一个数字字符；
+\f:匹配一个换页符；
+\s:匹配任何不可见字符；包括空格、制表符、换页符、等等；
+\t:匹配一个制表符；
+\w:匹配包括下划线的任何单词字符；
+
+栈方法：push(),pop();
+队列方法:push(),shift():在头删除;unsheift():在头插入;
+
+对象.concat()；连接数组；
+对象.slice(numbernOne,numberTwo);获取子数组，含头不含尾；
+对象.splice(numberOne:要删除的起始位置,numberTwo:要删除的个数，"stringOne":要插入的对象，"stringTwo":要插入的对象，...);
+对象.indexOf(number/string);返回查找数字或字符串的索引下标；
+对象.lastIndexOf(number/string);从后往前查找，返回的下标是从前往后的索引位置下标。
+
+function.apply(this,arguments):可以劫持另外一个对象的方法，继承另外一个对象的属性
+
+Math.ceil():向上四舍五入为最接近的整数；
+Math.floor():向下四舍五入为最接近的整数；
+Math.round():标准的四舍五入；即最接近的整数；
+Math.random()*(upperValue-lowerValue+1)+lowerValue;获得在lowerValue到upperValue之间的随机数。
+
+<caption></caption>：表格摘要标签
+
+target:"_blank"新窗口
+target:"_self"本窗口
+target:"_top"整个浏览器窗口
+target:"_parent"父窗口
+
+单选按钮的name值一定要一致；
+
+font-style:italic//字体为斜体
+
+层模型--绝对定位
+absolute:相对于其最接近的一个具有定位属性的父包含块进行绝对定位
+relative:相对于以前的位置移动
+
+面向对象：
+var person=new Object();
+person.name="lisi";
+person.age="23";
+person.sayName=function(){alert("hello world");};
+对象字面量：
+var person={name:"lisi";age:"23";sayNumber:function(){alert("hello world"}}
+var book={_year:2004,edition:1};_year前面的下划线是一种常用的记号，用于表示只能通过对象方法访问属性。
+
+
+访问器属性不能直接定义，必须使用Object.defineProperty来定义。
+Object.defineProperty(book,"year",{get:function(){},set:function(){}})
+Object.defineProperty(book,{_year:{2009},edition:{1},year:{get:function(){},set:function(){}}})
+
+创建自定义构造函数：
+例：
+function Person(name,age,job){
+	this.name=name;
+	this.age=age;
+	this.job=job;
+	this.sayName=function(){alert("hello world")};
+	}创建函数对象：首字母大写，直接将属性和方法赋给了this对象；
+
+var person1=new Person("nichola",22,"SoftWare Engineer");创建新对象；
+
+注意：任何函数，只要通过new操作符来调用，那它就可以作为构造函数；而任何函数，如果不通过new操作符来调用，那它跟普通函数也不会有什么两样。
+
+is(expr)：用一个表达式检查当前选择的元素集合，如果其中至少有一个元素符合这个给定的表达式就返回true。如果没有元素符合，或者表达式无效，都返回false。
+
+unbind()方法移除被选元素的事件处理程序。
+
+prototype原型对象
+
+hasOwnProperty()方法可以检测一个属性是存在于实例中，还是存在于原型中。只在给定属性存在于对象实例中时，才会返回true。
+
+有两种方式使用in操作符：单独使用和在for-in循环中使用。在单独使用时，in操作符会在通过对象能够访问给定属性时返回true，无论该属性存在于实例中还是原型中。
+
+hasPrototypeProperty(person,"name"):假如name属性是存在于原型中的，则返回true，如果存在于实例中，则返回false。
+
+IE早期版本的实现中存在一个bug，即屏蔽不可枚举属性的实例属性不会出现在for-in循环中。因此，要取得对象上所有可枚举的实例属性，可以使用ECMAScript5的Object.keys()方法。
+Object.keys()：返回一个包含所有可枚举属性的字符串数组。
+例：var keys = Object.keys(Person.prototype);keys返回的是属性的数组！
+如果想得到所有实例属性，无论它是否可枚举.则可以用Object.getOwnPropertyNames()方法。例：var keys = Object.getOwnPropertyNames(Person.prototype);
+
+isPrototypeOf():只要是原型链中出现过的原型，都可以说是原型链锁派生的实例的原型
+例:alert(Object.prototype.isPrototypeOf(instence));判断instence是否是Object原型链上的实例。
+
+获取当前节点的属性值：
+function getStyle(obj,name){
+    if(obj.currentStyle){
+        return obj.currentStyle[name];
+    }else{
+        return getComputedStyle(obj,false)[name];
+    }
+}
+
+三种继承方式
+拷贝继承：
+child,parent:函数类型
+function copy(child,parent){
+    var child = child.prototype;
+    var parent = parent.prototype;
+	for(var i in parent){
+	    child[i] = parent[i];
+	}
+}
+类式继承
+注意：子类中的属性继承用call或者apply;
+child,parent:函数类型
+function extend(child,parent){
+    var child = child.prototype;
+    var parent = parent.prototype;
+    var F = function(){};
+    F.prototype = parent;
+    child = new F();
+    child.constructor = child;
+}
+原型继承
+obj:对象
+function extend(obj){
+    var F = function(){};
+    F.prototype = obj;
+    return new F();
+}
+
+arguments.callee是一个正在执行的函数指针。
+
+闭包：指有权访问另一个函数作用域的变量的函数。
+
+JS事件
+什么是event事件对象：
+用来获取事件的详细信息：鼠标位置，键盘按键
+
+onmousemove//鼠标移动事件
+获取event对象（兼容性写法）
+var oEvent=ev||window.event;
+oEvent.cancelBubble=true;//取消冒泡事件
+oEvent.clientX//获取X的坐标；
+oEvent.clientY//获取Y的坐标；
+实时获取坐标
+X=oEvent.clientX+Object.scrollLeft();
+Y=oEvent.clientY+Object.scrollTop();
+
+什么是JS事件冒泡
+在一个对象上触发某类事件（比如单击onclick），如果此对象定义了此对象的处理程序，那么此事件就会调用这个处理程序，如果没有定义此事件处理程序或者事件返回true，那么这个事件会向这个对象的父级对象传播，从里到外，直至它被处理（父级对象所有同类事件都将被激活），或者它到达了对象层次的最顶层，即document对象。
+
+阻止默认事件：return false；
+
+拖拽原理：距离不变，三个事件，onkeydown,onmousemove,onmouseup;
+
+事件绑定：
+IE下的：attachEvent(事件名，函数);//事件名有on，例：'onclick'；
+FF下的：addEventListener(事件名，函数，false);//事件名没有on,例：'click'；
+
+径向渐变的概念：从起点到终点颜色从内到外进行圆形渐变（从中间向外拉）
+
+如果被设置元素为文本、图片等行内元素时，水平居中是通过给父元素设置 text-align:center 来实现的
+满足定宽和块状两个条件的元素是可以通过设置“左右margin”值为“auto”来实现居中的
+不定宽块状元素-水平居中：第二种方法：改变块级元素的 dispaly(父级) 为 inline 类型，然后使用 text-align:center 来实现居中效果
+
+DOM:Document Object Model
+
+==    双等号，先转换类型，再比较
+===   三等号，不转换类型，直接比
+
+闭包：子函数可以用父函数的局部变量
+
+for(var i in json){}//json的for in 循环
+
+建议：用到json时用for in,其余的用普通的for循环
+
+obj.currentStyle.width:获取非行间样式的宽//兼容IE浏览器
+getComputedStyle(obj,false).width:获取非行间样式的宽//兼容Chrom,firefox等浏览器
+
+对数组的操作：
+attr.push(num1):向数组尾部添加数据
+attr.pop();数组删除尾部数据，“弹”出数据，
+attr.shift();数组头部删除数据
+attr.unshift();数组头部添加数据
+attr.splice("起始值"，"删除的个数"，"增加的内容");//可以向数组的中间添加删除数据
+attr.join("-");将数组中的值用"-"连接起来。
+attr.concat(attr1);将attr1数组连接到attr数组之后
+
+父级.appendChild(子节点);//把元素从原有的父级上删除，插入到新父级节点的末尾
+父级.insertBefore(子节点A，子节点B);//节点B插在A前
+父级.removeChild(子节点);
+
+oTab.tBodies[0].rows[1].cells[1].innerHTML;//JS中获取表格中的数据
+
+getTime 方法返回一个整数值，这个整数代表了从1970年1月1日开始计算到Date对象中的时间之间的毫秒数。
+
+/**
+* 时间对象的格式化;
+*/
+Date.prototype.format = function(format){
+ /*
+  * eg:format="YYYY-MM-dd hh:mm:ss";
+  */
+ var o = {
+  "M+" :  this.getMonth()+1,  //month
+  "d+" :  this.getDate(),     //day
+  "h+" :  this.getHours(),    //hour
+      "m+" :  this.getMinutes(),  //minute
+      "s+" :  this.getSeconds(), //second
+      "q+" :  Math.floor((this.getMonth()+3)/3),  //quarter
+      "S"  :  this.getMilliseconds() //millisecond
+   }
+   
+   if(/(y+)/.test(format)) {
+    format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+   }
+  
+   for(var k in o) {
+    if(new RegExp("("+ k +")").test(format)) {
+      format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+    }
+   }
+ return format;
+}
+
+需要向服务器提交数据，可以用表单
+表单有两个事件：onsubmit,onreset;
+一切来自用户的数据都是不可信的。
+想建立“匹配”“对应”关系，就用索引值
+
+
+Error.name的取值一共有六种，如下：
+
+　　Error：()的使用与定义不一致
+　　RangeError：数值越界
+　　ReferenceError：非法或不能识别的引用数值
+　　SyntaxError：发生语法解析错误
+　　TypeError：操作数类型错误
+　　URIError：URI处理函数使用不当
+
+
+JSON对象和字符串之间的相互转换
+例：
+var a = {"name":"tom","sex":"男","age":"24"};
+var b = '{"name":"Mike","sex":"女","age":"29"}'
+var aToStr=JSON.stringify(a);
+ 
+var bToObj=JSON.parse(b);
+在高级浏览器中可以直接用JSON对象的stringify()和parse()方法。
+JSON.stringify(obj)将JSON转换为字符串。
+JSON.parse(string)将字符串转为JSON格式。
+
+ie8(兼容模式)，ie7和ie6可以使用eval()将字符串转为JSON对象，
+var c='{"name":"Mike","sex":"女","age":"29"}'
+var cToObj = eval("("+c+")");
+jquery中也有将字符串转为JSON格式的方法jQuery.parseJSON(json)。
+
+
+编写插件：
+将jQuery传递给一个自我执行的封闭程序，jQuery在此程序中映射为$符号，这样可以避免$号被其他库覆写。
+(function($){
+	$.fn.myPlugin=function(){
+		
+	};
+};)(jQuery);
+
+JSONP(JSON with Padding)是json的一种“使用模式”，可以让网页从别的域名（网站）那获取资料，即跨域读取数据。
+
+
+JS部分
+
+返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量；
+
+不要使用new Number、new Boolean()、new String()创建包装对象；
+
+用parseInt()或parseFloat()来转换任意类型到number;
+
+用String来转换任意类型到string，或者直接调用某个对象的toString()方法；
+
+通常不必把任意类型转换为boolean再判断，因为可以直接写if(myVar){...}
+
+typeof操作符可以判断出number、boolean、string、function和undefined；
+
+判断Array要使用Array.isArray(arr)；
+
+判断null要使用myVar === null;
+
+判断某个全局变量是否存在用typeof window.myVar === 'undefined';
+
+函数内部判断某个变量是否存在用typeof myVar === 'undefined';
+
+number对象调用toString时要注意：需要特殊处理一下
+123..toString();//'123'，注意是两个点
+(123).toString();//'123'
+
+location对象表示当前页面的URL信息
+获取一个完整的URL可以用：location.href
+获取各个部分的值可以这么写：
+location.protocal;
+location.host;
+location.port;
+location.pathname;
+location.search;
+location.hash;
+
+location.assing()//加载一个新页面
+location.reload()//重新加载当前页面
+
+注意：在form表单中，没有name属性的<input>的数据是不会被提交的

@@ -1,0 +1,462 @@
+eclipse设置网页编辑完成到网页刷新就可用的操作步骤
+一、在需要同步的工程目录下单击右键选择Properies
+二、点击File synchronization，勾选上Enable...
+三、点击Add Folder...勾选需要同步的文件，例如webapp
+四、点击右下角第一个Browse...按钮，
+五、选择文件所在文件夹下的。。。看例子：C:\Users\huangjin\git\gbanker_web\gbanker-web-wap\target\exploded\gbanker-web-wap；
+
+讲讲输入完网址按下回车，到看见网页这个过程中发生了什么 
+a. 域名解析 
+b. 发起TCP的3次握手 
+c. 建立TCP连接后发起http请求 
+d. 服务器端响应http请求，浏览器得到html代码 
+e. 浏览器解析html代码，并请求html代码中的资源 
+f. 浏览器对页面进行渲染
+
+学习本身如果不是一件有趣的事情，何不换个有趣的方式来学习。
+
+控制第几行用三个点（省略号）表示
+text-overflow:ellipsis;
+display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+-webkit-line-clamp: 2; /** 显示的行数 **/
+word-break:break-all;
+overflow:hidden;
+
+段落
+<hgroup></hgroup>//该标签中可放入多个<h>系列标签
+<wbr></wbr>//安全换行，该标签表示该元素处可以换行，也可不换行
+
+字体样式
+<b></b>//表示字体粗体
+<i></i>//表示字体斜体
+<del></del>//表示删除的文字，会有删除线显示
+<ins></ins>//表示加入的文字，会有下划线显示
+<u></u>//添加下滑线
+<small></small>//小号字体
+<s></s>//表示过时的，不被使用的
+<sup></sup>//上标
+<sub></sub>//下标
+<mark></mark>//显示高亮
+<bdo dir='rtl'></bdo>//显示的内容顺序是颠倒的;dir属性是必须的，且有两个值，rtl（从右到左）和ltr（从左到右）。一般默认是ltr。
+<bdi></bdi>//显示的内容是顺序的
+短语格式
+<em>em强调</em>
+<strong>strong着重</strong>
+<code>code代码</code>
+<samp>samp例子代码</samp>
+<kbd>kbd用户输入</kbd>//显示表示是用户输入的
+<var></var>//表示变量，内容会倾斜
+<cite></cite>//引用
+<abbr></abbr>//缩写，如：W3C
+<q></q>//应用，有双引号
+特殊格式
+<address></address>//地址
+<blockquote></blockquote>//大引用，注意：有缩进
+
+列表
+<ul>
+   <li></li>
+</ul>
+<dl>//可看成是词条
+   <dt></dt>//词条的标题
+   <dd></dd>//该标题的解释；注意：该解释会相对于上面标题有缩进
+</dl>
+
+图片
+<img/>
+<iframe src=""></iframe>//插入其他页面或其他网站的内容
+
+链接
+<a></a>
+<img src='' usemap='#map'/>//usemap将图片分为好几个区域，然后分别做处理
+<map name="map">//对应上面的usemap
+    <area shape="rect" coords="0,0,50,50"href=""alt=""/>//coords表示坐标；0,0表示起始坐标，50，50表示终止坐标；
+    <area shape="circle/poly(多边形)" coords="75,75,25"href=""alt=""/>//表示坐标在75,75，半径是25px；
+</map>
+
+表格
+<table></table>
+<tr></tr>
+<td></td>
+
+<time>2015-8-27</time>//用于放时间的
+
+//设置锚点
+<a href='#1'>跳到name为1的锚点</a>
+<a name=1></a>
+
+<pre></pre>//展示格式化内容，即编辑器怎么排版的，网页就原封不动的展现出来
+
+<figure>//使用插图，好处是使标签语义化；这两个元素一般用于图片的布局
+   <figcaption>这是一张图片</figcaption>
+   <img/>
+</fiture>
+
+表格
+<colgroup span='2'style="background:red"></colgroup>//该元素是为了处理某个列，span属性定义处理哪些列。1表示第一列，2表示前两列。如果要单独设置第二列，那么需要声明两个，先处理第一个，将列点移入第二位，再处理第二个即可。
+<colgroup>
+   <col>
+   <col style="background:red">
+</colgroup>//<col>元素表示单独一列，一个表示一列，控制更加灵活。如果设置了span，则可以控制多列。
+
+文档元素
+<header></header>
+<section></section>//文档的主题部分 页面区块
+<footer></footer>
+<article>//可以看成是小的<body>;与此相似的有论坛的帖子、用户的评论、新闻等。
+    <header></header>
+    <section></section>//文档的主题部分
+    <footer></footer>
+</article>
+<aside></aside>//专门为某一段内容进行注释使用
+<embed src="" type="" widty="" height=""></embed>//嵌入插件内容
+<details>//用于描述文档或文档某个部分的细节
+	<summary>讯鸟公司</summary>
+	<p>刘兵兵</p>
+	<a href="#">唉。。。</a>
+</details>
+<progress width="" max=""></progress>//显示进度条，一般通过JS控制内部的值，IE9以下不支持
+
+<meter min="" max="" value="" low="" high=""></meter>//该元素显示某个范围内的值。其下的属性包含：min和max表示范围边界，low表示小于它的值过低，high表示大于它的值过高，optimum表示最佳值，但不出现效果。IE浏览器不支持此元素。
+
+新的输入型控件_1
+email:电子邮箱文本框，跟普通的没什么区别
+注意：1、当输入不是邮箱的时候，验证不通过
+      2、移动端的键盘会有变化
+tel:电话号码
+url：网页的URL
+search:搜索引擎（Chrome下输入文字后，会多出一个关闭的X）
+range:特定范围内的数值选择器（min,max,step）
+
+新的输入型控件_2
+number:只能包含数字的输入框
+color：颜色选择器
+datetime:显示完整的日期
+datetime-local:显示完整日期，不含时区
+time:显示时间，不含时区
+date:显示日期
+week：显示周
+month:显示月
+
+新的表单特性和函数
+placeholder:输入框提示信息
+autocomplete:是否保存用户输入值（默认是on，关闭提示选择off）
+autofocus:指定表单获取输入焦点
+list和tatalist:为输入框构造一个选择列表（list值为datalist标签的id）
+required:此项必填，不能为空
+pattern:正则验证（pattern="\d{1,5}"）
+Formaction在submit里定义提交地址
+
+视频：
+<vedio></vedio>//嵌入视频
+src:路径
+width:宽
+height:高
+autoplay:设置后，表示立刻开始播放视频
+
+preload:设置后，表示预先载入视频none表示不进行预加载，metadata表示只预加载媒体的元数据，auto表示预加载全部的视频或音频
+
+controls:设置后，表示显示播放控件
+loop:设置后，表示反复播放视频
+muted:设置后，表示视频处于静音状态
+poster:指定视频数据载入时显示的图片
+src属性可以单独设置，如下：
+<vedio>
+	<source src="" type=""/>
+</vedio>
+
+音频：
+<audio>
+	<source src="">
+</audio>
+autoplay:设置后，表示立刻开始播放视频
+preload:设置后，表示预先载入视频
+controls:设置后，表示显示播放控件
+
+表单元素：
+form属性==>
+autocomplete:设置浏览器记住用户输入的数据，实现自动完成表单。默认为ON自动完成，如果不想自动完成则设置off。
+novalidate：设置是否执行客户端数据有效性检查
+
+input属性==>
+autofocus:让光标聚焦在某个input元素上，让用户直接输入
+disabled:禁用input元素
+form:该属性中的值与<form>表单的id值相同，则拥有该form属性的标签中的值可提交到<form>表单中。
+
+type==>
+type="text"::input有如下属性
+    placeholder:输入字符的提示
+    maxlength:设置输入文本的最大长度
+    readonly：文本框处于只读状态
+    disabled:文本框处于禁用状态
+    size:设置文本框宽度
+    value:设置文本框初始值
+    required:表明用户必须输入一个值，否则无法通过输入验证 
+    list:指定为文本框提供建议值的datalist元素，其值为datalist元素的id值，如：    <input type="text" list="abc"/>
+    <datalist id="abc">
+        <option value="1">苹果</option>
+        <option value="2">桔子</option>
+    </datalist>
+
+type="search"==>此时框后有一个小叉，但是Firefox不支持此属性
+type="number"==>只能输入数字，出现的上下小箭头，可进行加减
+type="file"==>生成一个文件上传控件，用于文件的上传，有属性如下：
+accept:指定接受MIME类型
+required:表明用户不许提供一个值，否则无法通过验证。
+
+<select>
+	<optgroup label="水果类">
+		<option value=""selected>苹果</option>
+		<option></option>
+		<option></option>
+		<option></option>
+	</optgroup>
+	<optgroup label="粗粮类">
+		<option value=""selected>小米</option>
+		<option></option>
+		<option></option>
+		<option></option>
+	</optgroup>
+</select>
+
+
+
+CSS3
+text-align:justify//两端对齐
+text-transform:capitalize/uppercase/lowercase/；//首字母大写/转换为大写/转换为小写
+word/letter-spacing:10px;
+text-decoration:underline/overline/line-through;下划线/上划线/删除线
+direction:rtl/ltr//文字方向
+white-space:pre/pre-wrap/nowrap/pre-line;保留回车与空格/保留回车与空格且可以卷绕/不卷绕，就一行显示/合并空白，保留换行；
+
+<ul style="list-style-position:inside/outside"></ul>//inside是文字与“点”对齐，outside是与“文字”对齐；
+
+伪元素前置两个冒号（::），伪类前置一个冒号（:)
+::first-line//首行
+::first-letter//首字母
+::before//文本前插入
+::after//本文后插入
+
+@font-face{//给文档添加字体
+	font-family:"起名字";
+	src:url();
+
+style="border-collapse:collapse"//合并边框模型
+
+}
+
+visibility:visible//默认值，元素在页面上可见
+visibility:hidden//元素不可见，但会占据空间
+visibility:collapse//元素不可见，隐藏表格的行与列，如果不是表格，则hidden一样
+
+background-attachment:fixed//背景图片固定，不随滚动条一起滚动
+
+<time pubdate="pubdate"></time>//有pubdate标识的时间会显示为最新发布的时间
+
+<details>//此功能只有chrome浏览器支持
+	<summary>klsjdljllkj</summary>//显示的标题或内容
+	<p></p>//隐藏的内容，当点击时此内容出现
+</details>
+
+canvas的用法
+<canvas id='cvs'></canvas>//可设置宽、高，设置ID
+在JS中获取该ID 例：
+var canvas=document.getElementById('cvs');//获取画布DOM
+var context=canvas.getContext("2d");//获得画布的上下文内容，设置绘图环境
+context.fillStyle='';//设置画布的背景样式
+context.fillRect(X,Y,Width,Height);//设置画布起始位置和大小
+context.lineWidth='';//设置画笔大小
+context.strokeStyle='';//设置边框样式
+context.strokeRect(X,Y,Width,Height);//设置边框位置和大小
+
+/*画圆*/
+for(var i=1;i<11;i++){
+	context.beginPath();//开一个通道来绘画
+	context.arc(i*20,i*20,i*10,0,Math.PI*2,true);//画圆，X坐标，Y坐标，半径，起始角度，停止角度=>此处是360度；
+
+	context.closePath();//关闭通道
+	context.fillStyle='rgba(255,0,0,0.25)';//样式设置
+	context.fill();//方法，此处是绘制；
+    }
+
+sessionStorage用户本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且的那个会话结束后数据也会随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。
+
+localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。
+
+例：
+sessionStorage.setItem(key,value);//存储数据
+sessionStorage.getItem(key);//获得数据
+sessionStorage.removeItem(key);//删除指定key本地存储的值
+sessionStorage.clear();//清除所有的key/vae
+
+VCD分解
+View视觉：	 HTML+CSS 基本界面模板
+Controller控制： javascript 内容处理、事件处理
+Data数据：	 data.js 非必须，助于理解
+
+Firebug调试工具
+Ctrl+向上箭头：动态添加数字的小数位
+Shift+向上箭头：动态以十向上相加
+
+设置垂直居中的方法：
+position:absolute;
+top:50%;
+margin-top:-300px;/*设置为当前元素高度的一半*/
+
+position的top:50%;left:50%;是相对于界面宽高的。translate的-50%,-50%是相对于div本身宽高的。
+
+不定宽高的水平垂直居中
+position ：absolute;
+top:50%;
+left:50%;
+-webkit-transform:translate(-50%,-50%);
+
+flexbox版的不定宽高的水平垂直居中
+justify-content:center;//子元素水平居中
+align-items:center;//子元素垂直居中
+display:-webkit-flex;
+
+-webkit-backface-visibility:hidden;当元素不面向屏幕时隐藏
+-webkit-transform-style:preserve-3d;支持子元素的3D效果
+
+oDiv.style.cssText='width:100px；height:100px；';//批量改变样式
+
+移动开发：
+viewport:visual//度量或视口,不可改动
+         layout//布局
+
+布局viewport=设备宽度=度量viewport
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">//移动web加入这个meta标签就可以正常开发了
+
+
+HTML5其他功能
+编辑功能：标签中添加属性
+.contenteditable = 'true'
+
+语言输入
+.<input type="text" x-webkit-speech />(有兼容性，Chrome支持)
+
+桌面提醒
+.window.webkitNotifications.requestPermission();
+.statue = window.webkitNotifications.checkPermission();
+.var notification = window.webkitNotifications.createNotification("[imgurl]","Title","Body");
+.notification.show();
+
+HTML5之离线存储
+搭建离线应用程序
+	1、服务器设置头信息：
+		-AddType text/cache-mainfest.manifest
+	2、html标签加:
+		-manifest="xxxxx.manifest"
+	3、写manifest文件:离线的清单列表
+		-先写：CACHE MANIFEST
+		-FALLBACK:第一个网络地址没获取到，就走第二个缓存的地址
+	4、NETWORK：无论缓存中存在与否，均从网络获取
+
+
+websocket
+Node.js
+.安装node.js
+.转到项目目录
+.运行node scriptname.js
+.http服务器的创建
+.安装websocket模块npm install socket.io
+.websocket服务的创建
+
+
+Web worker
+什么是worker？
+	.JS的单线程（放入UI队列的个数，利用定时器解决）
+	.可以让web应用程序具备后台处理能力，对多线程的支持非常友好。
+
+Worker API
+.new Worker('后台处理的JS地址')
+.利用postMessage传输数据
+.利用onmessage方法进行监听
+.importScripts('导入其他JS文件')
+
+
+Worker运行环境
+.navgator:appName、appVersion、userAgent、platform
+.location:所有属性都是只读的
+.self:指向全局worker对象
+.所有的ECMA对象，Object、Array、Date等
+.XMLHttpRequest构造器
+.setTimeout和setInterval方法
+.close()方法，立刻停止worker运行
+importScripts方法
+
+
+HTML5地理信息与本地存储
+Geolocation
+地理位置
+.经度:南北极的连接线（竖线）
+.纬线:东西连接的线（横线）
+位置信息从何而来
+.IP地址
+.GPS全球定位系统
+.Wi-Fi无线网络
+.基站
+
+地理位置对象_1(LBS:基于地图信息的应用)
+.navigatior.geolocation
+	-单次定位请求：getCurrentPosition(请求成功，请求失败，数据收集方式)
+	-请求成功函数
+	》经度：coords.longitude
+	》纬度：coords.latitude
+	》准确度：coords.accuracy
+	》海拔：coords.altitude
+	》海拔准确度：coords.altitudeAcuracy
+	》行进方向：coords.heading
+	》地面速度：coords.speed
+	》时间戳：new Date(position.timestamp);
+
+例：
+    oBtn.onclick = function(){
+	navigator.geolocation.getCurrentPosition(function(position){
+	oDiv.innerHTML = '经度：'+position.coords.logitude;
+})
+}
+
+地理位置对象_2
+.navigatior.geolocation
+    -请求失败函数
+	》失败编号：code
+	》0：不包括其他错误编号中的错误
+	》1：用户拒绝浏览器获取位置信息
+	》2：尝试获取用户信息，但失败了
+	》3：设置了timeout值，获取位置超时了
+    -数据收集：json的形式
+	》enableHighAcuracy:更精确的查找，默认false
+	》timeout：获取位置允许最长时间，默认infinity
+	》maximumAge:位置可以缓存的最大时间，默认0
+
+地理位置对象_3
+.navigatior.geolocation
+    -多次定位请求：watchPosition(像setInterval)
+	》移动设备有用，位置改变才会触发
+	》配置参数：frequency更新的频率
+    -关闭更新请求：clearWath(像clearInterval)
+
+本地存储
+Storage API
+.setItem()
+    -设置数据，key/value类型，类型都是字符串
+    -可以用获取属性的形式操作
+.getItem();
+    -获取数据，通过key来获取到相应的value
+.removeItem();
+    -删除数据，通过key来删除相应的value
+.clear();
+    -删除全部存储的值
+.存储事件：
+    -当数据有修改或删除的情况下，就会触发storage事件
+    -在对数据进行改变的窗口对象上是不会触发的
+    -Kye：修改或者删除的key值，如果调用clear(),key为null
+    -newValue:新设置的值，如果调用removeStorage(),key为null
+    -oldValue:调用改变前的value值
+    -storageArea:当前的storage对象
+    -url：触发该脚本变化的文档url
+	注意：session同窗口才可以，例子：iframe操作
+

@@ -1,0 +1,93 @@
+函数节流
+<script type="text/javascript">  
+    var query = _(function() {  
+        // 在这里进行查询操作  
+    }).throttle(500);  
+ 
+    $(window).bind('scroll', query);  
+</script>
+debounce()方法关注函数执行的间隔，即函数两次的调用时间不能小于指定时间
+throttle()方法更关注函数的执行频率，即在指定频率内函数只会被调用一次。
+
+_.template模板函数只能解析3种模板标签：
+<% %>:用于包含javascript代码，这些代码将在渲染数据时被执行。
+<%= %>:用于输出数据，可以是一个变量、某个对象的属性、或函数调用（将输出函数的返回值）
+<%_ %>:用于输出数据，同时会将数据中包含的HTML字符转换为实体形式（例如它将双引号转换为&quot形式），用于避免XSS攻击
+
+javascript语言的数据集合，包括两种结构：数据和对象
+
+map方法对集合的每个成员进行一次某种操作，将返回的值依次存入一个新的数组
+例：
+_.map([1, 2, 3], function(num){ return num * 3; });
+// [3, 6, 9]
+_.map({one : 1, two : 2, three : 3}, function(num, key){ return num * 3; });
+// [3, 6, 9]
+
+each方法map类似，一次对数组所有元素进行某种操作，不返回任何值
+例：
+_.each([1, 2, 3], alert);
+_.each({one : 1, two : 2, three : 3}, alert);
+
+Underscore.js提供了一系列方法，判断数组元素的特征。这些方法都返回一个布尔值，表示是否满足条件。
+every方法判断数组的所有元素是否都满足某个条件。如果都满足则返回true，否则返回false。
+_.every([1,2,3,4,5,6],function(num){return num % 2 == 0;});//false
+
+some方法则是只要有一个元素满足，就返回true，否则返回false。
+_.some([1,2,4,3,5,6],function(num){return num % 2 == 0;});//ture
+
+size方法返回集合的成员数量。
+_.size({one : 1,two : 2,three : 3});//3
+
+Underscore.js提供用于过滤数组的方法，找到符合要求的成员。
+filter方法一次对集合的每一个成员进行某种操作，只返回操作结果为true的成员。
+_.filter([1,2,3,4,5,6],function(num){return num % 2 == 0});//[2,4,6]
+
+reject方法只返回操作结果为false的成员。
+_.reject([1,3,2,4,5,6],function(num){return num % 2 == 0});//[1,3,5]
+
+find方法一次对集合的每个成员进行某种操作，返回第一个操作结果为true的成员。如果所有成员的操作结果都为false，则返回undefined。
+_.find([1,2,3,4,5,6],function(num){return num % 2 == 0});//2
+
+contains方法表示如果某个值在数组内，则返回true，否则返回false。
+_.contains([1,2,3,4,5,6],3);//true
+
+countBy方法一次对集合的每个成员进行某种操作，将操作结果相同的成员算作一类，最后返回一个对象，表明每种操作结果对应的成员数量。
+_.countBy([1,2,3,4,5,6],function(num){reutrn num % 2 == 0?'event':'odd'});//{odd:3,even:2}
+
+对象相关方法
+toArray方法将对象转为数组，只包含对象成员的值。典型应用是将类似数组的对象转换为真正的数组。
+_.toArray({a:0,b:1,c:2});//[0,1,2]
+
+pluck方法将多个对象的某一个属性的值，提取成一个数组。
+var stooges = [{name:'moe',age : 40},{name:'larry',age : 50},{name:'curly',age : 20}];
+_.pluck(stooges,'name');//["moe","larry","curly"]
+
+与函数相关的方法
+在不同的运行环境下，JavaScript函数内部的变量所在的上下文是不同的。这种特性会给程序带来不确定性，为了解决这个问题，Underscore.js提供了两个方法，用来给函数绑定上下文。
+
+bind方法
+该方法绑定函数运行时的上下文，返回一个新函数
+var o={
+	p:2,
+	m:function(){console.log(this.p);}
+}
+o.m()//2
+_.bind(o.m,{p:1})()//1
+除了前两个参数以外，bind方法还可以接受更多参数，它们表示函数方法运行时所需的参数。
+var add=function(n1,n2,n3){
+	console.log(this.sum+n1+n2+n3);
+}
+_.bind(add,{sum:1},1,1,1)();//4
+上面代码中bind方法有5个参数，最后那三个是给定add方法的运行参数，所以运行结果为4。
+
+template模板
+var list="<% _.each(people,function(name){%><li><%=name%><%})%>";
+_.template(list,{people:['moe','larry','curly']});
+// "<li>moe</li><li>curly</li><li>larry</li>"
+
+如果template方法只有第一个参数templateString，省略第二个参数，那么会返回一个函数，以后可以向这个函数输入数据。
+var t1 = _.template("Hello <%=user%>!");  
+t1({ user: "<Jane>" }) 
+// 'Hello <Jane>!'
+_.template()
+

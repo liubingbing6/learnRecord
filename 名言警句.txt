@@ -1,0 +1,25 @@
+坐而言不如行而起
+1、旅行
+2、美食、音乐、电影
+3、聊我的朋友，ta的朋友
+4、有冒险经历的过程
+5、癖好或怪癖
+6、问ta的看法、意见==》男女之间的问题
+7、聊ta的激情或我的激情
+
+I Just Called to Say I Love You
+Sealed With A Kiss
+
+console.dir()//打印整体信息
+console.dirxml()//可以打印文本节点信息
+console.assert()//断言==》判断真假
+console.trace()//栈==》判断当前对象的走法或执行过程
+
+console.time('hello')//判断一段代码的执行时间，括号内必须写一个标题
+console.tiemEed('hello')
+
+console.profile()//判断当前函数体的执行性能(概括)
+console.profileEnd()
+
+
+

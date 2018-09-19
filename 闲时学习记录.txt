@@ -1,0 +1,134 @@
+String.format("%.2f",total);//保留total小数点后两位
+任意min~max之间（int）(Math.random()*(max-min+1)+min)//获得min—max之间随机的一个整数
+正则表达式打元字符：\ $ * . ) ^ ? |{
+g(global)全局模式；
+i(case-insensitive)不区分大小写模式;
+m(multiline)多行模式;
+以字面量的形式创建正则表达式：
+var parttern1 = /[bc]at/i;匹配第一个bat或cat，不区分大小写；
+var parttern2 = /.at/gi;匹配所有以at结尾的三个字符
+var parttern3 = /\.at/gi;匹配所有.at的字符；
+var re = new RegExp("cat","g");
+var text = "cat,bat,sat,fat";
+var pattern = /.cat/gi;
+var matches = pattern.extc(text);
+matches.index;
+matches.lastIndex;
+使用不带圆括号的函数名不是调用函数，而是使用函数指针
+ECMAscript中没有函数重载的概念，如果两个函数名相同且参数也相同，在调用时后面的函数会覆盖掉前面的函数
+unexpected identifier意外标识符
+function createCompareatFunction(propertyName){
+	return function(value1,value2){
+	var object1=value1[value1];
+	var object2=value2[value2];
+	if(object1<object2){
+	}
+    }
+}
+函数内部的属性和方法：
+			prototype();
+			length();
+			collee();
+			coller();
+			call();
+			apply(第一个参数：设置运行函数的作用域；第二个参数：可以是Array数组，也可以是arguments对象);
+			bind();
+引用类型与基本保证类型的主要区别就是对象的生存期。
+var obj = new Object("hello");
+alert(obj instanceof String);
+节点类型 nodeType;
+文本节点 nodeType==3
+元素节点 nodeType==1
+子节点 childNode;
+获取子节点有两种类型一种就是文本节点，另外一种就是元素节点，但是采用children，这种方法就会自动的获取元素节点而不包括文本节点。
+父节点 parentNode;
+首尾子节点有兼容性问题：
+firstChild firseElementChild
+lastChild lastElementChild
+兄弟节点 有兼容性问题;
+nextSibling nextElementSibling
+previousSibling previousSibling
+DOM方式操作元素属性：
+getAttribute(名称);
+setAttribute(名称，值);
+removeAttribute(名称);
+创建元素：createElement;
+父级.appendChild(子节点);
+父级.insertBefore(需要插入的节点，插入的位置节点);
+父级.removeChild(子节点)删除节点;
+文档碎片:createDocumentFragment();
+表格布局：table tBody 
+对象.search(exper)；返回exper字符串与对象匹配的首个地址下标，如果没有查找到，则返回-1；
+表单的验证：onsubmit,onreset,onkeyup,onblur,onfocus,
+
+绝对定位的元素的位置相对于最近的已定位祖先元素，如果元素没有已定位的祖先元素，那么它的位置相对于最初的包含块。
+4001005678
+commit：版本
+淡入淡出运动；
+侧边栏；
+缓冲运动(记得取整)；
+
+为窗口添加滚动条事件：
+window.onscroll=function(){};
+注意在获取滚动条距离的时候：谷歌不识别document.documentElement.scrollTop,必须要加上document.body.scrollTop;即var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+
+out对象：
+println()
+clear();
+clearBuffer();
+flush();
+
+request对象：
+getParameter();获得单个数据
+getParameterValues();获得多个数据，数组保存；
+setCharacterEncoding();设置字符编码；
+setAttribute();
+getAttribute();
+
+response对象:
+session对象:
+getValueNames():返回一个包含此session中所有可用属性的数组
+int getMaxInactiveInteral():返回两次请求间隔多长时间此session被取消（单位秒）；
+
+EL表达式：
+${coustomer.age}：获得coustomer对象下的age属性值，查找范围依次是（范围有关的隐含对象）pageScope,requestScope,sessionScope,applicationScope
+与输入有关的隐含对象：param,paramValues.
+其他隐含对象：cookie,header,headerValues,initParam,pageContext.
+${cookie.JSESSIONID.name}=>获取cookie的EL表达式的方式
+${header["Accept-Language"]}=》获取头信息的EL表达式
+${initParam.initName}
+
+pageContext 即为PageContext,获取属性
+例如：${pageContext.request.queryString}获取请求的URL，但不包含请求之参数字符串
+      ${pageContext.request.contextPath}服务的web application名称。
+
+EL表达式可进行自动类型转换。
+${empty requestScope.names}:empty 可以作用于一个集合，若该集合不存在或集合中没有元素，其结果都为true
+
+自定义标签的开发与应用步骤：
+1，编写完成标签功能的java类（标签处理器）；
+--建一个web工程文件，建一个类，该类实现SimpTag接口。
+2，编写标签库描述（tld）文件，在tld文件中对自定义中进行描述。
+--引入jstl.jar与standard.jar标签库，复制粘贴到WEB-INF下的lib文件夹中
+--在WEB-INF文件夹下建立一个XX.tld文件（xml文件类型），
+--在XX.tld文件中
+<short-name></short-name>:建议在jsp页面中使用的标签前缀
+<uri></uri>:作为当前tld文件表示的唯一ID，多个tld文件的ID不能重复。jsp页面的uri属性通过该ID来引用。
+<tag>:定义标签
+	<name></name>:标签名字
+	<tag-class></tag-class>:标签所在的全类名
+	<body-content></body-content>:标签体的类型
+</tag>
+3，在JSP页面中导入和使用自定义标签。
+--导入taglib标签
+<%@taglib uri="" prefix="c"%>
+--使用标签
+<c:标签名字/>
+
+同步：事情一件一件做
+异步：多个事情可以一起做
+
+1，创建Ajax对象
+2，连接到服务器
+3，发送请求
+4，接收返回值

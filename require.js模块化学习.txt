@@ -1,0 +1,95 @@
+require.js  ==》实现模块化加载
+
+AMD规范诞生的背景：浏览器端的模块，不能采用同步加载，只用采用异步加载
+AMD:"异步模块定义" ==》它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等加载完成后，这个回调函数才会运行。
+
+
+优点：
+（1）实现js文件的异步加载，避免网页失去响应；
+（2）管理模块之间的依赖性，便于代码的编写和维护。
+1、防止js加载阻塞页面渲染
+2、使用程序调用的方式加载js，防止出现如下丑陋复杂的场景
+<script type="text/javascript" src="a.js"></script>
+<script type="text/javascript" src="b.js"></script>
+<script type="text/javascript" src="c.js"></script>
+<script type="text/javascript" src="d.js"></script>
+<script type="text/javascript" src="e.js"></script>
+<script type="text/javascript" src="f.js"></script>
+<script type="text/javascript" src="g.js"></script>
+<script type="text/javascript" src="h.js"></script>
+<script type="text/javascript" src="i.js"></script>
+<script type="text/javascript" src="j.js"></script>
+上述丑陋的场景：有很大的缺点。首先，加载的时候，浏览器会停止网页渲染，加载文件越多，网页失去响应的时间就会越长；其次，由于js文件之间存在依赖关系，因此必须严格保证加载顺序（比如上例的1.js要在2.js的前面），依赖性最大的模块一定要放到最后加载，当依赖关系很复杂的时候，代码的编写和维护都会变得困难。
+
+require定义三个变量，define,require,requirejs
+其中require===requirejs,一般使用require更简短
+
+define：定义一个模块
+==》假定现在有一个math.js文件，它定义了一个math模块。那么，math.js就要这样写：
+　// math.js
+　　define(function (){
+　　　　var add = function (x,y){
+　　　　　　return x+y;
+　　　　};
+　　　　return {
+　　　　　　add: add
+　　　　};
+　　});
+==》如果这个模块还依赖其他模块，那么define()函数的第一个参数，必须是一个数组，指明该模块的依赖性。
+define(['myLib'], function(myLib){
+　　　　function foo(){
+　　　　　　myLib.doSomething();
+　　　　}
+　　　　return {
+　　　　　　foo : foo
+　　　　};
+　　});
+
+
+require：加载依赖模块，并执行加载完成后的回调函数
+例：
+require(["js/a"],function(){
+    alert("load finished");
+})
+注意：require中的依赖是一个数组，即使只有一个依赖，也必须使用数组来定义
+
+require.config  ==》用来配置模块加载位置，简单点说就是给模块起一个更短更好记的名字
+例：
+require.config({
+    paths : {
+        "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery"],
+        "a" : "js/a"   
+    }
+})
+其中paths的配置会使我们的模块名字更精炼，paths还有一个更重要的功能，就是可以配置多个路径，如果远程cdn库没有加载成功，可以加载本地的库
+
+注意：
+1、在使用requirejs时，加载模块时不用写.js后缀，当然也不能写后缀。
+2、下面例子中的callback函数中发现有$参数，这个就是依赖的jquery模块的输出变量，如果你依赖很多个模块，可以依次写入多个参数来使用
+例：
+require(["jquery","underscore"],function($, _){
+    $(function(){
+        _.each([1,2,3],alert);
+    })
+})
+如果某个模块不输出变量值，则没有，所以尽量将输出的模块写在前面，防止位置错乱引发误解
+
+第三方模块
+通过require加载的模块一般都需要符合AMD规范即使用define来申明模块，但是部分时候需要加载非AMD规范的js，这时候就需要用到另一个功能：shim，shim解释起来也比较难理解，shim直接翻译为"垫"，其实也是有这层意思的，
+通常用在两个地方：
+1、非AMD模块输出，将非标准的AMD模块“垫”成可用的模块
+2、插件形式的非AMD模块，我们经常会用到jquery插件，而且这些插件基本都不符合AMD规范，比如jquery.form插件，这时候就需要将form插件“垫”
+到jquery中。
+例：
+require.config({
+    shim: {
+        "underscore" : {
+            exports : "_";//输出的变量名，表明这个模块外部调用时的名称
+        },
+        "jquery.form" : {
+            deps : ["jquery"]//deps数组，表明该模块的依赖性
+        }
+    }
+})
+
+注意：使用闭包十分容易造成浏览器的内存泄露，严重情况下会使浏览器挂死

@@ -1,0 +1,42 @@
+XMLHttpRequest取得响应
+readyState属性
+0:请求未初始化，open还没有调用
+1：服务器连接已建立，open已经调用了
+2：请求已接收，也就是接收到头信息了
+3：请求处理中，也就是接收到响应主体了
+4：请求已完成，且响应已就绪，也就是响应完成了
+
+JSON的长度和xml格式比起来很短小
+json读写的速度更快
+json可以使用javascript内建的方法直接进行解析，转换成javascript对象，非常方便
+
+跨文档消息通信
+postMessage对象（window对象下第一个方法）具体可看妙味课堂=》窗口跨域操作问题和postMessage的使用
+.接收消息的窗口对象.postMessage()
+.两个参数：发送的数据，接收的域名（带上协议）
+.交互方式
+	-iframe:父页面:contentWindow 子页面:window.top
+	-窗口页:父页面:window.open 子页面:widnow.opener
+.接收事件
+	-message
+	-ev.origin:发送数据来源的域名
+	-ev.data:发送的数据
+
+
+ajax的跨域问题和处理
+在标准浏览器下,XMLHttpRequest对象已经是升级版本，支持了更多的特性，可以跨域了，但是，如果想实现跨域请求，还需后端的相关配合才可以。例如PHP中的header添加信息
+header('Access-Control-Allow-Origin:http://www.a.com')//这是允许访问改资源的域
+
+如果是IE浏览器想实现跨域请求，则需要使用另外一个对象去实现：XDomainRequest
+例：var oXDom = new XDomainRequest();
+	oXDom.onload = function(){
+		alert(this.responseText);
+	}
+	oXDom.open('get','http://www.b.com/ajax.php',true);
+	oXDom.send();
+
+XMLHttpRequest改进了
+.upload.onprogress:上传进度
+.FormData对象=》格式化数据，方便进行数据传输
+.ev.total(已发送的总量)、ev.loaded(待发送的总量)
+.onprogress:下载

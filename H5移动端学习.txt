@@ -1,0 +1,172 @@
+视口设置
+    viewport视口(可视区窗口)
+	默认不设置viewport一般可视区宽度在移动端是980
+	width 可视区的宽度（number||device-width）
+	user-scalable是否允许用户缩放（yes||no）
+	IOS10无效
+	initial-scale初始缩放比例
+	minimum-scale最小缩放比例
+	maximum-scale最大缩放比例
+设置缩放比的时候，可以JS调用当前屏幕的尺寸：window.screen.width
+缩放比：屏幕尺寸/目标尺寸
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=.5,minimun-scale=.5,maximum-scale=1">
+
+px:逻辑像素，浏览器使用的抽象单位
+dp,pt:设备无关像素
+dpr:设备像素缩放比
+计算公式：1px = (dpr)的平方 * dp
+
+移动端是没有hover这个功能的哟。
+角度转弧度 = deg*Math.PI/180
+旋转:
+a=Math.cos(deg/180*Math.PI);
+b=Math.sin(deg/180*Math.PI);
+
+
+QQ强制横屏或者竖屏显示
+<meta name="x5-orientation" content="portrain|landscape">
+
+QQ设置全屏
+<meta name="x5-fullscreen" content="true"/>
+
+UC强制竖屏或者横屏显示
+<meta name="screen-orientation" content="portrait|landscape">
+
+UC全屏显示
+<meta name="full-screen" content="yes"/>
+
+禁止识别电话号码和邮箱号码
+<meta name="format-detection" content="telephone=no,meail=no"/>
+拨打电话和发邮件
+href="tel:"
+href="mailto:"
+
+默认样式
+清除点击阴影：-webkit-tap-highlight-color
+消除按钮圆角: -webkit-appearance:none
+选中文字设置：-webkit-user-select:none
+禁止文字缩放：-webkit-text-size-adjust:100%
+默认字体设置: Helvetica
+
+Font Boosting 
+在一段文字我们没有给他设置高度的时候，在webkit内核下，文字的大小被浏览器放大了
+	解决办法：
+		1、设置高度
+		2、设置最大高度 max-height
+
+rem(根节点)计算
+1、页面载入时通过js计算初始值：
+  (function(){
+	var html = document.documentElement;
+	var hWidth = html.getBoundingClientRect().width;
+	html.style.fontSize = hWidth/16 + "px";
+})()
+
+弹性盒模型--box（新版与老版）
+1、注意在使用弹性盒模型的时候 父元素必须要加display:box或diplay:inline-box
+	flex:display:flex（新版的）
+	box:display:-webkit-box
+2、box-orient定义盒模型的主轴方向（父级元素添加）
+	flex:flex-direction:row/column（新版的）
+	box:-webkit-box-orient:
+		horizontal水平显示
+		vertical垂直方向
+3、box-direction元素排列顺序（父级元素添加）
+	flex:flex-direction:row-reverse / column-reverse;
+	box:-webkit-box-direction:
+		normal正序
+		reverse反序
+
+弹性盒模型2--box（新版与老版）
+1、box-pack主轴方向富裕的空间管理
+	flex:justify-content:flex-start / flex-end / center / space-between / space-around;
+	box:-webkit-box-pack:
+	start 所有子元素在盒子左侧显示，富裕空间在右侧
+	end 所有子元素在盒子右侧显示，富裕空间在左侧
+	center 所有子元素居中
+	justify 富裕空间在子元素之间平均分布
+2、box-align 侧轴方向方向富裕的空间管理
+	flex:align-items:flex-start / flex-end / center / baseline（根据侧轴方向上文字的基线对齐）
+	box:-webkit-box-align:
+		start 所有子元素在居顶
+		end 所有子元素在居底
+		center 所有子元素在居中
+弹性盒模型3--box
+1、Box-flex 定义盒子的弹性空间
+	flex:flex-grow:1(子元素添加)
+	box:-webkit-box-flex:1
+子元素的尺寸=盒子的尺寸*子元素的box-flex属性值 / 所有子元素的box-flex属性值的和
+
+2、box-ordinal-group 设置元素的具体位置
+	flex:order:1(数值越小越靠前)
+	box:-webkit-box-ordinal-group
+
+CSS3响应式布局
+媒体特性
+	width	       文档宽度
+	orientation    横竖屏(portrait/landscape)
+		@media(orientation:portrait)
+样式引入方式
+    样式表中末尾添加@media all and(min-width:600px){}
+    link标签
+	<link rel="stylesheet" href="css/01_1.css" media="all and(min-width:600px)"/>
+    写在样式表头部
+	@import url(01.css)(max-width:767px);
+
+移动端事件一:
+注意：在移动端开发的时候，浏览器的模拟器时好时坏，一般不用on的方式绑定事件函数，要用事件绑定的方式(addEventListener)。
+	pc上的事件比移动端的事件略慢，大概是在300ms左右
+
+	ontouchastart 手指触摸
+	ontouchmove 手指移动
+	ontouchend 手指离开
+
+移动端的点透：
+    当上层元素发生点击的时候，下层元素也有点击(焦点)特性，在300ms之后，如果上层元素消失或者隐藏，目标点就会"漂移"到下层元素身上，就会触发点击行为。
+    解决：
+	1、下层不要使用有点击(焦点)特性的元素。
+	2、阻止pc事件。如下：
+document.addEventListener('touchstart',function(ev){
+	ev.preventDefault();
+})
+	1、IOS10下设置meta禁止用户缩放是不可行的。(使用阻止pc事件就可以在IOS10下禁止用户缩放)
+	2、解决IOS10下溢出隐藏的问题。
+	3、禁止系统默认的滚动条，阻止橡皮筋效果
+	4、禁止长按选中文字、选中图片、系统默认菜单
+	5、解决点透问题
+	6、也阻止了焦点元素的焦点行为（阻止其冒泡可以解决问题）
+
+当给某个元素加上了事件绑定函数之后，事件函数默认的第一个参数就是事件对象
+	事件对象：当用户在浏览器下触发了某个行为，事件对象会记录用户操作时一些细节信息。
+
+touches 当前位于屏幕上的所有手指的一个列表
+targetTouches 位于当前DOM元素上的手指的一个列表
+changedTouches 涉及当前事件的手指的一个列表
+
+移动端默认样式清除：
+body,
+body *{
+	-webkit-text-size-adjust:100%;
+}
+body,
+h1{
+	margin:0;
+	font-family:Helvetica;
+}
+ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+strong{
+	font-weight:normal;
+}
+a,
+input,
+button{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-appearance:none;
+}
+a{
+	text-decoration:none;
+}
