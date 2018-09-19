@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script type="text/javascript"> 
+window.onload=function(){
+  var odiv=document.getElementById("thediv");
+  var obt=document.getElementById("bt");
+  var count=0;
+  var flag=null;
+  function done(){
+    if(count==0){
+      clearInterval(flag);
+    } 
+    else{
+      count=count-1;
+    }
+  }
+  obt.onclick=function(){
+    var val=parseInt(odiv.innerHTML);
+    if(count==0){
+      odiv.innerHTML=val+1;
+      count=3;
+      flag=setInterval(done,1000);
+    }
+    else{
+      //alert("还需要"+(count)+"秒才能点击");
+    }
+  }
+}
+</script> 
+<body>
+<div id="thediv">0</div>
+<input type="button" id="bt" value="查看效果"/> 
+</body>
+</html>

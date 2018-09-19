@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+.box {
+	width: 800px;
+	height: 800px;
+	position: relative;
+	margin: 30px auto;
+}
+.box div{
+	position: absolute;
+	width: 200px;
+	height: 200px;
+}
+.box1{
+	background: red;
+	left: 100px;
+	top: 250px;
+}
+.box2{
+	background: yellow;
+	left: 350px;
+	top: 50px;
+}
+.box3{
+	background: blue;
+	left: 600px;
+	top: 250px;
+}
+button{
+	position: absolute;
+	top: 0;
+	width: 50px;
+	height: 50px;
+	margin-left: 20px;
+}
+#btn-right{
+	left: 70px;
+}
+</style>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body bgcolor="pink">
+<div class="box" id="box">
+	<div class = box1></div>
+	<div class = box2></div>
+	<div class = box3></div>
+</div>
+<button id="btn-left">
+	向左
+</button>
+<button id="btn-right">
+	向右
+</button>
+
+<script>
+window.onload = function () {
+	var btnLeft = document.getElementById("btn-left");
+	var btnRight = document.getElementById("btn-right");
+
+	var oBox = document.getElementById("box");
+	var oDiv = oBox.getElementsByTagName("div");
+	//console.log(getStyle(oDiv[0],'left'));
+	var arr = [];
+	for(var i = 0, length1 = oDiv.length; i < length1; i++){
+		arr.push([getStyle(oDiv[i],'left'),getStyle(oDiv[i],'top')])
+	}
+
+	btnLeft.onclick = function  () {
+		 arr.unshift(arr[arr.length-1]);
+		 arr.pop();
+		 for(var i = 0, length1 = oDiv.length; i < length1; i++){
+		 	oDiv[i].style.left = arr[i][0];
+		 	oDiv[i].style.top = arr[i][1];
+		 }
+	}
+	btnRight.onclick = function  () {
+		 arr.push(arr[0]);
+		 arr.shift();
+		 for(var i = 0, length1 = oDiv.length; i < length1; i++){
+		 	oDiv[i].style.left = arr[i][0];
+		 	oDiv[i].style.top = arr[i][1];
+		 }
+	}
+
+	function getStyle(obj,name) {
+		if (obj.currentStyle) {
+			return obj.currentStyle[name];
+		}else{
+			return getComputedStyle(obj,false)[name];
+		}
+	}
+}
+</script>
+</body>
+</html>

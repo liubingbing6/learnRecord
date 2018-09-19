@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="css/animate.css" rel="stylesheet"/>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+body{
+	overflow:hidden;}
+#imgDiv{
+	width:100%;
+	height:80%;
+	background-color:#333;
+	overflow:hidden;
+	}
+img{
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	}
+#rotateImg{
+	width:60px;
+	height:60px;
+	position:absolute;
+	top:30px;
+	right:60px;
+	background:url(img/%E9%9F%B3%E4%B9%90-%E5%BC%80.png) no-repeat center center;
+	background-color:#efefef;
+	border-radius:50%;
+	animation:rotateImg 2s linear infinite;
+	}
+@keyframes rotateImg{
+	0%{
+		transform:rotate(0deg);
+		}
+	25%{
+		transform:rotate(90deg);
+		}
+	50%{
+		transform:rotate(180deg);
+		}
+	75%{
+		transform:rotate(270deg);
+		}
+	100%{
+		transform:rotate(360deg);
+		}
+}
+</style>
+</head>
+
+<body>
+    <div id="imgDiv">
+        <img src="img/IMG_20150616_093808.jpg" class=""/>
+        <img src="img/IMG_20150616_093829.jpg" class=""/>
+    </div>
+    <div id="rotateImg"></div>
+    	
+    <audio id="audio" preload="auto" src="" autoplay></audio>
+    
+<script src="jquery-1.11.1.js"></script>
+<script>
+$(function(){
+	var num = 0;
+	var arr = [];
+	var onOff = true;
+	var exits = ['fadeOut', 'fadeOutDown', 'fadeOutUpBig', 'bounceOut', 'bounceOutDown', 'hinge','bounceOutUp', 'bounceOutLeft', 'rotateOut', 'rotateOutUpLeft', 'lightSpeedOut', 'rollOut'];
+
+	var entrances = ['fadeIn', 'fadeInDown', 'fadeInRight', 'bounceIn', 'bounceInRight', 'rotateIn','rotateInDownLeft', 'lightSpeedIn', 'rollIn', 'bounceInDown' ]; 
+					 
+	/*for(var i=1;i<16;i++){
+		arr.push('img/'+i+'.png');	
+	}*/
+	
+ arr = ["IMG_20150616_093808.jpg","IMG_20150616_093829.jpg","IMG_20150616_150711.jpg","IMG_20150616_190154.jpg","IMG_20150804_135135.jpg","IMG_20150804_135340.jpg","IMG_20150906_132736.jpg","IMG_20150924_230012.jpg","IMG_20150924_230210.jpg","IMG_20150924_230241.jpg","IMG_20151013_191351.jpg","IMG_20151105_184015.jpg","IMG_20151105_184032.jpg","IMG_20151105_184053.jpg","IMG_20151113_190447.jpg","IMG_20151130_203043.jpg","IMG_20151130_210716.jpg","IMG_20160131_135455.jpg","IMG_20160212_153149.jpg","IMG_20160212_153152.jpg","IMG_20160414_103414.jpg","IMG_20160414_103420.jpg","IMG_20160414_103430.jpg","IMG_20160414_142006.jpg","IMG_20160414_142017.jpg","IMG_20160415_100639.jpg","IMG_20160415_100851.jpg","IMG_20160415_102000.jpg","IMG_20160415_102007.jpg","IMG_20160415_215833.jpg","IMG_20160415_220228.jpg","IMG_20160415_231359.jpg","IMG_20160415_231406.jpg","IMG_20160415_234304.jpg","IMG_20160416_003042.jpg","IMG_20160416_022642.jpg","IMG_20160416_022659.jpg","IMG_20160416_024448.jpg","IMG_20160416_030346.jpg","IMG_20160416_054942.jpg","IMG_20160416_054954.jpg","IMG_20160416_055107.jpg","IMG_20160416_055149.jpg","IMG_20160416_064800.jpg","IMG_20160416_072218.jpg","IMG_20160416_072303.jpg","IMG_20160416_072514.jpg","IMG_20160416_085402.jpg","IMG_20160416_085416.jpg","IMG_20160416_085422.jpg","IMG_20160416_090219.jpg","IMG_20160416_091140.jpg","IMG_20160416_100046.jpg","IMG_20160416_100048.jpg","IMG_20160416_100555.jpg","IMG_20160416_100613.jpg","IMG_20160416_101214.jpg","IMG_20160416_105040.jpg","IMG_20160416_105146.jpg","IMG_20160419_123942.jpg","IMG_20160422_075608.jpg","IMG_20160515_132740.jpg","IMG_20160515_133809.jpg","IMG_20160515_134302.jpg","IMG_20160515_134333.jpg","IMG_20160515_134336.jpg","IMG_20160523_115134.jpg","IMG_20160523_115146.jpg","IMG_20160523_115157.jpg","IMG_20160523_115208.jpg","IMG_20160529_152649.jpg","IMG_20160601_170154.jpg","IMG_20160602_121435.jpg","IMG_20160602_121446.jpg","IMG_20160602_121503.jpg","IMG_20160602_121513.jpg","IMG_20160603_120710.jpg","IMG_20160603_155915.jpg","IMG_20160603_174338.jpg","IMG_20160606_122913.jpg","IMG_20160606_124501.jpg","IMG_20160606_124804.jpg","IMG_20160606_150049.jpg","IMG_20160610_073350.jpg","IMG_20160610_073403.jpg","IMG_20160610_073412.jpg","IMG_20160610_073448.jpg","IMG_20160610_154004.jpg","IMG_20160611_150041.jpg","IMG_20160615_213104.jpg","IMG_20160615_213131.jpg","IMG_20160615_213136.jpg","IMG_20160617_130045.jpg","IMG_20160623_152330.jpg","IMG_20160705_122611.jpg","IMG_20160705_122629.jpg","IMG_20160708_065257.jpg","IMG_20160708_065808.jpg","IMG_20160708_065823.jpg","IMG_20160708_065846.jpg","IMG_20160708_080527.jpg","IMG_20160708_080543.jpg","IMG_20160708_080700.jpg","IMG_20160708_110707.jpg","IMG_20160709_090458.jpg","IMG_20160709_090505.jpg","IMG_20160709_093038.jpg","IMG_20160709_093044.jpg","IMG_20160709_093107.jpg","IMG_20160709_093117.jpg","IMG_20160709_101054.jpg","IMG_20160709_102119.jpg","IMG_20160709_102652.jpg","IMG_20160709_102707.jpg","IMG_20160709_103534.jpg","IMG_20160709_103603.jpg","IMG_20160709_115103.jpg","IMG_20160709_115108.jpg","IMG_20160709_115119.jpg","IMG_20160709_142720.jpg","IMG_20160709_142730.jpg","IMG_20160710_075543.jpg","IMG_20160710_200553.jpg","IMG_20160710_201218.jpg","IMG_20160710_205610.jpg","IMG_20160710_205622.jpg","IMG_20160711_223147.jpg","IMG_20160716_134634.jpg","IMG_20160716_134647.jpg","IMG_20160716_134753.jpg","IMG_20160724_220719.jpg","IMG_20160724_220744.jpg","IMG_20160728_123617.jpg","IMG_20160728_125351.jpg","IMG_20160730_161013.jpg","IMG_20160730_162504.jpg","IMG_20160810_204118.jpg","IMG_20160816_193602.jpg","IMG_20160816_200553.jpg","IMG_20160820_202818.jpg","IMG_20160821_120020.jpg","IMG_20160826_115713.jpg","IMG_20160826_190318.jpg","IMG_20160828_231449.jpg","IMG_20160909_085624.jpg","IMG_20160909_085626.jpg","IMG_20160909_085650.jpg","IMG_20160909_085720.jpg","IMG_20160910_100819.jpg","IMG_20160910_102905.jpg","IMG_20160910_140847.jpg","IMG_20160910_140851.jpg","IMG_20160910_140932.jpg","IMG_20160910_141115.jpg","IMG_20160910_141159.jpg","IMG_20160910_141303.jpg","IMG_20160910_141612.jpg","IMG_20160910_141707.jpg","IMG_20160910_141712.jpg","IMG_20160910_141816.jpg","IMG_20160910_141829.jpg","IMG_20160910_141901.jpg","IMG_20160910_142245.jpg","IMG_20160910_142253.jpg","IMG_20160910_142317.jpg","IMG_20160910_142319.jpg","IMG_20160910_142427.jpg","IMG_20160910_142430.jpg","IMG_20160910_142441.jpg","IMG_20160910_142727.jpg","IMG_20160910_142956.jpg","IMG_20160910_143609.jpg","IMG_20160910_143758.jpg","IMG_20160910_144141.jpg","IMG_20160910_145045.jpg","IMG_20160910_145542.jpg","IMG_20160910_151602.jpg","IMG_20160910_152309.jpg","IMG_20160910_153904.jpg","IMG_20160910_155241.jpg","IMG_20160910_155301.jpg","IMG_20160910_155310.jpg","IMG_20160910_155311.jpg","IMG_20160910_155808.jpg","IMG_20160910_155932.jpg","IMG_20160915_134427.jpg","IMG_20160915_134445.jpg","IMG_20160915_134508.jpg","IMG_20160915_134510.jpg","IMG_20160921_204108.jpg","IMG_20160921_210254.jpg","IMG_20160922_200212.jpg","IMG_20160922_200248.jpg","IMG_20160922_200308.jpg","IMG_20160922_200313.jpg","IMG_20160922_200327.jpg","IMG_20160922_200333.jpg","IMG_20160922_200353.jpg","IMG_20160922_200405.jpg","IMG_20160923_221736.jpg","IMG_20160924_193105.jpg","IMG_20160924_193201.jpg","IMG_20160927_192527.jpg"]
+	
+	console.log(arr);
+	var arrMusic = ['宋冬野 - 安和桥.mp3','钢琴曲 - 水边的阿狄丽娜.mp3','G.E.M. 邓紫棋 - 泡沫.mp3','G.E.M. 邓紫棋 - 喜欢你.mp3','邓丽君 - 在水一方.mp3','曲婉婷 - 没有什么不同.mp3'];
+	var oaudio = document.getElementById('audio');
+	var musicNum = 0;
+	$('#audio').attr('src','music/'+arrMusic[musicNum]);
+	musicLoop();
+	function musicLoop(){
+		var timerAudio = setInterval(function(){
+			if(oaudio.ended){	
+				musicNum++;
+				if(musicNum == arrMusic.length){
+					musicNum = 0;
+				}
+				$('#audio').attr('src','music/'+arrMusic[musicNum]);
+				clearInterval(timerAudio);
+				clearInterval(timer);
+				timerFunc();
+				musicLoop();
+			}	
+		},1000);
+	}
+	$('#rotateImg').click(function(){
+		musicNum++;	
+		$('#audio').attr('src','music/'+arrMusic[musicNum]);
+	});
+
+	timerFunc();
+	function timerFunc() {
+		var timer = setInterval(function(){
+			if(!onOff){
+				prev();	
+			}else{
+				next();	
+			}
+		},3000);
+	}
+	
+	
+	function next(){
+		num++;
+		if(num >= arr.length){
+			num = arr.length-1;
+			onOff = false;
+			return;	
+		}
+		var lastImg = $('img:last');
+
+		lastImg.addClass('animated').addClass(exits[Math.floor(exits.length*Math.random())]);
+		
+		setTimeout(function(){
+			lastImg.attr('class','');
+			$('#imgDiv').prepend(lastImg);
+			lastImg.attr('src','img/'+arr[num+1]);
+		},1000);
+	}
+	function prev(){
+		num--;
+		if(num < 0){
+			num = 0;
+			onOff = true;
+			return;	
+		}
+		var firstImg = $('img:first');
+				
+			firstImg.addClass('animated').addClass(entrances[Math.floor(exits.length*Math.random())]);
+			
+		setTimeout(function(){	
+			firstImg.attr('class','');	
+			$('#imgDiv').append(firstImg);
+			firstImg.attr('src','img/'+arr[num]);	
+		},1000)
+	}
+})
+
+</script>
+</body>
+</html>

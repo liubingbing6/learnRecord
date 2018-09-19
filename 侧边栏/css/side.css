@@ -1,0 +1,75 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background-color: -#d8d8d8;
+}
+.side{
+	width: 52px;
+	position: fixed;
+	bottom: 5px;
+	left: 50%;
+	margin-left: -26px;
+}
+.item {
+	display: block;
+	text-decoration: none;
+	width: 52px;
+	height: 52px;
+	position: relative;
+	background-color: #d8d8d8;
+	margin-top:1px;
+	transition:all 0.5s;
+}
+.item_one {
+	background:url(../img/toolbar.png) no-repeat 0 -426px;
+}
+.item_two {
+	background:url(../img/toolbar.png) no-repeat  0 -550px;
+}
+
+.item_three {
+	background:url(../img/toolbar.png) no-repeat  0 -674px;
+}
+.item_four {
+	background:url(../img/toolbar.png) no-repeat  0 -798px;
+}
+.item_one:hover {
+	background-position: 0 -488px;
+	}
+.item_two:hover {
+	background-position: 0 -612px;
+	}
+.item_two:hover .sidebar_one{
+	opacity:1;
+	transform:scale(1);
+	}
+.item_three:hover {
+	background-position: 0 -736px;
+	}
+.item_four:hover {
+	background-position: 0 -860px;
+	}
+.item_four:hover .sidebar_two{
+	opacity:1;
+	transform:scale(1);
+	}
+.sidebar {
+	position:absolute;
+	display:inline-block;
+	width:172px;
+	height:200px;
+	right:52px;
+	top:-140px;
+	opacity:0;
+	transform:scale(0);
+	transform-origin:right bottom;
+	transition:all 0.5s;
+	}
+.sidebar_one {
+	background:url(../img/toolbar.png) no-repeat;
+	}
+.sidebar_two {
+	background:url(../img/toolbar.png) no-repeat 0 -214px;
+	}

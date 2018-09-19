@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;}
+</style>
+</head>
+
+<body>
+<button id="btn">按钮</button>
+<div id="div1" style="width:100px;height:100px;position:absolute;background:red;"></div>
+
+<script>
+window.onload = function(){
+	var btn = document.getElementById('btn');
+	var oDiv = document.getElementById('div1');
+		btn.onclick = function(){
+			move(oDiv,900,'offsetLeft');
+		
+	};	
+	function move(obj,iTag,attr){
+		var timer = setInterval(function(){
+			var speed = (iTag - obj[attr])/7;
+			speed = speed>0?Math.ceil(speed):Math.floor(speed);
+			if(obj[attr]==iTag){
+				clearInterval(timer);
+			}
+			document.title = obj[attr];
+			obj.style[attr] = obj[attr] + speed + 'px';	
+			},30);	
+		}
+}
+</script>
+</body>
+</html>

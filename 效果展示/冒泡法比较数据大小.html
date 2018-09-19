@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>title</title>
+</head>
+<body>
+<input type="text" id="input">
+<button id="btn">按钮</button>
+<p id="result"></p>
+<div id="div2">ccc</div>
+<script type="text/javascript">
+window.onload = function () {
+	var btn = document.getElementById('btn');
+	var input = document.getElementById('input');
+
+	//输入数据形如：‘3;2;5;4;7;1;4;9;8;10’
+	var res = document.getElementById('result');
+	var arr = new Array(10);
+	btn.onclick = function () {
+		var val = input.value;
+		arr = val.split(';');
+		//for循环转换数据类型
+		for(var i = 0, length1 = arr.length; i < length1; i++){
+			arr[i] = Number(arr[i]);
+		}
+		//冒泡排序，对arr数组进行操作
+		for(var i = 0, length1 = arr.length; i < length1-1; i++){
+			for(var j=i+1;j<=arr.length;j++){
+				if (arr[i]>arr[j]) {
+					var three = arr[i];
+					arr[i] = arr[j];
+					arr[j] = three;
+				}
+			}
+		}
+		res.innerHTML = '最大值:'+arr[arr.length-1]+'<br/>'+'最小值:'+arr[0];
+	}
+}
+
+</script>
+
+</body>
+</html>

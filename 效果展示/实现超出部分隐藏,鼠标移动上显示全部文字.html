@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+html{
+	font-size:12px;
+	}
+.words{
+	font-size:.875rem;
+	color:red;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	width:300px;
+	height:auto;
+	}
+#tooltop{
+	position:absolute;
+	font-size:1rem;
+	padding:3px;
+	display:none;
+	background-color:#c90;
+	border:1px solid #000;
+	border-radius:4px;
+	}
+</style>
+</head>
+
+<body>
+
+<p class="words">版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+<p class="words">版权声明原创章，未经博主允许不得转载。</p>
+<p class="words">版权声明：本文为文章，未经博。</p>
+<p class="words">版权声明：本文为博主允许不得转载。</p>
+<p class="words">版权声明：本文为博主原创文博主允许不得转载。</p>
+<p class="words">版权声明：本文为博主原经博主允许不得转载。</p>
+<p class="words">版权声明：本文为博主原经博主允得转载。</p>
+<span class="words2">版权原创文章，未经博主允许不得转载。</span>
+
+<script src="jquery-1.11.1.js"></script>
+<script>
+$(function(){
+	$('p').hover(function(e){
+		var tooltop = $("<div id='tooltop'></div>");
+		$('body').append(tooltop);
+		var _text = $(this).text();
+		$('#tooltop').text(_text).css({
+			'left':e.pageX+10+'px',
+			'top':e.pageY+10+'px'	
+		}).show();
+	},function(){
+		$('#tooltop').remove();	
+	})	
+	
+	$('.words2').on('mouseover',{'msg':'hahahhahaha'},function(event){
+		$(this).text(event.data.msg);	
+	});
+	/*function demo(callback){
+		var obj = null;
+		if(arguments.length == 1 && $.isPlainObject(callback)){
+			obj = callback;
+			callback = obj.callback;
+		}
+		callback && callback();
+	}
+	demo()*/
+	
+})
+</script>
+</body>
+</html>
