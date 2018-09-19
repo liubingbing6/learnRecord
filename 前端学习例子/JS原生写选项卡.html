@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+*{margin:0;padding:0;}
+.demo{
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	background:#fff;
+	position:relative;
+	border:4px solid #FFF;
+	margin:30px auto;
+	animation:ani 2s linear infinite;
+	}
+.demo:before{
+	content:'';
+	display:block;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background:#399;
+	position:absolute;
+	top:0;
+	left:24px;}
+@keyframes ani{
+	0%{
+		transform:rotate(0)}	
+	100%{
+		transform:rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+<div class="demo"></div>
+<script>
+window.onload = function(){
+
+	function getStyles(obj,attr){
+		return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];	
+	}
+}
+</script>
+</body>
+</html>

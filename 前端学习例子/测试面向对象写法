@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>测试面向对象写法</title>
+</head>
+<body>
+
+<script>
+function Parent(name,age) {
+	this.name = name;
+	this.age = age;
+	this.arr = [1,2,3];
+	this.get = function () {
+		console.log(this.name);
+	}
+}
+Parent.prototype.set = function(){
+	 console.log(this.age);
+};
+
+function Child(name,age) {
+	Parent.apply(this,arguments);
+	this.name = name;
+	this.age = age;
+	this.ss = function () {
+		console.log("ss");
+	}
+}
+/*Child.prototype = new Parent();
+Child.prototype.constructor = Child;*/
+Child.prototype.reds = function () {
+	console.log(this.name + this.age);
+}
+
+
+//var c = new Child("xiaos",25);
+	// console.log(c.name);
+	//c.get();
+	//c.set();
+
+function extendss(child,parent) {
+	var c = child.prototype;
+	var p = parent.prototype;
+	var F = function(){};
+	F.prototype = p;
+	c = new F();
+	c.constructor = child;
+}
+extendss(Child,Parent);
+/*function deepCopy(child,parent) {
+	var child = child || {};
+	for (var i in parent) {
+		if (typeof parent[i] == 'object') {
+			child[i] =(parent[i].constructor == Array) ? [] :{};
+			deepCopy(child[i],parent[i]);
+		}else{
+			child[i] = parent[i];
+		}
+	}
+	return c;
+}*/
+/*function copy(child,parent) {
+	var c = child.prototype;
+	var p = parent.prototype;
+	for (var i in p) {
+		c[i] = p[i];
+	}
+}
+copy(Child,Parent);*/
+
+var c = new Child('ww',22);
+	// c.get();
+	// c.set();
+	c.arr.push(4);
+var c1 = new Child('www',333);
+	alert(c1.arr);
+	c1.get();
+</script>
+</body>
+</html>

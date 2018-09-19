@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>原生js封装组件</title>
+
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	position: relative;
+}
+.box{
+	position: absolute;
+	box-sizing: border-box;
+	border:1px solid #000;
+	background-color: #fff;
+	z-index: 2;
+}
+.header{
+	width: 100%;
+	height: 30px;
+	color: #fff;
+	line-height: 30px;
+	background: #666;
+	text-align: center;
+}
+.close{
+	float: right;
+	cursor: pointer;
+}
+#mark{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #999;
+	z-index: 1
+}
+.box_btn{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.box_btn button{
+	width: 60px;
+	height: 30px;
+	background-color: transparent;
+	border:1px solid #ff4343;
+	border-radius: 4px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+<!-- <div class="box">
+	<div class="header">
+		<span>标题</span>
+		<span class="close">X</span>
+	</div>
+	<div class="content">哈哈哈</div>
+</div> -->
+<!-- <div id="mark"></div> -->
+<button id="btn1">按钮1</button>
+<button id="btn2">按钮2</button>
+<script>
+window.onload = function () {
+	var oBtn1 = document.querySelector("#btn1");
+	var oBtn2 = document.querySelector("#btn2");
+	oBtn1.onclick = function () {
+		var dialog = new Dialog();
+			dialog.init({
+				iNow:1,
+				mark:false,
+				drag:false,
+				confirm:function () {
+					alert(123);
+				}
+			});
+	}
+	oBtn2.onclick = function () {
+		var dialog = new Dialog();
+			dialog.init({
+				iNow:2,
+				w:100,
+				height:400,
+				title:'登陆',
+				dir:'right',
+			});
+	}
+
+}
+function Dialog() {
+	this.oDiv = null;
+	this.mark = null;
+	this.iNow = 0;
+	this.disX = 0;
+	this.disY = 0;
+	this.setting = {
+		type:"alert",//error,alert,notice,message
+		w : 300,
+		h : 300,
+		title:'',
+		dir : 'center',
+		mark:false,
+		drag:true,
+		confirm:"",//确认按钮
+		cancle:""	//取消按钮
+	};
+}
+Dialog.prototype.json = {}//定义一个
+Dialog.prototype.init = function (obj) {
+	var _this = this;
+	this.setting = this.s_extend(this.setting,obj);
+
+	if (this.json[this.setting.iNow] == undefined) {
+		this.json[this.setting.iNow] = true;
+	}
+	if(this.json[this.setting.iNow]){
+		this.createDiv();
+		// this.close();
+		this.json[this.setting.iNow] = false;
+	}
+}
+Dialog.prototype.createDiv = function(){
+	var _this = this;
+	this.oDiv = document.createElement('div');
+	this.oDiv.className = 'box';
+	this.oDiv.innerHTML = '<div class="header"><span>'+this.setting.title+'</span><span class="close">X</span></div><div class="content"><div class="box_btn"><button>确定</button><button>取消</button></div></div>';
+
+	this.oDiv.style.width = this.setting.w + 'px';
+	this.oDiv.style.height = this.setting.h + 'px';
+
+	document.body.appendChild(this.oDiv);
+
+	if(this.setting.dir == 'center'){
+		this.oDiv.style.left = (this.window_w() - this.oDiv.offsetWidth)/2 + 'px';
+		this.oDiv.style.top = (this.window_h() - this.oDiv.offsetHeight)/2 + 'px';
+	}
+	if(this.setting.dir == 'right'){
+		this.oDiv.style.left = (this.window_w() - this.oDiv.offsetWidth) + 'px';
+		this.oDiv.style.top = (this.window_h() - this.oDiv.offsetHeight) + 'px';
+	}
+	if(this.setting.mark){//如果为真，则显示遮罩
+		this.createMark();
+	}
+	var btn = this.oDiv.querySelectorAll('button');
+	if(this.setting.confirm.constructor == Function){//确认按钮
+		btn[0].onclick = function () {
+			_this.setting.confirm();
+			_this.close(_this);
+		};
+	}
+
+	if(this.setting.cancle.constructor == Function){//取消按钮
+		btn[1].onclick = this.setting.cancle;
+	}
+	
+	var oClose = this.oDiv.querySelector('.close');
+	btn[1].onclick = oClose.onclick = function () {
+		_this.close(_this);
+	}
+	//添加拖拽功能
+	if(this.setting.drag){
+		this.oDiv.onmousedown = function (ev) {
+			var ev = ev || window.event;
+			_this.disX = ev.clientX - _this.oDiv.offsetLeft;
+			_this.disY = ev.clientY - _this.oDiv.offsetTop;
+			document.onmousemove = function (ev) {
+				var ev = ev || window.event;
+				_this.fnMove(ev,_this);
+			};
+			document.onmouseup = _this.fnUp;
+			return false;
+		}
+	}
+}
+Dialog.prototype.createMark = function(){
+	this.mark = document.createElement('div');
+	this.mark.id = 'mark';
+	this.mark.style.width = this.window_w() + 'px';
+	this.mark.style.height = this.window_h() + 'px';
+	document.body.appendChild(this.mark);
+}
+Dialog.prototype.close = function (_this) {
+	//var _this = _this;
+	document.body.removeChild(_this.oDiv);
+	if (_this.setting.mark) {
+		document.body.removeChild(_this.mark);
+	}
+	_this.json[_this.setting.iNow] = true;
+}
+Dialog.prototype.fnMove = function(ev,_this){
+	var ev = ev || window.event;
+	var left = ev.clientX - _this.disX;
+	var top = ev.clientY - _this.disY;
+	var self_w = _this.window_w() - _this.oDiv.offsetWidth;
+	var self_h = _this.window_h() - _this.oDiv.offsetHeight;
+	if(left <= 0){
+		left = 0
+	}else if (left >= self_w) {
+		left = self_w;
+	}
+	if(top <= 0){
+		top = 0
+	}else if (top >= self_h) {
+		top = self_h;
+	}
+	_this.oDiv.style.left = left + 'px';
+	_this.oDiv.style.top = top + 'px';
+}
+Dialog.prototype.fnUp = function(){
+	document.onmousemove = null;
+	document.onmouseup = null;
+}
+Dialog.prototype.s_extend = function (child,parent) {
+	var _this = this;
+	var child = child || {};
+	/*for (var i in parent) {
+		child[i] = parent[i];
+	}*/
+	for (var i in parent) {
+		if (typeof parent[i] == 'object') {
+			child[i] = (parent[i].prototype.constructor = Array) ? [] :{};
+			_this.s_extend(child[i],parent[i]);
+		}else{
+			child[i] = parent[i];
+		}
+	}
+	return child;
+}
+Dialog.prototype.window_w = function () {
+	return document.documentElement.clientWidth || document.body.clientWidth;
+}
+Dialog.prototype.window_h = function () {
+	return document.documentElement.clientHeight || document.body.clientHeight;
+}
+
+</script>
+</body>
+</html>

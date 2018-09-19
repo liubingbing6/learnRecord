@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<p style="text-align: center;"><embed type="application/x-shockwave-flash" class="edui-faked-video" pluginspage="http://www.macromedia.com/go/getflashplayer" src="http://player.youku.com/player.php/sid/XMTgxODgyMTg3Ng==/v.swf" width="800" height="450" wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" title="Adobe Flash Player"></p>
+
+
+<script type="text/javascript">
+function flashChecker() {  
+  var hasFlash = 0;　　　　 //是否安装了flash    
+  var flashVersion = 0;　　 //flash版本    
+  
+  if(document.all) {  
+    var swf = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');  
+    if(swf) {  
+      hasFlash = 1;  
+      VSwf = swf.GetVariable("$version");  
+      flashVersion = parseInt(VSwf.split(" ")[1].split(",")[0]);  
+	  console.log(flashVersion);
+    }  
+  } else {  
+    if(navigator.plugins && navigator.plugins.length > 0) {  
+      var swf = navigator.plugins["Shockwave Flash"];  
+      if(swf) {  
+        hasFlash = 1;  
+        var words = swf.description.split(" ");  
+		console.log("words:"+words);
+        for(var i = 0; i < words.length; ++i) {  
+          if(isNaN(parseInt(words[i]))) continue;  
+          flashVersion = parseInt(words[i]);  
+        }  
+      }  
+    }  
+  }  
+  return { f: hasFlash, v: flashVersion };  
+}  
+  
+var fls = flashChecker();  
+console.log(fls);
+alert("当前flash版本号为:"+fls.v);
+var s = "";  
+if(!fls.f) {  
+  if(confirm("您的浏览器未安装Flash插件，现在安装？")) {  
+    window.location.href = "http://get.adobe.com/cn/flashplayer/";  
+  }  
+}
+</script>
+</body>
+</html>

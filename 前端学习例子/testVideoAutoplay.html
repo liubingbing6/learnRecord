@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+video{
+	display:block;
+	margin:0 auto;}
+#btn{
+	border:1px solid #eee;
+	width:120px;
+	height:30px;
+	border-radius:4px;}
+</style>
+</head>
+
+<body>
+<button id="btn">循环</button>
+<video src="image/创意祝福.mp4" width="500" height="500" id="video" loop controls></video>
+<script>
+window.onload = function(){
+	var oVideo = document.getElementById('video');
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		if(oVideo.loop){
+			oVideo.loop = false;
+		}else{
+			oVideo.loop = true;	
+		}	
+	}
+		
+}
+</script>
+</body>
+</html>

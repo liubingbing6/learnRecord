@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding: 0;}
+        ul{list-style-type: none;width: 300px;margin:30px auto;}
+        ul li{width: 30px;height: 30px;border-radius: 50%;border:1px solid #ddd;display: inline-block;cursor: pointer;}
+        .active{background: #ff4343;border-color:#fff;}    
+        img{display: block;width: 700px;height: 400px;margin: 0 auto;}
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+;(function ($) {
+    function PreLoad(imgs,options) {
+        this.imgs = (typeof images === 'string') ? [imgs] : imgs;
+        this.DEFAULTS = {   //默认配置
+            order: 'unordered',
+            each : null,    //每一张图片加载完毕后执行
+            all  : null     //所有图片加载完毕后执行
+        };
+        this.opts = $.extend({},this.DEFAULTS,options);
+
+        if(this.opts.order === 'ordered'){
+            this._ordered();
+        }else{
+            this._unordered();
+        }
+    }
+    PreLoad.prototype._ordered = function () {      //有序加载
+        var imgs = this.imgs,
+            count = 0,
+            len = imgs.length,
+            opts = this.opts;
+            load();
+            function load() {
+                var imgObj = new Image();
+                $(imgObj).on('load error',function () {
+                    opts.each && opts.each(count);
+                    if (count >= len -1) {
+                        opts.all && opts.all();
+                    }else{
+                        load();
+                    }
+                    count++;
+                });
+                imgObj.src = imgs[count];
+            }
+        
+    };
+    PreLoad.prototype._unordered = function () {    //无序加载
+        var imgs = this.imgs,
+            count = 0,
+            len = imgs.length,
+            opts = this.opts;
+
+        $.each(imgs,function(i, val) {
+            if (typeof val !== 'string') return;
+            var imgObj = new Image();
+            $(imgObj).on('load error',function () {
+                opts.each && opts.each();
+                if(count >= len - 1){
+                    opts.all && opts.all();
+                }
+                count++;
+            })
+            imgObj.src = imgs[count];
+        });
+    }
+    $.extend({
+        preload : function(imgs,opts) {
+            new PreLoad(imgs,opts);
+        }
+    })
+})(jQuery)
+    </script>
+</head>
+<body>
+<ul id="ul">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<button data-pick='pre'>上一张</button>
+<button data-pick='next'>下一张</button>
+<img src="image/1.jpg" alt="" id="img">
+<script>
+$(function () {
+    var demo = new Demo();
+        demo.init();
+        $("#ul").on('click', 'li', demo.sele);
+        $("button").on('click',demo.preNext);
+});
+function Demo() {
+    var self = this;
+    this.pickIndex = 0;
+    this.imgs = ['image/1.jpg','image/2.jpg','image/3.jpg','image/4.jpg','image/5.jpg','image/6.jpg','image/7.jpg','image/8.jpg','image/9.jpg'];
+
+    this.init = function () {
+        $.preload(self.imgs,{order:'ordered'});
+    }
+ 
+    this.sele = function () {
+        var index = $(this).index();
+        $(this).parent().find('li').each(function(i, el) {
+            if (i<=index) {
+                $(this).addClass('active');
+            }else {
+                $(this).removeClass('active');
+            }
+            
+        });
+      //  console.log(index+1);
+    };
+    this.preNext = function () {
+        
+        var pick = $(this).attr('data-pick');
+        if (pick === 'pre') {
+            self.pickIndex = Math.max(0,--self.pickIndex);
+        }else{
+            self.pickIndex = Math.min(self.imgs.length - 1,++self.pickIndex);
+        }
+        $("#img").attr('src',self.imgs[self.pickIndex]);
+    }
+}
+
+</script>
+</body>
+</html>
