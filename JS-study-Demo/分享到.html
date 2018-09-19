@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+*{
+	margin:0;
+	padding: 0;
+}
+#div1 {
+	width:200px;
+	height:500px;
+	background:#0C9;
+	position:absolute;
+	top:0;
+	left:-200px;
+	}
+#div1 span {
+	position:absolute;
+	width:20px;
+	height:60px;
+	line-height:20px;
+	right:-20px;
+	top:70px;
+	background:#9C0;
+	}
+</style>
+<script>
+window.onload=function()
+{
+	var div1=document.getElementById('div1');
+	div1.onmouseover=function(){
+		moveStar(div1,0);
+		};
+	div1.onmouseout=function(){
+		moveStar(div1,-200);
+		};
+};
+var timer=null;
+function moveStar(obj,iTag){
+	//var div1=document.getElementById('div1');
+	clearInterval(timer);
+	timer=setInterval(function(){
+	var speed=0;
+	if(obj.offsetLeft<iTag){
+		speed=10;
+	}
+	else{
+		speed=-10;
+	}
+	if(obj.offsetLeft==iTag){
+			clearInterval(timer);
+	}
+	else{
+		obj.style.left=obj.offsetLeft+speed+'px';
+		}			   
+	},50);
+}
+</script>
+</head>
+
+<body>
+	<div id="div1">
+		<span id="share">分享到</span>
+	</div>
+</body>
+</html>

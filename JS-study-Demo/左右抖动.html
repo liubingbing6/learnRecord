@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+img{
+	position:absolute;
+	width:800px;
+	height:500px;
+	top:50px;
+	left:300px;}
+</style>
+<script>
+window.onload = function(){
+	function getStyle(obj,name){
+		if(obj.currentStyle){
+			return obj.currentStyle[name];	
+		}else{
+			return getComputedStyle(obj,false)[name];	
+		}	
+	}
+	var oImg = document.getElementById('img');
+	
+	oImg.onclick = function(){
+		var _this = this;
+		shake(this,'left',function(){
+			shake(_this,'top');						   
+		});
+	}
+	var pos = parseInt(getStyle(oImg,'left'));
+	function shake(obj,dir,callback){
+			
+			var arr = [];
+			var timer = null;
+			var num = 0;
+			for(var i=20;i>0;i-=2){
+				arr.push(i,-i);	
+			}
+			arr.push(0);
+		clearInterval(timer);
+		timer = setInterval(function(){
+			obj.style[dir] = pos +arr[num] +'px';
+			num++;
+			if(num === arr.length){
+				clearInterval(timer);
+				callback && callback();
+			}
+		},50);	
+	//alert(arr);
+	}
+	
+};
+</script>
+</head>
+<body>
+<img src="images2/3.jpg" id="img" />
+</body>
+</html>

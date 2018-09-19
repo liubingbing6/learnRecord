@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" href="css/main.css" type="text/css" />
+<script src="js/setHomeSetFav.js" type="text/javascript" charset="gb2312"></script>
+<script src="js/myfocus-2.0.1.min.js" type="text/javascript"></script>
+<script src="js/mf-pattern/mF_fancy.js" type="text/javascript"></script>
+<link href="js/mf-pattern/mF_fancy.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript">
+	myFocus.set({id:'picBox'});
+</script>
+</head>
+
+<body>
+<div class="top">
+	<div class="top_content">
+    	<ul>
+        	<li><a href="#">设为首页</a></li>
+            <li><a href="#" onclick="AddFavorite(window.location,document.title)">加入收藏</a></li>
+            <li><a href="#" onclick="SetHome(window.location)">联系我们</a></li>
+        </ul>
+    </div><!--top_content结束-->
+</div><!--top结束-->
+<div class="wrap">
+	<div class="logo">
+    	<div class="logo_left">
+        	<img src="images/logo.jpg" alt="慕课网" />
+        </div>
+        <div class="logo_right">
+        	<img src="images/tel.jpg" alt="热线电话"/>24小时服务热线：<span class="tel">123-456-7890</span>
+        </div>
+    </div><!--logo结束-->
+    <div class="nav">
+    	<div class="nav_left"></div>
+        <div class="nav_mid">
+            <div class="nav_mid_left">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">关于慕课</a></li>
+                    <li><a href="#">新闻动态</a></li>
+                    <li><a href="#">课程中心</a></li>
+                    <li><a href="#">在线课程</a></li>
+                    <li><a href="#">人才招聘</a></li>
+                </ul>
+            </div>
+            <div class="nav_mid-right">
+                <form method="post" action="">
+                    <input type="text" class="search_text"/>
+                </form>
+            </div>
+       	 </div><!--nav_mid结束-->
+        <div class="nav_right"></div><!--nav_right结束-->
+    </div><!--nav结束-->
+    <div class="ad" id="picBox">
+    	<div class="loading"><img src="images/loading.gif" alt="图片加载中" /></div>
+        <div class="pic">
+            <ul>
+                <li><img src="images/ad2.jpg"/></li>
+                <li><img src="images/ad3.jpg"/></li>
+                <li><img src="images/ad4.jpg"/></li>
+            </ul>
+        </div>
+    </div><!--ad图片加载结束-->
+    <div class="main">
+    	<div class="news"></div><!--news结束-->
+        <div class="course"></div><!--course结束-->
+        <div class="sidebar"></div><!--sidebar结束-->
+    </div><!--main结束-->
+</div><!--wrap结束-->
+</body>
+</html>

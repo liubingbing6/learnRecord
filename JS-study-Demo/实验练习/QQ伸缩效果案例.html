@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+ul,h2,body{
+	padding:0;
+	margin:0;}
+#oul{
+	width:240px;
+	margin:0 auto;
+	border:1px solid #000;
+	}
+ul{
+	list-style:none;}
+#oul h2{
+	font-size:30px; 
+	line-height:30px;
+	text-indent:22px;
+	background:url(../images/arrow.jpg)no-repeat 12px center #F96;}
+#oul ul li{
+	text-indent:22px;
+	border-bottom:1px solid #000;
+	padding:5px 0;}
+#oul .active{
+	background:url(../images/arrow2.png)12px center no-repeat #C96;}
+#oul ul{
+	display:none;}
+</style>
+<script>
+window.onload=function(){
+	var oUl=document.getElementById('oul');
+	var aH2=oUl.getElementsByTagName('h2');
+	var aUl=oul.getElementsByTagName('ul');
+	for(var i=0;i<aH2.length;i++){
+		aH2[i].index=i;
+		aH2[i].onclick=function(){
+			if(this.className==''){
+					aUl[this.index].style.display='block';
+					this.className='active';
+				}
+			else{
+					aUl[this.index].style.display='none';
+					this.className='';
+				}
+			}
+		}
+	};
+</script>
+</head>
+
+<body>
+	<ul id="oul">
+    	<li>
+        	<h2>小学同学</h2>
+        	<ul>
+                <li>张三</li>
+                <li>张三</li>
+                <li>张三</li>
+                <li>张三</li>
+            </ul>
+        </li>
+    	<li>
+        	<h2>初中同学</h2>
+        	<ul>
+                <li>李四</li>
+                <li>李四</li>
+                <li>李四</li>
+                <li>李四</li>
+            </ul>
+        </li>
+        <li>
+        	<h2>高中同学</h2>
+        	<ul>
+                <li>王五</li>
+                <li>王五</li>
+                <li>王五</li>
+                <li>王五</li>
+            </ul>
+        </li>
+        <li>
+        	<h2大学同学</h2>
+        	<ul>
+                <li>赵六</li>
+                <li>赵六</li>
+                <li>赵六</li>
+                <li>赵六</li>
+                <li>赵六</li>
+            </ul>
+        </li>
+        
+    </ul>
+</body>
+</html>

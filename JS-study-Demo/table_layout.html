@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload=function(){
+		var table=document.getElementById('tab');
+		var tds=table.tBodies[0].rows.length;
+		var idNumber=table.tBodies[0].rows.length+1;
+		var bgcolor=null;
+		for(var i=0;i<tds;i++){
+			table.tBodies[0].rows[i].onmouseover=function(){
+				bgcolor=this.style.background;
+				this.style.background='blue';
+				};
+			table.tBodies[0].rows[i].onmouseout=function(){
+				this.style.background=bgcolor;
+				};
+			if(i%2){
+				table.tBodies[0].rows[i].style.background='green';
+				}
+				else{
+				table.tBodies[0].rows[i].style.background='';
+					}
+			}
+			var t_name=document.getElementById('text_name');
+			var t_age=document.getElementById('text_age');
+			var btn_submit=document.getElementById('btn_submit');
+			btn_submit.onclick=function(){
+				var oTr=document.createElement('tr');
+				var oTd=document.createElement('td');
+					oTd.innerHTML=idNumber++;
+					oTr.appendChild(oTd);
+				var oTd=document.createElement('td');
+					oTd.innerHTML=t_name.value;
+					oTr.appendChild(oTd);
+				var oTd=document.createElement('td');
+					oTd.innerHTML=t_age.value;
+					oTr.appendChild(oTd);
+				var oTd=document.createElement('td');
+					oTd.innerHTML="<a href='javascript:;'>删除</a>";
+					oTr.appendChild(oTd);
+				var a_delet=oTd.getElementsByTagName('a')[0];
+					a_delet.onclick=function(){
+						table.tBodies[0].removeChild(this.parentNode.parentNode);
+						};
+				table.tBodies[0].appendChild(oTr);
+				};
+			
+		};
+</script>
+</head>
+
+<body>
+姓名:<input type="text" id="text_name"/>
+年龄:<input type="text" id="text_age"/>
+	<input type="button" id="btn_submit" value="提交"/><br/><br/>
+<table id="tab" border="1px" width="500px" style="text-align:center;">
+	<thead>
+    	<td>ID</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+            <td>张三</td>
+            <td>11</td>
+            <td></td>
+        </tr>
+        <tr>
+        	<td>2</td>
+            <td>李四</td>
+            <td>22</td>
+             <td></td>
+        </tr>
+        <tr>
+        	<td>3</td>
+            <td>王二</td>
+            <td>13</td>
+            <td></td>
+        </tr>
+        <tr>
+        	<td>4</td>
+            <td>张峰</td>
+            <td>44</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

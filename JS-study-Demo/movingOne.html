@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1 {
+	width:200px;
+	height: 200px;
+	background-color:#F00;
+	position:absolute;
+	top:50px;
+	left:0px;
+	}
+</style>
+<script>
+window.onload=function(){
+		var timer=null;
+		var btn=document.getElementById('btn');
+		var div1=document.getElementById('div1');
+		var speed=1;
+		btn.onclick=function(){
+			clearInterval(timer);
+			timer=setInterval(function(){
+			if(div1.offsetLeft==300){
+				clearInterval(timer);
+				}
+			else{
+			div1.style.left=div1.offsetLeft+speed+'px';
+			}
+			}, 30);
+			};
+	};
+		
+</script>
+</head>
+
+<body>
+<input type="button" value="开始移动" id="btn"/>
+<div id="div1">
+
+</div>
+</body>
+</html>

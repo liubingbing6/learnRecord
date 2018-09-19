@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+	window.onload=function(){
+		var table=document.getElementById('tab');
+		var btn_find=document.getElementById('btn_submit');
+		var t_name=document.getElementById('text_name');
+
+		btn_find.onclick=function(){
+			for(var i=0;i<table.tBodies[0].rows.length;i++){
+				var tname=t_name.value.toLowerCase();
+				var tcell=table.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+				if(tcell.search(tname)!=-1){
+					table.tBodies[0].rows[i].style.background='red';
+					}
+				else{
+					table.tBodies[0].rows[i].style.background='';
+					}
+				}
+			};
+		};
+</script>
+</head>
+
+<body>
+姓名:<input type="text" id="text_name"/>
+	<input type="button" id="btn_submit" value="搜索"/><br/><br/>
+<table id="tab" border="1px" width="500px" style="text-align:center;">
+	<thead>
+    	<td>ID</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>操作</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+            <td>张三</td>
+            <td>11</td>
+            <td></td>
+        </tr>
+        <tr>
+        	<td>2</td>
+            <td>李四</td>
+            <td>22</td>
+             <td></td>
+        </tr>
+        <tr>
+        	<td>3</td>
+            <td>王二</td>
+            <td>13</td>
+            <td></td>
+        </tr>
+        <tr>
+        	<td>4</td>
+            <td>张峰</td>
+            <td>44</td>
+            <td></td>
+        </tr>
+         <tr>
+        	<td>5</td>
+            <td>Bule</td>
+            <td>44</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

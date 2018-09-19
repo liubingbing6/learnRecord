@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oUl = document.getElementById('oUl');
+	var aLi = oUl.getElementsByTagName('li');
+	//b[0]总件数；b[1]总费用;b[2]最贵单价;
+	var b = document.getElementsByTagName('b');
+	//定义全局变量，计算总件数
+	var comTotal = 0;
+	//var totalVal =0;
+	//定义全局变量，计算总费用；
+	var totalNum = 0;
+	//定义数组，存放加入的商品，遍历寻找最大数，得出最贵商品单价
+	var arr =[];
+	var arr1 = [];
+	//var arr2 = [];
+	for(var i=0;i<aLi.length;i++){
+		//aLi[i].arrLarge = [];
+		//为每一个li设置一个属性，用来计算总费用时存放当前的总价
+		aLi[i].index = 0;
+		fn(aLi[i]);	
+	}
+	function fn(aLi){
+		var oBtn = aLi.getElementsByTagName('input');
+		var oSpan = aLi.getElementsByTagName('span');
+		//获取购买数量
+		var valSpan0 = oSpan[0].innerHTML;
+		//获取购买单价
+		var valSpan1 = oSpan[1].getElementsByTagName('strong')[0].innerHTML;
+		//获取此商品的总额
+		var valSpan2 = oSpan[2].getElementsByTagName('i')[0];
+		
+		oBtn[1].onclick = function(){
+			//获取当前变量的自定义属性
+			var index = aLi.index;
+			//将当前商品的总费用值"保存"
+			index = parseFloat(valSpan2.innerHTML);
+			
+			valSpan0++;
+			valSpan0 = parseInt(valSpan0);
+			valSpan1 = parseFloat(valSpan1);
+			oSpan[0].innerHTML = valSpan0;
+			valSpan2.innerHTML = valSpan0*valSpan1;
+			comTotal ++;
+			b[0].innerHTML = comTotal;
+			//判断此商品是否已购买
+			if(valSpan0 !==0){
+				arr.push(valSpan1);
+			}else{
+				arr.pop(valSpan1);	
+				
+			}
+			arr.sort(function(x,y){
+				return x-y;				  
+			});
+			//b[2]最贵单价;
+			b[2].innerHTML = arr[arr.length-1];
+
+			//总费用先加后减
+			totalNum +=parseFloat(valSpan2.innerHTML);
+			totalNum -= index;
+			//b[1]总费用;
+			b[1].innerHTML = totalNum;
+		};
+
+		oBtn[0].onclick = function(){
+			var index = aLi.index;
+			index = parseFloat(valSpan2.innerHTML);
+		
+			valSpan0--;
+			if(comTotal!==0 && !(valSpan0<0)){
+				comTotal--;
+			}
+			if(valSpan0<0){
+				valSpan0 = 0;
+			}
+			
+			valSpan0 = parseInt(valSpan0);
+			valSpan1 = parseFloat(valSpan1);
+			oSpan[0].innerHTML = valSpan0;
+			valSpan2.innerHTML = valSpan0*valSpan1;
+			b[0].innerHTML = comTotal;
+			
+			if(valSpan0 !== 0){
+				arr.push(valSpan1);
+			}else{
+				arr.pop(valSpan1);	
+			}
+			arr.sort(function(x,y){
+				return x-y;				  
+			});
+			b[2].innerHTML = arr[arr.length-1]||0;
+
+			//总费用
+			totalNum += parseFloat(valSpan2.innerHTML);
+			totalNum -= index; 
+			b[1].innerHTML = totalNum;
+		};
+		
+	};
+	
+}
+</script>
+</head>
+
+<body>
+<ul id="oUl">
+	<li>
+    	<input type="button" value="-"/>
+        <span>0</span>
+        <input type="button" value="+"/>
+        <span>单价<strong>12.5</strong>元  </span>
+        <span>共计<i>0</i>元</span>
+    </li>
+    <li>
+    	<input type="button" value="-"/>
+        <span>0</span>
+        <input type="button" value="+"/>
+        <span>单价<strong>22.5</strong>元  </span>
+        <span>共计<i>0</i>元</span>
+    </li>
+    <li>
+    	<input type="button" value="-"/>
+        <span>0</span>
+        <input type="button" value="+"/>
+        <span>单价<strong>2.5</strong>元  </span>
+        <span>共计<i>0</i>元</span>
+    </li>
+    <li>
+    	<input type="button" value="-"/>
+        <span>0</span>
+        <input type="button" value="+"/>
+        <span>单价<strong>15</strong>元  </span>
+        <span>共计<i>0</i>元</span>
+    </li>  
+</ul>
+商品共计<b>0</b>件；共花费<b>0</b>元；其中最贵的是商品单价是<b>0</b>元；
+</body>
+</html>

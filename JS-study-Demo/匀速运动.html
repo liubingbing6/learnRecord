@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;}
+#div1{
+	width:100px;
+	height:100px;
+	position:absolute;
+	left:0;
+	background:#000;
+	}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var Lbtn=document.getElementById('Lbtn');
+	var Rbtn=document.getElementById('Rbtn');
+	Lbtn.onclick=function(){
+		startMove(500);
+		};
+	Rbtn.onclick=function(){
+		startMove(0);
+		};
+	};
+var timer=null;
+function startMove(iTarget){
+	var oDiv=document.getElementById('div1');
+	clearInterval(timer);
+	timer=setInterval(function(){
+			var speed=0;
+			if(iTarget-oDiv.offsetLeft>0){
+				speed=7;
+			}
+			else{
+				speed=-7;
+			}
+			if(Math.abs(iTarget-oDiv.offsetLeft)<=7){//此处取绝对值
+				clearInterval(timer);
+				oDiv.style.left=iTarget+'px';
+			}
+			else{
+				oDiv.style.left=oDiv.offsetLeft+speed+'px';
+			}
+				document.title=oDiv.offsetLeft;
+		},30);
+	}
+</script>
+</head>
+
+<body>
+<input type="button" value="右移动" id="Lbtn"/>
+<input type="button" value="左移动" id="Rbtn"/>
+<div id="div1"></div>
+</body>
+</html>

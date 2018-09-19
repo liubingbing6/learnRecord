@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+#div1{
+	width:300px;
+	height:300px;
+	padding:10px;
+	background:#f1f1f1;
+	border:1px solid #000;}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var oSpan=document.getElementById('span1');
+	var otext=document.getElementById('text1');
+	var obtn=document.getElementById('btn1');
+	obtn.onclick=function(){
+	//alert(oSpan.innerHTML);
+	//alert(oSpan.innerText);
+		oDiv.innerHTML+=oSpan.innerHTML+otext.value+"<br/>"
+		otext.value='';
+		};
+	}
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+<span id="span1">刘兵兵:</span>
+<input type="text" id="text1"/>
+<input type="button" id="btn1" value="按钮"/>
+</body>
+</html>

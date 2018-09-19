@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;}
+.box{
+	width:400px;
+	border:1px solid #efefef;
+	margin:30px auto;
+	}
+.box ul{
+	width:100%;}
+.box li{
+	position:relative;
+	list-style:none;
+	margin-bottom:2px;
+	border-bottom:1px solid #efefef;
+	width:100%;
+	height:30px;
+	overflow:hidden;
+	}
+li a{
+	display:block;
+	height:30px;
+	line-height:30px;
+	width:100%;
+	text-align:center;}
+.boxa{
+	position:absolute;
+	width:100%;}
+</style>
+</head>
+
+<body>
+<div class="box">
+	<ul>
+    	<li>
+        	<div class="boxa">
+                <a href="#">11111111</a>
+                <a href="#">22222222</a>
+            </div>
+        </li>
+        <li>
+        	<div class="boxa">
+                <a href="#">33333333</a>
+                <a href="#">44444444</a>
+            </div>
+        </li>
+        <li>
+        	<div class="boxa">
+                <a href="#">55555555</a>
+                <a href="#">66666666</a>
+           	</div>
+        </li>
+        <li>
+        	<div class="boxa">
+                <a href="#">77777777</a>
+                <a href="#">88888888</a>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="js/move.js"></script>
+<script>
+window.onload = function(){
+	var timer2 = null;
+	var onOff = true;
+	timer2 = setInterval(function(){
+		func();	
+	},4000);	
+}
+var onOff = true;
+function func(){
+	var aDiv = document.getElementsByTagName('div');
+	var num = 0;
+	
+	var timer1 = setInterval(function(){
+		if(num == aDiv.length){
+			clearInterval(timer1);
+			num = 0;
+			onOff = !onOff;
+		}else if(onOff){
+			startMove(aDiv[num],{top:-30})	;
+			num++;
+		}else{
+			startMove(aDiv[num],{top:0})	;
+			num++;	
+		}
+		
+	},200);	
+}
+</script>
+</body>
+</html>

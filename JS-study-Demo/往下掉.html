@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>title</title>
+</head>
+<body>
+
+
+
+<script src="js/move.js"></script>
+
+<script>
+window.onload = function(){
+		
+	var str = '';
+	var len = 15;
+	var timer1 = null;
+	var num = 0;
+	for(var i=0;i<len;i++){
+		str +='<div style="width:50px;height:50px;background:red;position:absolute;left:'+i*80+'px;top:0px"></div>';	
+	}
+	document.body.innerHTML = str;
+	var aDiv = document.getElementsByTagName('div');
+	
+	var onOff = true;	
+	
+		document.onclick = function(){
+			if (onOff) {
+				fn(aDiv,500)
+			}else{
+				fn(aDiv,0)
+			}
+			onOff = !onOff;
+
+		};
+	function fn(obj,value){
+		clearInterval(timer1);
+		var	timer1 = setInterval(function(){
+				startMove(obj[num],{top:value});
+				num++;
+				num = num>obj.length?0:num;
+			},100);	
+	}
+};
+
+</script>
+</body>
+</html>

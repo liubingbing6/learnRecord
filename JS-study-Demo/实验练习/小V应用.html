@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+div{
+	width:40px;
+	height:40px;
+	position:absolute;
+	padding:5px;
+	background:#F00;
+	top:0;
+	left:0;
+	line-height:40px;
+	text-align:center;
+	font-size:30px;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementsByTagName('div');
+	var oWidth=0,oTop=0;
+	function aa(){
+		for(var i=0;i<10;i++){
+			document.body.innerHTML+='<div>'+i+'</div>';
+		}
+		for(var i=0;i<oDiv.length;i++){
+			oDiv[i].style.left+=(10+i*60)+'px';
+			oDiv[i].style.top+=i*60+'px';
+			}
+		oWidth=oDiv[oDiv.length-1].offsetLeft;
+		oTop=oDiv[oDiv.length-1].offsetTop;
+			//alert(oTop);
+		for(var i=10;i<20;i++){
+			document.body.innerHTML+='<div>'+i+'</div>';
+		}
+		for(var i=10;i<oDiv.length;i++){
+			oDiv[i].style.left+=(oWidth+60+i%10*60)+'px';
+			oDiv[i].style.top+=(oTop-i%10*60)+'px';
+			
+			}
+	
+		}
+		
+	aa();
+
+	}
+</script>
+<script src="../js/move.js"></script>
+</head>
+
+<body>
+</body>
+</html>

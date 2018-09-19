@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+div{
+	width:300px;
+	overflow:hidden;
+	margin: 0 auto;
+	border:1px solid #000;}
+</style>
+<script>
+window.onload = function(){
+	var oSpan = document.getElementsByTagName('span')[0];
+	var oA = document.getElementsByTagName('a')[0];
+	var str = oSpan.innerHTML;
+	var onOff = true;
+	oA.onclick = function(){
+		if(onOff){
+			var cStr = str.slice(0,15);
+			oSpan.innerHTML = cStr+'...';
+			oA.innerHTML = '>>展开';	
+		}else{
+			oSpan.innerHTML = str;
+			oA.innerHTML = '<<收缩';		
+		}
+		onOff = !onOff;
+	};
+};
+</script>
+</head>
+
+<body>
+	<div>
+		<span>
+	    	1.项目介绍
+	  1）云笔记：在线学习时记录笔记，可分享，可参加笔记相关社区活动；
+	  2）开发环境：windows+JDK1.8+MyEclipse10+Tomcat7.0+MySql5.1;
+	  3)搭建项目环境
+	    A.使用Spring整合MyBatis,访问数据库；
+	      补充：Spring整合MyBatis后，我们直接写接口并通过XML提供对应的SQL即可，Spring会自                动的帮助我们调用SQL实现接口；
+	    B.使用SpringMVC处理请求，返回json数据；
+	    C.使用HTML+JQuery负责显示数据；
+	  4）部署方案
+	     采用分布式部署方案；
+	    </span>
+	    <a href="javascript:;"><<收缩</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oBtn = document.getElementById('btn');
+	var oUl = document.getElementById('oUl');
+	var aLi = oUl.getElementsByTagName('li');
+	var arr = ['red','yellow','green'];
+	function fn(){
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].style.background = arr[i%3];	
+			aLi[i].onmouseover = function(){
+				this.index = this.style.background;
+				this.style.background = 'blue';	
+			};	
+			aLi[i].onmouseout = function(){
+				this.style.background = this.index;	
+			};	
+		}
+	}
+	fn();
+	oBtn.onclick = function(){
+		var oLi = document.createElement('li');
+		oUl.appendChild(oLi);
+		fn();
+	};
+	
+}
+</script>
+</head>
+
+<body>
+	<input type='button' value="添加" id='btn'/></br>
+	<ul id="oUl">
+		<li></li>
+	    <li></li>
+	    <li></li>
+	    <li></li>
+	    <li></li>
+	    <li></li>
+	    <li></li>
+	    <li></li>
+	</ul>
+</body>
+</html>
