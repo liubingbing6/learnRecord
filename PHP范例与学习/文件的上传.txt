@@ -1,0 +1,32 @@
+<?php
+header("content-type;text/html;charset=utf-8");
+$useName = $_POST['useName'];
+$uImage = $_FILES['fileName'];
+print_r($uImage).'/n';
+
+//检测文件的类型
+$ext = explode(".", $uImage["name"]);
+$extName = end($ext);
+if ($extName != 'jpg' && $extName != 'png' && $extName != 'gif'){
+    echo "文件类型不正确：<a href='index.php'>返回</a>";
+    exit();//终止后边文件的运行
+}
+//检测文件的大小 1k = 1000字节  1M = 1000k   1M = 1000000字节   图片一般2M；这里大小的运算是以内存“吃”掉一部分算的。
+if ($uImage["size"]>2000000){
+    echo "图片太大了<a href='index.php'>返回</a>";
+    exit();//终止后边文件的运行
+}
+//文件重命名          文件名称要求不可重复    时间戳5位的随机数
+$dir = "upload/";   //当前路径，必须这么写！
+$fileName = time().rand(10000, 99999).".".$extName;
+$uploadUrl = $dir.$fileName;
+//move_uploaded_file(临时位置，指定的位置);
+move_uploaded_file($uImage['tmp_name'], $uploadUrl);
+
+
+服务器端配置:
+file_uploads = On,支持HTTP上传
+upload_tmp_dir=,临时文件保存的目录
+upload_max_filesize=2M,允许上传文件的最大值
+max_file_uploads=20,允许一次上传的最大文件数
+post_max_size=8M,POST方式发送数据的最大值

@@ -1,0 +1,95 @@
+数据库设计相关知识：
+优良的设计：
+	1、减少数据冗余
+	2、避免数据维护异常
+	3、节约存储空间
+	4、高效的访问
+逻辑设计：
+	1、将需求转化为数据库的逻辑模型
+	2、通过ER图的形式对逻辑模型进行展示
+	3、同所选用的具体的DBMS系统无关
+名词解释：
+关系：一个关系对应通常所说的一张表
+元组：表中的一行即为一个元组。
+属性：表中的一列即为一个属性；每一个属性都有一个名称，称为属性名。
+候选码：表中的某个属性组，它可以唯一确定一个元组。
+主码：一个关系有多个候选码，选定其中一个为主码。
+域：属性的取值范围。
+分量：元组中的一个属性值
+
+ER图例说明：
+矩形：表示实体集，矩形内写实体集的名字
+菱形：表示联系集
+椭圆：表示实体的属性
+线段：将属性连接到实体集，或将实体集连接到联系集
+(ER图中将多对多关系通过联系集转化为一对多)
+
+数据冗余：是指相同的数据在多个地方存在，或者说表中的某个列可以由其他列计算得到，这样就说表中存在着数据冗余。
+
+数据库设计范式：
+第一范式：数据库表中的所有字段都是单一属性，不可再分的。（这个单一属性是由基本的数据类型所构成的，如：整数，浮点数，字符串等）。换句话说：第一范式要求数据库中的表都是二维表。
+第二范式：数据库的表中不存在非关键字段对任一候选关键字段的部分函数依赖。（部分函数依赖是指存在着组合关键字中的某一关键字决定非关键字的情况）。换句话说：所有单关键字段的表都符合第二范式。
+第三范式：是在第二范式的基础上定义的，如果数据表中不存在非关键字段对任意候选关键字段的传递函数依赖则符合第三范式
+BC范式：
+
+简洁记忆：
+1NF：就是原子性，字段不可再分割；(这个肯定不用在解释了吧)
+2NF：就是完全依赖，没有部分依赖；。(非主属性不能依赖于主键的一部分，要完全依赖于主键)
+3NF:没有传递依赖。(非主属性之间的依赖)。
+BC范式： 解决部分主键依赖于非主键部分。
+
+
+
+
+
+$row = mysql_fetch_row($result);
+$row = mysql_fetch_array($result, MYSQL_NUM); //这两个方法获取的数据是一样的
+
+$row = mysql_fetch_assoc($result);
+$row = mysql_fetch_array($result, MYSQL_ASSOC);
+这两个方法是相同的
+
+/*
+//连接数据库
+mysql_connect('127.0.0.1', 'code1', '');
+mysql_select_db('code1');
+mysql_query("set names 'utf8'");
+//数据预处理 防止查询不到数据
+mysql_query("insert into user(name, age, class) values('王二', 19, '高三五班')");
+//进行数据查询
+$sql = "select * from user limit 1";
+$result = mysql_query($sql);
+
+//在这里获取一行数据
+$row = mysql_fetch_array($result);
+
+echo '<pre>';
+print_r($row);
+foreach($row as $v){
+    print_r($v);    
+}
+echo '</pre>';
+*/
+
+查询分页数据
+/*
+//连接数据库
+mysql_connect('127.0.0.1', 'code1', '');
+mysql_select_db('code1');
+mysql_query("set names 'utf8'");
+//预设翻页参数
+$page = 2;
+$pagesize = 2;
+//在这里构建分页查询
+$offset = ($page - 1) * $pagesize;
+$sql = "select * from user limit $offset, $pagesize";
+//获取翻页数据
+$result = mysql_query($sql);
+$data = array();
+while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+    $data[] = $row;
+}
+echo '<pre>';
+print_r($data);
+echo '</pre>';
+*/

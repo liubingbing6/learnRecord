@@ -1,0 +1,189 @@
+PDO连接数据库
+1.通过参数形式连接数据库
+例：try {
+    $dsn = 'mysql:host=localhost;dbname=school';
+    $username = 'root';
+    $passwd = 'root';
+    $pdo = new PDO($dsn, $username, $passwd);
+    var_dump($pdo);
+}catch (PDOException $e){
+    echo $e->getMessage();
+}
+
+2.通过URI形式连接数据库
+与例1是大体相同的，只是$dsn='uri:fill://....'这后面写你的文件路径，文件内容形式如：mysql:host=localhost;dbname=school；
+
+3.通过配置文件形式连接数据库
+在my.ini文件中写入pdo.dsn.imooc(这个是你在连接时的一个名字而已，可以随便取)="mysql:host=localhost;dbname=school";
+例：try {
+    $dsn = 'imooc';
+    $username = 'root';
+    $passwd = 'root';
+    $pdo = new PDO($dsn, $username, $passwd);
+    var_dump($pdo);
+}catch (PDOException $e){
+
+$pdo->exec($sql);
+exec():执行一条sql语句并返回受影响的记录条数，如果没有影响则返回为0；
+exec():对select没有作用；
+
+$pdo的方法
+$pdo->lastInsertId();//得到最新插入记录的ID号
+query()//执行一条SQL语句，返回一个PDOStatement对象;通常只需查询语句
+prepare()//准备要执行的SQL语句，返回PDOStatement对象
+quote()//返回一个添加引号的字符串，用户SQL语句中
+setAttribute()//设置数据库连接的属性
+getAttribute()//得到数据库连接的属性
+errorCode()//获取跟数据库句柄上一次操作相关的SQLSTATE;
+errorInfo()//获取跟数据库句柄上一次操作的错误信息，是一个数组；数组中包含3个单元。0==>SQLSTATE,1==>CODE,2==>INFO;
+
+$stmt的方法
+execute()//执行一条预处理语句
+rowCount()//返回上一个SQL语句影响的行数
+fetch()//从结果集中获取一行
+fetchAll()//返回一个包含结果集中所有行的数组
+setFetchMode()//为语句设置默认的获取模式
+fetchColumn()//从结果集中的下一行返回单独的一列
+fetchObject()//获取下一行并作为一个对象返回
+bindParam()//绑定一个参数到指定的变量名
+bindValue()//把一个值绑定到一个参数
+bindColumn()//绑定一列到一个PHP变量
+getColumnMeta()//返回结果集中一列的元数据
+columnCount()//返回结果集中的列数
+setAttribute()//设置一个语句属性
+getAttribute()//检索一个语句属性
+errorCode()//获取跟上一次语句句柄操作相关的SQLSTATE;
+errorInfo//获取跟上一次语句句柄操作相关的扩展信息
+debugDumpParams()//打印一条SQL预处理命令
+nextRowset()//将指针指向下一个结果集
+
+
+//预处理语句中的占位符的使用
+ try {
+    $dsn = "mysql:host=localhost;dbname=school";
+    $name = 'root';
+    $pass = 'root';
+    $pdo = new PDO($dsn, $name, $pass);
+    //方式一
+  /*   $sql = "select * from course where couName =:username and couPass =:password";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array(":username"=>$userName,":password"=>$password)); */
+    //方式二
+    $sql = "select * from course where couName =? and couPass =?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(array($userName,$password));
+    echo $stmt->rowCount();
+}catch (PDOException $e){
+    echo $e->getMessage();
+}
+
+//bindParam()方法绑定参数
+try {
+    $dsn = "mysql:host=localhost;dbname=school";
+    $name = 'root';
+    $pass = 'root';
+     $pdo = new PDO($dsn, $name, $pass);
+   //方式一
+   /*  $sql = "insert into course(couName,couPass) values(:username,:password)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":username", $userName,PDO::PARAM_STR);
+    $stmt->bindParam(":password", $password,PDO::PARAM_STR); */
+    //方式二
+   /* $sql = "insert into course(couName,couPass) values(?,?)";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindParam(1, $userName);
+      $stmt->bindParam(2, $password);
+      $stmt->execute();
+      echo $stmt->rowCount();
+   */
+    //方式三  删除操作
+    $id = 4;
+    $sql = "delete from course where id > :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":id", $id,PDO::PARAM_INT);
+    $stmt->execute();
+    echo $stmt->rowCount();
+}catch (PDOException $e){
+    echo $e->getMessage();
+}
+
+//bindColumn()方法绑定参数
+try {
+    $dsn = "mysql:host=localhost;dbname=school";
+    $name = 'root';
+    $pass = 'root';
+    $pdo = new PDO($dsn, $name, $pass);
+
+    $sql = "select couName,couPass from course";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    echo "结果集中的列数一共有：".$stmt->columnCount();
+    echo "<hr/>";
+    $stmt->bindColumn(1, $userName);
+    $stmt->bindColumn(2, $password);
+    while ($stmt->fetch(PDO::FETCH_BOUND)){
+        echo "用户名：".$userName."--密码:".$password."<hr/>";
+    }
+   // echo $stmt->rowCount();
+}catch (PDOException $e){
+    echo $e->getMessage();
+}
+
+PDO错误处理模式
+1.PDO::ERRMODE_SLIENT:默认模式，静默模式
+2.PDO::ERRMODE_WARNING:警告模式
+3.PDO::ERRMODE_EXCEPTION:异常模式
+例：try {
+    $dsn = "mysql:host=localhost;dbname=school";
+    $name = 'root';
+    $pass = 'root';
+    $pdo = new PDO($dsn, $name, $pass);
+    //$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNINT);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $sql = "select * from course";
+    $stmt = $pdo->query($sql);
+    echo $pdo->errorCode();
+    echo '<br/>';
+    print_r($pdo->errorInfo());
+}catch (PDOException $e){
+    echo $e->getMessage();
+}
+
+PDO对象的方法  事务
+beginTransaction()//启动一个事务
+commit()//提交一个事务
+rollBack()//回滚一个事务
+inTransaction()//检测是否在一个事务内
+例：//事务：同时成功才算成功，只有innodb才行，此部分为数据库知识
+//bindParam()方法绑定参数
+try {
+    $dsn = "mysql:host=localhost;dbname=school";
+    $name = 'root';
+    $pass = 'root';
+    $pdo = new PDO($dsn, $name, $pass);
+    //开启事务之前检测一下
+    var_dump($pdo->inTransaction());
+    //开启一个事务
+    $pdo->beginTransaction();
+    //开启事务之后检测一下
+    var_dump($pdo->inTransaction());
+    $sql = "update userAccount set money=money-2000 where username='imooc'";
+    $res1 = $pdo->exec($sql);
+    if ($res1 == 0){
+        throw new PDOException("imooc 转账失败！");
+    }
+    $sql2 = "update userAccount set money=money+2000 where username='king'";
+    $res1 = $pdo->exec($sql2);
+    if ($res1 == 0){
+        throw new PDOException("king 接收失败！");
+    }
+    //提交事务
+    $pdo->commit();
+}catch (PDOException $e){
+    //回滚事务
+    $pdo->rollBack();
+    echo $e->getMessage();
+}
+
+成功开启POP3/SMTP服务,在第三方客户端登录时，密码框请输入以下授权码：
+rckvpxhdgimcbcaa
