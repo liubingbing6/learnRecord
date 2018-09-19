@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body{
+	height:200000px;}
+#div1{
+	width:200px;
+	height:200px;
+	background:red;
+	position:absolute;
+	right:0;
+	bottom:0;}
+</style>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="../JS例子/JS练习/js/move.js" ></script>
+<title>无标题文档</title>
+<script>
+$(function(){
+	$(window).scroll(function(event){
+		//$('title').html(event.pageX);
+		//$('title').html(event.pageY);
+		var scrTop = $(document).scrollTop();
+		var clientH = $(window).height();
+		var oDiv = $('#div1');
+		var res = clientH - oDiv.get(0).offsetHeight + scrTop + 'px';
+		oDiv.animate({top : res},50)
+		//startMove(oDiv,{top : res});
+	});		 
+	
+});
+window.onload = function(){
+	document.onclick = function(){
+		var oDiv = document.getElementById('div1');
+			//startMove(oDiv,{left : 0});
+		var timer =	setInterval(function(){
+				oDiv.style.left =oDiv.offsetLeft - oDiv.offsetWidth + 'px'; 
+				if(oDiv.offsetLeft <=0){
+					clearInterval(timer);
+					oDiv.style.left= 0 ;
+				}
+			},30);
+	};
+	
+};
+var obj = {a : 123};
+alert(a in obj);
+</script>
+</head>
+
+<body>
+<div id="div1">2222
+</div>
+</body>
+</html>

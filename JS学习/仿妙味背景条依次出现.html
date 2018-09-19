@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ss</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	ul{
+		margin: 50px;
+		border: 1px solid #000;
+	}
+	li {
+		position: relative;
+		line-height: 30px;
+		border-bottom: 1px solid #e8e8e8;
+		list-style-type: none;
+	}
+	li:last-child{
+		border-bottom: none;
+	}
+	li:after{
+		position: absolute;
+		content: '';
+		width: 0px;
+		height: 30px;
+		background: red;
+		left: 0;
+		top: 0;
+		opacity: .8;
+		z-index: -1;
+		transition: all 1s;
+	}
+	li:hover::after{
+		width: 200px;
+	}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>html+css整站</li>
+		<li>码农俱乐部-技术之夜-1</li>
+		<li>码农俱乐部-技术之夜-2</li>
+		<li>码农俱乐部-技术之夜-3</li>
+		<li>码农俱乐部-技术之夜-4</li>
+		<li>码农俱乐部-技术之夜-5</li>
+		<li>码农俱乐部-技术之夜-6</li>
+	</ul>
+</body>
+</html>
