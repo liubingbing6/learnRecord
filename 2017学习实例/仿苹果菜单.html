@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{margin: 0;padding: 0}
+	#div1{width: 100%;height: auto;position: absolute;bottom: 0;text-align: center}
+	img{width: 64px;}
+</style>
+<body>
+	<div id="div1">
+		<img src="image/10.png" alt="">
+		<img src="image/11.png" alt="">
+		<img src="image/12.png" alt="">
+		<img src="image/13.png" alt="">
+		<img src="image/14.png" alt="">
+	</div>
+</body>
+<script>
+window.onload = function () {
+	var oDiv = document.getElementById('div1');
+	document.onmousemove = function (ev) {
+		var ev = ev || window.event;
+		var aImg = document.getElementsByTagName('img');
+		for(var i = 0, length1 = aImg.length; i < length1; i++){
+			//先找到每一个图片的中心坐标
+			var x = aImg[i].offsetLeft + aImg[i].offsetWidth/2;
+			var y = aImg[i].offsetTop + aImg[i].offsetHeight/2 + oDiv.offsetTop;
+
+			//利用勾股定理求出斜边距离，也就是鼠标离当前图的距离
+			var a = ev.clientX - x;
+			var b = ev.clientY - y;
+
+			var c = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));  //得到斜边的值
+			//距离最近，显示最大，所以用1减取反值
+			var scale = 1-c/300;
+			
+			document.title  = scale;
+			if (scale < 0.5) {
+				scale = 0.5;
+			}
+
+			if (scale > 1) {
+				scale = 1;
+			}
+			aImg[i].style.width = scale * 128 + 'px';  //比例值乘以图片宽
+			aImg[i].style.height = scale * 128 + 'px';
+		}
+	}
+}
+</script>
+</html>

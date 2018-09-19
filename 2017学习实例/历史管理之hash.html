@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>通过hash值操作历史管理</title>
+<style>
+*{margin: 0;padding: 0}
+</style>
+</head>
+<body>
+	<input type="button" value="随机选项" id="input">
+	<div id="div1"></div>	
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+window.onload = function () {
+	var oInput = document.getElementById('input');
+	var oDiv = document.getElementById('div1');
+	var json = {};
+
+	oInput.onclick = function () {
+		var randomNum = Math.random();
+		json[randomNum] = getNumber(35,7);
+
+		oDiv.innerHTML = json[randomNum];
+		window.location.hash = randomNum;
+	}
+
+//通过这个事件来判断
+	window.onhashchange = function  () {
+		 oDiv.innerHTML = json[window.location.hash.substring(1)];
+	}
+
+	function getNumber (num,sel) {
+		 var arr = [];
+		 var selArr = [];
+		 for(var i=0;i<num;i++){
+		 	arr.push(i+1);
+		 }
+		 for(var j=0;j<sel;j++){
+		 	selArr.push(arr.splice(Math.floor(Math.random()*arr.length), 1));
+		 } 
+		 return selArr;
+	}
+}
+</script>
+</body>
+</html>

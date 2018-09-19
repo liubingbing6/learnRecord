@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+html{height:100%}
+body{height:100%;margin:0;padding:0;background:#000;}
+#box{height:100%;position:relative;-webkit-perspective:800;}
+#imgList{-webkit-transform-style:preserve-3d;position:absolute;height:201px;top:50%;margin-top:-100px;width:100%;left:50%;margin-left:-450px;}
+#imgList img{width:300px;position:absolute;bottom:0;-webkit-box-reflect:below 0 -webkit-linear-gradient(top,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.5) 100%)}
+#imgList img:nth-of-type(1){-webkit-transform:rotateY(45deg) translateZ(-100px);left:0px;}
+#imgList img:nth-of-type(2){-webkit-transform:rotateY(45deg) translateZ(-100px);left:100px;}
+#imgList img:nth-of-type(3){-webkit-transform:translateZ(200px);left:300px;}
+#imgList img:nth-of-type(4){-webkit-transform:rotateY(-45deg) translateZ(-100px);left:500px;}
+#imgList img:nth-of-type(5){-webkit-transform:rotateY(-45deg) translateZ(-100px);left:600px;}
+</style>
+</head>
+
+<body>
+<div id="box">
+	<div id="imgList">
+    	<img src="image/1.jpg"/>
+        <img src="image/2.jpg"/>
+        <img src="image/3.jpg"/>
+        <img src="image/4.jpg"/>
+        <img src="image/5.jpg"/>
+    </div>
+</div>
+</body>
+</html>

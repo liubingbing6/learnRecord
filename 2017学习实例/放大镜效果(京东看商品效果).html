@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜效果</title>
+</head>
+<style>
+	/* *{margin: 0;padding: 0} */
+	#div1{width: 180px;height: 180px;position: relative;}
+	#div1 span{width: 100px;height: 100px;position: absolute;left:0;top:0;background: yellow;opacity: .5;filter: alpha(opacity=50);display: none;}
+	#div2{display: none;width: 500px;height:500px;overflow: hidden;position: absolute;left: 250px;top: 50px;}
+	#div2 img{position: absolute;left: 0;top: 0;}
+</style>
+<body>
+<div id="div1">
+	<img src="image/15.jpg" alt="">
+	<span></span>
+</div>
+<div id="div2">
+	<img src="image/16.jpg" alt="">
+</div>
+</body>
+<script>
+window.onload = function () {
+	var oDiv1 = document.getElementById('div1');
+	var oSpan = oDiv1.getElementsByTagName('span')[0];
+
+	var oDiv2 = document.getElementById('div2');
+	var oImg = oDiv2.getElementsByTagName('img')[0];
+	oDiv1.onmouseenter = function () {
+		oSpan.style.display = 'block';
+		oDiv2.style.display = 'block';
+	}
+	oDiv1.onmouseleave = function () {
+		oSpan.style.display = 'none';
+		oDiv2.style.display = 'none';
+	}
+	oDiv1.onmousemove = function (ev) {
+		var ev = ev || window.event;
+		var L = ev.clientX - oDiv1.offsetLeft - oSpan.offsetWidth/2;
+		var T = ev.clientY - oDiv1.offsetTop - oSpan.offsetHeight/2;
+		if(L < 0 ){
+			L = 0
+		}else if (L>oDiv1.offsetWidth - oSpan.offsetWidth) {
+			L = oDiv1.offsetWidth - oSpan.offsetWidth;
+		}
+
+		if(T < 0 ){
+			T = 0	
+		}else if (T > oDiv1.offsetHeight - oSpan.offsetHeight) {
+			T = oDiv1.offsetHeight - oSpan.offsetHeight;
+		}
+
+		oSpan.style.left = L + 'px';
+		oSpan.style.top = T + 'px';
+
+		var scaleX = L/(oDiv1.offsetWidth - oSpan.offsetWidth);//获取横向的比例
+		var scaleY = T/(oDiv1.offsetHeight - oSpan.offsetHeight);//获取纵向的比例
+
+		
+		oImg.style.left = -scaleX * (oImg.offsetWidth - oDiv2.offsetWidth) + 'px';
+		oImg.style.top = -scaleY * (oImg.offsetHeight - oDiv2.offsetHeight) + 'px';
+	}
+}
+</script>
+</html>

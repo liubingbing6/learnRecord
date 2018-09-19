@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;}
+body{height:20000px;position:relative;}
+.btn{position:fixed;top:0;}
+.mask{position:absolute;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.3);display:none;z-index:100}
+.dialog{width:360px;height:360px;border:solid 5px #666;position:absolute;z-index:101;display:none;}
+.dialog .delImg{width:30px;height:30px;position:absolute;right:0;border:1px solid #eee;}
+.dialog .bottom{position:absolute;bottom:0;text-align:center;}
+</style>
+</head>
+
+<body>
+<button class="btn">显示弹框</button>
+<div class="mask"></div>
+<div class="dialog">
+	<div class="delImg">X</div>
+    <div class="bottom">
+    	<input type="button" id="Button2" value="确定"/>&nbsp;&nbsp;
+        <input type="button" id="Button3" value="取消"/>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+$(function(){
+	$(".btn").click(function(){
+		$('.mask').show();
+		showDialog();	
+		$('.dialog').show();
+	});	
+	
+	$(".delImg").click(function(){
+		$('.mask').hide();	
+		$('.dialog').hide();	
+	});
+	/*
+		根据当前页面与滚动条位置，设置提示对话框的Top和Left;
+	*/
+	function showDialog(){
+		var objW = $(window);//当前窗口
+		var objC = $('.dialog');//对话框
+		
+		var brsW = objW.width();
+		var brsH = objW.height();
+		var scrL = objW.scrollLeft();
+		var scrT = objW.scrollTop();
+		var curW = objC.width();
+		var curH = objC.height();
+		
+		//计算对话框居中时距离左边的距离
+		var left = scrL + (brsW - curW)/2;
+		//计算对话框居中时距离顶部的距离
+		var top = scrT + (brsH - curH)/2;
+		
+		objC.css({
+			"left":left,
+			"top":top	
+		});
+	}
+	//页面窗口大小改变事件和滚动事件
+	$(window).on('resize scroll',function(){
+		if(!$(".dialog").is(":visible")){
+			return;	
+		}
+		showDialog();
+	})
+	/*$(window).resize(function(){
+		if(!$(".dialog").is(":visible")){
+			return;	
+		}
+		showDialog();	//设置对话框的top与left
+	})*/
+	
+})
+</script>
+</body>
+</html>

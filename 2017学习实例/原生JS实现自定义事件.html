@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js原生实现自定义事件</title>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<div id="div1"></div>
+	<script>
+		window.onload = function  () {
+			 var oDiv = document.getElementById('div1');
+			 var oBtn = document.getElementById('btn'); 
+
+			 bindEvent(oDiv,'show',function() {
+			 	alert(1);
+			 });
+			 bindEvent(oDiv,'show',function () {
+			 	alert(2);
+			 })
+			 bindEvent(oDiv,'show2',function () {
+			 	alert(3);
+			 })
+			 fireEvent(oDiv,'show');
+			 fireEvent(oDiv,'show2');
+		}
+		
+		function bindEvent(obj,events,fn) {
+			obj.listeners = obj.listeners || {};
+			obj.listeners[events] = obj.listeners[events] || [];
+			obj.listeners[events].push(fn);
+
+			if (obj.addEventListener) {
+				obj.addEventListener(events, fn,false);
+			}else {
+				obj.attachEvent('on'+events,fn);
+			}
+		}
+		function fireEvent(obj,event) {
+			for(var i = 0, length1 = obj.listeners[event].length; i < length1; i++){
+				obj.listeners[event][i]();
+			}
+		}
+	</script>
+</body>
+</html>

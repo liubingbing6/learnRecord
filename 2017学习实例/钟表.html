@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0}
+	#wrap{width: 200px;height: 200px;border:2px solid #000;margin: 100px auto;border-radius: 50%;position: relative;}
+	#wrap ul{list-style: none;position: relative;height: 200px;}
+	#wrap ul li{width: 2px;height: 8px;position:absolute;left:99px;top:0;background: #000;transform-origin: center 100px;line-height: 42px;text-indent: 4px;}
+	#wrap ul li:nth-of-type(5n+1){height: 12px;}
+	#hour{width: 6px;height: 45px;background: #000;position: absolute;left: 97px;top: 55px;transform-origin: bottom;}
+	#min{width: 4px;height: 65px;background: #999;position: absolute;left: 98px;top: 35px;transform-origin: bottom;}
+	#sec{width: 2px;height: 85px;background: #999;position: absolute;left: 99px;top: 15px;transform-origin: bottom;}
+	#origin{width: 20px;height: 20px;background: #ff4343;position: absolute;;left: 90px;top: 90px;border-radius: 50%;}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="js-list"></ul>
+		<div id="hour"></div>
+		<div id="min"></div>
+		<div id="sec"></div>
+		<div id="origin"></div>
+	</div>
+	<script>
+		window.onload = function () {
+			var demo = new TimeDemo();
+			demo.initTime();
+			demo.toTime();
+			setInterval(demo.toTime, 1000);
+		}
+		function TimeDemo() {
+			var self = this;
+			this.oUl = document.getElementById("js-list");
+			this.sec = document.getElementById("sec");
+			this.hour = document.getElementById("hour");
+			this.min = document.getElementById("min");
+			this.oLi = "";
+			this.num = 0;
+			//初始化时间个数
+			this.initTime = function () {
+				for(var i = 0, length1 = 60; i < length1; i++){
+					if ((i+1)%5 == 0) {
+						if (self.num == 5) {//把“6”倒转回来
+							//console.log(self.num);
+							self.oLi += "<li style=transform:rotate("+i*6+"deg)>9</li>";
+							++self.num;
+						}else{
+							self.oLi += "<li style=transform:rotate("+i*6+"deg)>"+(++self.num)+"</li>";
+						}
+					}else{
+						self.oLi += "<li style=transform:rotate("+i*6+"deg)></li>";
+					}
+				}
+				self.oUl.innerHTML = self.oLi;
+			};
+			//动态获取时间，并且旋转
+			this.toTime = function () {
+				var time = new Date();
+				var oSec = time.getSeconds();
+				var oMin = time.getMinutes()+oSec/60;
+				var oHour = time.getHours()+oMin/60;
+				self.sec.style.cssText = "transform:rotate("+oSec*6+"deg)";
+				self.hour.style.cssText = "transform:rotate("+oHour*30+"deg)";
+				self.min.style.cssText = "transform:rotate("+oMin*6+"deg)";
+			}
+		}
+	</script>
+</body>
+</html>

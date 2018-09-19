@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding: 0;}
+        ul{list-style-type: none;width: 300px;margin:30px auto;}
+        ul li{width: 30px;height: 30px;border-radius: 50%;border:1px solid #ddd;display: inline-block;cursor: pointer;}
+        .active{background: #ff4343;border-color:#fff;}    
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<ul id="ul">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+$(function () {
+    var demo = new Demo();
+   $("#ul").on('click', 'li', demo.sele);
+});
+function Demo() {
+    var self = this;
+    this.sele = function () {
+        var index = $(this).index();
+        /*$(this).parent().find('li').each(function(i, el) {
+            if (i<=index) {
+                $(this).addClass('active');
+            }else {
+                 $(this).removeClass('active');
+            }
+            
+        });*/
+        $(this).addClass('active').siblings('li').removeClass('active').end().prevAll().addClass('active');
+        console.log(index+1);
+    }
+}
+
+</script>
+</body>
+</html>

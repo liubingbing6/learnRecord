@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;
+	padding:0}
+.demo{
+	width:100px;
+	height:100px;
+	margin:30px auto;
+	background:#c90;
+	position:relative;
+	border-radius:50%;
+	}
+.demo:before{
+	content:'';
+	display:block;
+	position:absolute;
+	border:2px solid #ff4343;
+	border-radius:50%;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	animation:demo 1.5s infinite linear;
+	}
+@keyframes demo
+{
+	0%{
+		opacity:.2;
+		left:-2px;
+		top:-2px;
+		right:-2px;
+		bottom:-2px;
+		}
+	30%{
+		opacity:.8;
+		left:-6px;
+		top:-6px;
+		right:-6px;
+		bottom:-6px;
+		}
+	60%{
+		opacity:.4;
+		left:-12px;
+		top:-12px;
+		right:-12px;
+		bottom:-12px;
+		}
+	100%{
+		opacity:0;
+		left:-20px;
+		top:-20px;
+		right:-20px;
+		bottom:-20px;
+		}
+}
+	
+</style>
+</head>
+
+<body>
+<div class="demo"></div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<title>妙味照片墙</title>
+</head>
+<style>
+	*{margin: 0;padding: 0}
+	body{background:#666;}
+	ul{width: 660px;margin: 30px auto;position: relative;}
+	ul li{width: 200px;height: 150px;margin: 10px;float: left;list-style: none;overflow: hidden;}
+	ul li>img{width: 200px;height: 150px;}
+</style>
+<body>
+<input type="button" value="随机分布" id="input">
+<ul id="oUl"></ul>
+<script src="move.js"></script>
+<script>
+window.onload = function () {
+	var dl = new DragLayout();
+	dl.createImg();
+	var oInput = document.getElementById('input');
+	oInput.addEventListener('click', dl.randomLayout);
+}
+
+function DragLayout() {
+	var self = this;
+	this.aLi = null; //保存页面节点
+	this.arr = [];  //保存节点坐标位置
+	this.randomArr = [];  //记录每个节点的索引值
+	this.izIndex = 2;    //定义初始层级
+
+
+//创建图片节点
+	this.createImg = function () {
+		var oUl = document.getElementById('oUl');
+		var li = '';
+		for(var i = 0, length1 = 9; i < length1; i++){
+			li += "<li><img src='img/"+(i+21)+".png'/></li>"
+		}
+		oUl.innerHTML = li;
+
+		self.changeLayout();
+
+	}
+	//布局转换
+	this.changeLayout = function() {
+	
+		self.aLi = document.getElementsByTagName('li');
+
+		for(var i = 0, length1 = self.aLi.length; i < length1; i++){
+			self.aLi[i].index = i;
+			self.randomArr.push(i);
+			self.arr.push([self.aLi[i].offsetLeft,self.aLi[i].offsetTop]);
+
+			self.drag(self.aLi[i]);
+		}
+
+		for(var i = 0, length1 = self.aLi.length; i < length1; i++){
+			self.aLi[i].style.position = 'absolute';
+			self.aLi[i].style.left = self.arr[i][0] + 'px';
+			self.aLi[i].style.top = self.arr[i][1] + 'px';
+			self.aLi[i].style.margin = 0;
+		}
+	}
+
+	//给元素绑定拖拽功能
+	this.drag = function(obj) {
+		var disX = 0,
+			disY = 0;
+		obj.onmousedown = function (ev) {
+			obj.style.zIndex = self.izIndex++;
+			var ev = ev || window.event;
+			disX = ev.clientX - obj.offsetLeft;
+			disY = ev.clientY - obj.offsetTop;
+			document.onmousemove = function (ev) {
+				var ev = ev || window.event;
+				obj.style.left = ev.clientX - disX + 'px';
+				obj.style.top = ev.clientY - disY + 'px';
+
+				for(var i = 0, length1 = self.aLi.length; i < length1; i++){
+					self.aLi[i].style.border = '';//清楚所有的边框
+				}
+				var nl = self.nearLi(obj);  //找到离当前节点最近的li节点
+				if (nl) {
+					nl.style.border = "2px solid #ff4343";
+				}
+			}
+			document.onmouseup = function () {
+				document.onmousemove = null;
+				document.onmouseup = null;
+
+				var nl = self.nearLi(obj);
+				var tmp = 0;
+				if(nl){
+					startMove(obj,{left:self.arr[nl.index][0],top:self.arr[nl.index][1]});
+					startMove(nl,{left:self.arr[obj.index][0],top:self.arr[obj.index][1]});
+					nl.style.border = '';
+
+					tmp = obj.index;
+					obj.index = nl.index;
+					nl.index = tmp;
+					
+				}else{
+					startMove(obj,{left:self.arr[obj.index][0],top:self.arr[obj.index][1]});
+				}
+
+			}
+			return false;
+		}
+	}
+
+	this.nearLi = function(obj) {
+		var value = 999999;
+		var _index = -1;
+
+		for(var i = 0, length1 = self.aLi.length; i < length1; i++){
+			if (self.pz(obj,self.aLi[i]) && obj != self.aLi[i]) { //在碰撞节点中进行选择
+				var c = self.gougu(obj,self.aLi[i]);//找到距离最近的一个点
+				if (c < value) {
+					value = c;
+					_index = i;
+				}
+			}
+		}
+		if (_index !== -1) {
+			return self.aLi[_index];
+		}else{
+			return false;
+		}
+	}
+
+//碰撞检测
+	this.pz = function(obj1,obj2) {
+		var L1 = obj1.offsetLeft;
+		var R1 = obj1.offsetLeft + obj1.offsetWidth;
+		var T1 = obj1.offsetTop;
+		var B1 = obj1.offsetTop + obj1.offsetWidth;
+
+		var L2 = obj2.offsetLeft;
+		var R2 = obj2.offsetLeft + obj2.offsetWidth;
+		var T2 = obj2.offsetTop;
+		var B2 = obj2.offsetTop + obj2.offsetWidth;
+
+		if (R1 < L2 || R2 < L1 || B1 < T2 || B2 < T1) {
+			//碰不到的情况
+			return false;
+		}else {
+			return true;	
+		}
+	}
+	//利用勾股定理求斜边值
+	this.gougu = function(obj1,obj2) {
+		var a = obj1.offsetLeft - obj2.offsetLeft;
+		var b = obj1.offsetTop - obj2.offsetTop;
+		return Math.sqrt(a*a + b*b);
+	}
+
+	//随机分布
+	this.randomLayout = function() {
+		// var randomArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+		console.log(self.randomArr);
+
+		self.randomArr.sort(function (n1,n2) {
+			return Math.random() - 0.5;
+		});
+		console.log(self.randomArr);
+		for(var i = 0, length1 = self.aLi.length; i < length1; i++){
+			self.aLi[i].index = self.randomArr[i];
+			startMove(self.aLi[i],{left:self.arr[self.randomArr[i]][0],top:self.arr[self.randomArr[i][1]]});
+			
+		}
+	}
+}
+</script>
+</body>
+</html>
