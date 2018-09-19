@@ -1,0 +1,65 @@
+<script src="/js/common/require.js" data-main="/js/account/main"></script>
+
+
+/**
+ * 尝试模块化开发
+ * time:2017/4/21
+ * author:liubb
+ */
+requirejs.config({
+	paths:{
+		'jquery':"/js/common/jquery.min"     //引入jQuery文件给当前页面进行调用，并简化名字
+	}	
+});
+
+requirejs(['jquery','account'],function($,account){
+	$(function(){
+		var obj = new account.account();
+		//obj.reset();
+	});
+})
+
+
+
+
+
+
+/**
+ * time:2017/4/23
+ * author:liubb
+ */
+define(['jquery'],function($){
+	function account(){
+		var self = this;
+		
+		this.init = function(){
+			self.ajax('/hd/account/balance',{},function(ret){
+				$("#js-TabsTicketValue").value(ret.ticket.value);
+				$("#js-TabsRedValue").value(ret.redPackage.value);
+			})
+		}
+		
+		this.ajax = function(url, data, callback){
+			$.ajax({
+		        url : url,
+		        type : "post",
+		        async : true,
+		        cache : false,
+		        data : data,
+		        dataType : "json",
+		        success : function(recData){
+		            callback(recData);
+		        },
+		        error : function(e){
+		            alert(e);
+		            console.log('error:', e);
+		        }
+	    	});
+		}
+	}
+	
+	
+	return {
+		'account':account
+	}
+})

@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function BinaryTree(){
+	//创建一个节点
+	var Node = function(key){
+			this.key = key;
+			this.left = null;
+			this.right = null;
+		}	
+	var root = null;//根节点
+	
+	//对新节点进行排序
+	var InsertNode = function(node,newNode){
+			if(node.key > newNode.key){
+				if(node.left == null){
+					node.left = newNode
+				}else{
+					InsertNode(node.left,newNode);
+				}	
+			}else{
+				if(node.right == null){
+					node.right = newNode;	
+				}else{
+					InsertNode(node.right,newNode);	
+				}
+			}
+		}
+	
+	//插入一个新节点
+	this.insert = function(key){
+			var node = new Node(key);
+			if(root == null){
+				root = node;
+			}else{
+				InsertNode(root,node);
+			}
+		}
+	//中序遍历  先访问左子树，操作当前节点的值，再访问右子树
+	var InorderTraverseNode = function(node,callback){
+			if(node !== null){
+				InorderTraverseNode(node.left,callback);
+				callback(node.key);
+				InorderTraverseNode(node.right,callback);	
+			}
+		}
+	this.inOrderTraverse = function(callback){
+		InorderTraverseNode(root,callback);
+	}
+	//前序遍历 先操作当前节点的值，再访问左子树，然后访问右子树
+	var PreOrderTraverseNode = function(node,callback){
+			if(node !== null){
+				callback(node.key);
+				PreOrderTraverseNode(node.left,callback);
+				PreOrderTraverseNode(node.right,callback);	
+			}
+		}
+	this.preOrderTraverse = function(callback){
+		PreOrderTraverseNode(root,callback);
+	}
+	//后序遍历 先访问左子树再访问右子树再操作当前节点的值
+	var AfterOrderTraverseNode = function(node,callback){
+			if(node !== null){
+				AfterOrderTraverseNode(node.left,callback);
+				AfterOrderTraverseNode(node.right,callback);
+				callback(node.key);	
+			}
+		}
+	this.afterOrderTraverse = function(callback){
+		AfterOrderTraverseNode(root,callback);
+	}
+	
+	//二叉树操作  查找最小值：一直进入左子树，找到最后一个值
+	var findMinNode = function(node){
+			if(node){
+				while(node && node.left !== null){
+					node = node.left;
+				}	
+				return node.key;
+			}
+			return null;
+		}
+	this.findMin = function(){
+			return findMinNode(root);
+		}
+		
+	//二叉树操作  查找最大值：一直进入又子树，找到最后
+	var fundMaxNode = function(node){
+			if(node){
+				while(node && node.right !== null){
+					node = node.right;	
+				}	
+				return node.key;
+			}
+			return null;
+		}
+	this.findMax = function(){
+			return fundMaxNode(root);
+		}
+	//二叉树操作  查找指定的值：先比较当前节点值大小，小就走左子树，大就走右子树
+	var findValNode = function(node,pick){
+			if(node === null) return false;
+			if(pick < node.key){
+				return findValNode(node.left,pick);	
+			}else if(pick > node.key){
+				return findValNode(node.right,pick);	
+			}else{
+				return true;	
+			}
+		}
+	this.findVal = function(pick){
+			return findValNode(root,pick);
+		}
+		
+	//删除叶子节点 
+	var removeNode = function(node,key){
+			if(node === null) return false;
+			if(key < node.key){
+				node = removeNode(node.left,key);
+				return node;	
+			}else if(key > node.key){
+					node = removeNode(node.right,key);
+					return node;
+			}else{
+				//删除叶子节点
+				if(node.left === null && node.right === null){
+					node = null;
+					return node;	
+				}	
+				//删除中间节点 情况一
+				if(node.left === null){
+					node = node.right;
+					return node;	
+				}else if(node.right === null){
+					node = node.left;
+					return node;	
+				}
+				//删除中间节点 情况二：含有左右子节点
+				var aux = findMinNodeObj(node.right);
+				node.key = aux.key;
+				node.right = removeNode(node.right,aux.key);
+				return node;
+			}
+		}
+		//找到最小值节点
+	var findMinNodeObj = function(node){
+		if(node){
+			while(node && node.left !== null){
+				node = node.left;
+			}	
+			return node;
+		}
+		return null;
+	}
+	this.remove = function(key){
+		root = removeNode(root,key);	
+	}
+}
+
+	var nodes = [8,3,10,1,6,14,4,7,13];
+	var binaryTree = new BinaryTree();
+	nodes.forEach(function(key){
+		binaryTree.insert(key);	
+	});
+	
+	var callback = function(key){
+			console.log(key);
+		}
+	//binaryTree.inOrderTraverse(callback);
+	//binaryTree.preOrderTraverse(callback);
+	//binaryTree.afterOrderTraverse(callback);
+	//console.log(binaryTree.findMin());
+	//console.log(binaryTree.findMax());
+	console.log(binaryTree.findVal(11));
+</script>
+</body>
+</html>
