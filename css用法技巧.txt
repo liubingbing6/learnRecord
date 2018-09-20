@@ -1,0 +1,301 @@
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0;}
+body{font-size:12px;}
+img{border:none;}
+li{list-style:none;}
+input,select,textarea,button{outline:none;border:none;}
+textarea{resize:none;}
+a{text-decoration:none;}
+.fl{float:left}
+.fr{float:right}
+
+/*清除浮动*/
+终极版一：
+.clearfix:after{content:"\200B";display:block;height:0;clear:both;}
+.clearfix{*zoom:1;}/*IE/7/6*/IE8以上支持伪类
+解释下:content:"\200B";这个参数，Unicode字符里有一个“零宽度空格”，即 U+200B，代替原来的“.”，可以缩减代码量。而且不再使用visibility:hidden。
+
+终极版二：
+.clearfix:before,.clearfix:after{ 
+    content:""; 
+    display:table; 
+} 
+.clearfix:after{clear:both;} 
+.clearfix{ 
+    *zoom:1;/*IE/7/6*/
+}
+例：
+<div class="clearfix">
+    <div class="fl"></div>
+    <div class="fr"></div>
+</div>
+body{
+	padding:0;
+	font-size:10pt;
+	behavior:url(css/csshover.htc);
+}//这个文件需要单独下载，IE兼容css中hover属性
+img{box-shadow:阴影类型 X轴位移 Y轴位移 阴影大小 阴影扩展 阴影颜色 }
+
+当不设阴影类型时，默认为投影效果。当设为inset时，为内阴影效果。
+X轴和Y轴位移不等同但类似于photoshop里面的”角度”和”位置。
+阴影大小、扩展、颜色和Photoshop里面的都同理。
+
+当box-shadow的属性值水平和垂直都设置为0时，则表示四周都出现阴影
+
+1.垂直对齐
+.verticalcenter{
+position: absolute;
+top: 50%;
+-webkit-transform: translateY(-50%);
+-o-transform: translateY(-50%);
+transform: translateY(-50%);
+}
+
+
+2.只在一边或两边显示盒子阴影;例子是在下边显示一个阴影
+.box-shadow {
+    background-color: #FF8020;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.box-shadow:after {
+    content: "";
+    width: 180px;
+    height: 1px;
+    margin-top: 198px;
+    margin-left: -90px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    z-index: -1;
+    -webkit-box-shadow: 0px 0px 10px 4px #000000;
+       -moz-box-shadow: 0px 0px 10px 4px #000000;
+            box-shadow: 0px 0px 10px 4px #000000;
+}
+
+
+3.制造模糊文本
+.blurry-text {
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+
+4.用CSS动画实现省略号动画
+.loading:after {
+    overflow: hidden;
+    display: inline-block; 
+    vertical-align: bottom; 
+    animation: ellipsis 2s infinite; 
+    content: "\2026"; /* ascii code for the ellipsis character */ 
+}
+@keyframes ellipsis {
+    from {
+        width: 2px;
+    }
+ 
+    to{
+        width: 15px;
+    }
+}
+
+
+5.样式重置
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    outline: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+
+
+html,body { height: 100%; }
+body { font-size: 62.5%; line-height: 1; font-family: Arial, Tahoma, sans-serif; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+input,select,textarea,button{outline:none;border:none;}
+textarea{resize:none;}
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+strong { font-weight: bold; }
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: none; max-width: 100%; display:block}
+p { font-size: 1.2em; line-height: 1.0em; color: #333; }
+a{text-decoration:none;}
+
+6.跨浏览器的透明
+.transparent {
+    filter: alpha(opacity=50); /* internet explorer */
+    -khtml-opacity: 0.5; /* khtml, old safari */
+    -moz-opacity: 0.5; /* mozilla, netscape */
+    opacity: 0.5; /* fx, safari, opera */
+}
+
+7.通用媒体查询
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+}
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+}
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+/* Styles */
+}
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* Styles */
+}
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min-device-pixel-ratio:1.5) {
+/* Styles */
+}
+
+8.锚链接伪类
+a:link { color: blue; }
+a:visited { color: purple; }
+a:hover { color: red; }
+a:active { color: yellow; }
+
+9.CSS3：全屏背景
+html {
+    background: url('images/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+10.内容垂直居中
+.container {
+    min-height: 6.5em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+11.CSS3 斑马线
+tbody tr:nth-child(odd) {
+    background-color: #ccc;
+}
+
+12.大字段落
+p:first-letter{
+    display: block;
+    margin: 5px 0 0 5px;
+    float: left;
+    color: #ff3366;
+    font-size: 5.4em;
+    font-family: Georgia, Times New Roman, serif;
+}
+13.三角列表项目符号
+ul {
+    margin: 0.75em 0;
+    padding: 0 1em; 
+    list-style: none; 
+}
+
+li:before {
+    content: "";
+    border-color: transparent #111;
+    border-style: solid;
+    border-width: 0.35em 0 0.35em 0.45em;
+    display: block;
+    height: 0;
+    width: 0;
+    left: -1em;
+    top: 0.9em;
+    position: relative;
+}
+
+14.CSS固定页脚
+#footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    background: #444;
+} 
+/* IE 6 */
+* html #footer {
+    position: absolute;
+    top: expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
+
+15.跨浏览器设置最小高度
+#container {
+    min-height: 550px;
+    height: auto !important;
+    height: 550px;
+}
+
+16.CSS3鲜艳的输入
+input[type=text], textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #ddd;
+}
+input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+17.在可点击的项目上强制手型
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer { 
+    cursor: pointer; 
+}
+
+18.网页顶部盒阴影
+body:before { 
+    content: "";
+    position: fixed;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+ 
+    -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+    -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+    box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+    z-index: 100;
+}
+
+IE８以下浏览器都不支持 opacity css样式，可以使用IE自带的“滤镜”来实现，如下代码：
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+上面代码的作用设置为 70% 的透明
