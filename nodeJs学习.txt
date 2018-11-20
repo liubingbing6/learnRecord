@@ -1,0 +1,122 @@
+NodeJs和Javascritp的异同
+-ECMAScript
+-语法
+-内置对象、方法
+.顶层对象
+-javascript:window
+-nodejs:global
+
+在ECMAScript部分node和JS其实是一样的，比如数据类型的定义、语法结构，内置对象。node中没有window
+
+什么是模块
+-在node中，文件和模块是一一对应的，也就是一个文件就是一个模块
+-每个模块都有自己的作用域
+-我们通过var申明的变量并非全局而是该模块作用域下的。
+
+__filename:返回当前模块文件的解析后的绝对路径，改属性其实并非全局的，而是模块作用域下的
+
+__dirname:返回当前模块文件所在目录解析后的绝对路径，该属性也不是全局的，而是模块作用域下的。
+
+process对象
+.process对象是一个全局对象，可以在任何地方都能访问到它，通过这个对象提供的属性和方法，使我们可以对当前运行的程序的进程进行访问和控制
+.argv  --Array,一个包含命令行参数的数组
+.execPath --开启当前进程的绝对路径
+.env  --返回用户环境信息
+.title --返回当前进程的名称
+.pic --当前进程的id
+。。。还有很多，可查看API文档
+.stdin、stdout:标准输入输出流（IO）
+    -标准输入设备：htt;://baike.baidu.com/view/32680.html
+    -标准输出设备：htt;://baike.baidu.com/view/32676.html
+    -stdin和stdout提供了操作输入数据和输出数据的方法，我们也通常称为IO操作
+.stdin    -标准输入流
+.stdout   -标准输出流
+
+-Buffer类
+.一个用于更好的操作二进制数据的类
+    -我们在操作文件或者网络数据的时候，其实操作的就是二进制的数据流，Node为我们提供了一个更加方便的去操作这种数据了的类Buffer，它是一个全局的类
+.new Buffer(size);
+.new Buffer(array);
+.new Buffer(string,[encoding]);
+let buf = new Buffer(string);
+    buf.length:buffer的bytes大小
+    buf[index]:获取或者设置在指定index索引位置的8位字节内容
+    buf.write(string,[offset],[length],[encoding]):根据参数offset偏移量和指定的encoing编码方式，将参数string数据写入buffer
+    buf.toString([encoding],[start],[end]):根据encoding参数(默认是'utf8')返回一个解码的string类型
+    buf.toJSON():返回一个JSON表示的Buffer实例。JSON。stringify将会默认调用来字符串序列化这个Buffer实例
+
+-File System -文件系统模块 -require('fs')
+.该模块是核心模块，需要使用require导入后使用
+.该模块提欧共了操作文件的一些API
+.fs.open(path,flags,[mode],callback)
+    -异步版的打开一个文件
+    -callback:回调 
+        -err 打开文件失败的信息保存在err中，成功就是null
+        -fd  被打开文件的标识
+.fs.openSync(path,flags,[mode])
+    -fs.open()的同步版
+.fs.read(fd,buffer,offset,length,position,callback)
+    -从指定的文档标识符fd读取文件数据。
+.fs.readSync(fd,buffer,offset,length,position)
+    -fs.read函数的同步版本。返回bytesRead的个数
+.fs.writeFile(path,string,callback);
+    -写入内容到文件内，如果没有文件就创建一个文件
+.fs.appendFile(path,string,callback)
+    -将内容追加到文件内部，没有明文件就创建一个文件
+.fs.readFile(path,[options],callback)
+    -异步读取一个文件的全部内容
+.fs.readFileSync(path,[options])
+    -fs.readFile的同步版本
+.fs.exists(path,callback)
+    -检查指定路径的文件或者目录是否存在
+.fs.unlink(path,callback)
+    -删除一个文件
+.fs.rename(oldName,newName,callback)
+    -对文件进行重命名
+.fs.stat(path,callback)
+    -文件的信息
+.fs.watch(path,callback)
+    -对文件进行监听，当发生改变的时候触发回调
+.fs.mkdir(path,[mode],callback)
+    -创建文件夹
+.fs.readdir(path,callback)
+    -读取文件夹
+.fs.rmdir(path,callback)
+    -删除文件夹
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

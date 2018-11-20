@@ -202,7 +202,8 @@ Promise
     -Promise.all()
     -Promise.resoLve()
 
-
+Babel转码器
+创建.babelrc文件：cmd进入根目录，输入   type null>.babelrc  ，回车即可！
 
 
 

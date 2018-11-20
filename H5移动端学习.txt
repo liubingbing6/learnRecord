@@ -95,9 +95,10 @@ rem(根节点)计算
 1、Box-flex 定义盒子的弹性空间
 	flex:flex-grow:1(子元素添加)
 	box:-webkit-box-flex:1
+
 子元素的尺寸=盒子的尺寸*子元素的box-flex属性值 / 所有子元素的box-flex属性值的和
 
-2、box-ordinal-group 设置元素的具体位置
+2、box-ordinal-group 设置元素的具体位置(子元素上面设置)
 	flex:order:1(数值越小越靠前)
 	box:-webkit-box-ordinal-group
 
