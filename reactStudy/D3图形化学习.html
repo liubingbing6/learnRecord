@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #container{
+            background: #ddd;
+            margin:30px auto;
+            width:500px;
+            height:250px;
+        }
+    </style>
+</head>
+<body>
+<!--D3学习-->
+    <div id="container">
+    </div>
+</body>
+
+<script src="./script/d3.js"></script>
+<script>
+let svg = d3.select("#container")
+    .append('svg')
+    .attr('width',500).attr('height',250)
+d3.select('svg')
+    .append('g')
+    .attr('transform','translate(50,30)')
+</script>
+</html>

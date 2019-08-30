@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>
+</head>
+<body>
+    <div id="contener"></div>
+</body>
+<script type="text/babel">
+    class Reservation extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                isGoing : true,
+                numberOfGuests:2
+            }
+        }
+        handleChange(event){
+            const target = event.target;
+            const value = target.type === 'checkbox'?target.checked:target.value;
+            const name = target.name;
+            this.setState({
+                [name]:value
+            })
+        }
+        handleSubmit(e){
+            console.log(this.state.isGoing,this.state.numberOfGuests);
+            e.preventDefault();
+        }
+        render(){
+            return(
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        IS going:
+                        <label htmlFor="">
+                            <input type="checkbox"
+                                name="isGoing"
+                               checked={this.state.isGoing}
+                               onChange={this.handleChange.bind(this)}
+                            />
+                        </label>
+                        <br/>
+                        <label htmlFor="">
+                            Number of guests:
+                            <input type="number"
+                                name="numberOfGuests"
+                               value={this.state.numberOfGuests}
+                               onChange={this.handleChange.bind(this)}
+                            />
+                        </label>
+                        <input type="submit" value="Submit"/>
+                    </form>
+            )
+        }
+    }
+    ReactDOM.render(<Reservation/>,document.getElementById('contener'));
+</script>
+</html>

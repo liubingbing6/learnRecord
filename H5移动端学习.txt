@@ -85,6 +85,7 @@ rem(根节点)计算
 	end 所有子元素在盒子右侧显示，富裕空间在左侧
 	center 所有子元素居中
 	justify 富裕空间在子元素之间平均分布
+
 2、box-align 侧轴方向方向富裕的空间管理
 	flex:align-items:flex-start / flex-end / center / baseline（根据侧轴方向上文字的基线对齐）
 	box:-webkit-box-align:
@@ -114,13 +115,68 @@ CSS3响应式布局
     写在样式表头部
 	@import url(01.css)(max-width:767px);
 
+
+网格布局
+
+    网格容器：Grid Container
+	元素应用display:grid;它是其所有网格项的父元素
+    
+    网格项：Grid Item
+	网格容器的子元素，下面的item元素是网格项
+
+    网格线：Grid Line
+	组成网格项的分界线
+   
+    网格轨道：Grid Track
+	两个相邻的网格线之间为网格轨道
+
+    网格单元：Grid Cell
+	两个相邻的列网格线和两个相邻的行网格线组成的网格单元
+
+    网格区域：Grid Area
+	四个网格线包围的总空间
+
+    单位：fr
+	剩余空间分配数。用于在一系列长度值中分配剩余空间，如果多个已指定了多个部分，则剩下的空间根据各自的数字按照比例分配
+
+注意：
+    当元素设置了网格布局，column、float、clear、vertical-align属性 无效
+
+    grid-template
+    例：{
+	    grid-template-columns:40px 15% auto;
+	    grid-template-rows:25% auto 100px;
+	}
+    grid-column-gap / grid-row-gap
+    网格线的长度，可理解为列与列之间的间隙，行与行之间的间隙
+
+    justify-items：start / end / center / stretch
+    沿着行轴对齐网格内的内容
+
+    align-items:start /end /center /stretch
+    沿着列轴对齐网格内的内容
+
+    justify-content：start / end / center / space-between
+    设置网格容器内的网格沿着行轴对齐网格的对齐方式
+
+
+
+
+
+
+
+
+
+
+
+
 移动端事件一:
 注意：在移动端开发的时候，浏览器的模拟器时好时坏，一般不用on的方式绑定事件函数，要用事件绑定的方式(addEventListener)。
 	pc上的事件比移动端的事件略慢，大概是在300ms左右
 
 	ontouchastart 手指触摸
 	ontouchmove 手指移动
-	ontouchend 手指离开
+	ontouchend 手指离开(抬起)
 
 移动端的点透：
     当上层元素发生点击的时候，下层元素也有点击(焦点)特性，在300ms之后，如果上层元素消失或者隐藏，目标点就会"漂移"到下层元素身上，就会触发点击行为。
@@ -138,36 +194,68 @@ document.addEventListener('touchstart',function(ev){
 	6、也阻止了焦点元素的焦点行为（阻止其冒泡可以解决问题）
 
 当给某个元素加上了事件绑定函数之后，事件函数默认的第一个参数就是事件对象
-	事件对象：当用户在浏览器下触发了某个行为，事件对象会记录用户操作时一些细节信息。
+
+事件对象：当用户在浏览器下触发了某个行为，事件对象会记录用户操作时一些细节信息。
 
 touches 当前位于屏幕上的所有手指的一个列表
 targetTouches 位于当前DOM元素上的手指的一个列表
 changedTouches 涉及当前事件的手指的一个列表
+例：
+var dom = document.getElementById('box');
+dom.addEventListener('touchstart',function(ev){
+	console.log(ev.touches.length);
+})；
 
+如果采用百分比布局：宽度采用百分比，高度具体高度
+
+多指操作(当手指触摸元素，当前屏幕上有两根手指或两根以上的手指操作)
+
+事件：gesturestart、gestureend、gesturechange
+
+当我们触发了getsturestart时，然后抬起手指，这时屏幕上的手指个数少于2个或者当前元素没有手指了，就会触发gestureend;
+
+e.scale:缩放比，change时两根手指间距离和start时两根手指之间的距离比值
+e.rotation:旋转差，change时两根手指形成的直线和start时两根手指形成的直线，中间形成的夹角
 移动端默认样式清除：
-body,
-body *{
+html{
+	height:100%;
+}
+body{
 	-webkit-text-size-adjust:100%;
-}
-body,
-h1{
-	margin:0;
-	font-family:Helvetica;
-}
-ul{
+	height:100%;
 	margin:0;
 	padding:0;
 	list-style:none;
 }
-strong{
-	font-weight:normal;
+body *{
+	-webkit-user-select:none;
+	font-family:Helvetica;
 }
-a,
-input,
-button{
-	-webkit-tap-highlight-color:rgba(0,0,0,0);
+a,input,button,optgroup,select,textarea{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);//在移动端点击之后 会出现“暗色的”背景，因此加上这一条
 	-webkit-appearance:none;
+	border-radius:0
 }
 a{
 	text-decoration:none;
 }
+ul{
+	list-style:none;
+}
+img{
+	vertical-align:top;
+}
+webkit表单输入框placeholder的颜色值改变
+　　如果想要默认的颜色显示红色，代码如下： input::-webkit-input-placeholder{color:red}
+
+　　如果想要用户点击变为蓝色，代码如下： input:focus::-webkit-input-placeholder{color:blue}
+
+
+
+
+
+
+
+
+
+

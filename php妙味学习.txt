@@ -1,0 +1,75 @@
+PHP：脚本语言、适用web开发、可嵌入HTML中
+交互流程：HTML发送请求、服务器找到文件、PHP解析器解析文件生成静态文件、服务器返回文件、HTML页面展示
+开发环境安装配置：
+	web服务器：Apache/Nginx等等
+	数据库：MySql
+	PHP:php5.6
+集成环境（PHP版本为5.6）
+windows下：WAMP或者XAMPP
+Mac下：XAMPP
+
+MySql数据库管理工具推荐
+windows下：MySql-Front
+Mac下：Sequel Pro
+浏览器页面级别的：PhpMyAdmin
+
+数组：
+    两种定义方式array(),[]
+unset(array[key]);
+
+变量作用域：局部变量，global,static
+
+const定义常量
+类内调用定义的常量名称：self::常量名称
+类内调用方法（非静态）:$this->函数名（...）
+
+构造方法：
+	对象被创建时自动调用的方法
+	用来完成类初始化的工作
+function __construct(){}
+
+继承：
+    子类只能继承一个父类
+    子类继承父类所有公有和受保护的属性和方法
+    除非子类覆盖了父类的方法，被继承的方法都会保留其原有功能
+
+数据库设计范式
+    第一范式    无重复的列
+    第二范式    属性完全依赖于主键
+    第三范式    属性不能依赖于主属性(非主键列必须直接依赖于主键，不能存在传递依赖)
+索引应用
+    INDEX 索引    性能优化
+    UNIQUE索引    避免数据出现重复
+    PRIMARY索引   标识行
+主键
+ 值唯一
+ 不允许NULL值
+ 可以在创建表时定义，也可以在创建表之后定义
+
+SELECT * FROM table LIMIT start(起始数),count(查询数)
+
+PHP-MySQL
+连接方式
+$con = mysql_connect();
+$con = mysqli_connect();
+$con = new mysql();
+$con = new pdo();
+
+关闭连接方式
+mysql_close($con);
+mysqli_close($con);
+$con->close();
+$con = null;
+
+PHP允许单个域名跨域访问
+只需在请求服务器端文件头部添加如下代码：
+header('Access-Control-Allow-Origin:客户端地址');
+例如：
+header('Access-Control-Allow-Origin:http://client.runoob.com');
+
+
+
+
+
+
+

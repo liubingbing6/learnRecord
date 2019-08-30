@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #app{
+            width:800px;
+            margin:30px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <custom>
+            <h3 slot="m1">我是默认的</h3>
+            <h3 slot="m2">我是默认的2</h3>
+        </custom>
+
+    </div>
+</body>
+
+<script>
+
+    Vue.component('custom',{
+        data:function(){
+            return {
+                message:'child'
+            }
+        },
+        template:`<div>
+            <slot name="m1">我是模板值1</slot>
+            <slot name="m2">我是模板值2</slot>
+</div>`
+    });
+
+    new Vue({
+        el:"#app",
+        data:{
+            message:'father'
+        }
+    })
+</script>
+</html>

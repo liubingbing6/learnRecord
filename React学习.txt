@@ -1,0 +1,16 @@
+初始化=》运行中=》销毁
+
+初始化：
+	getDefaultProps:只调用一次，实例之间共享引用
+	getInitialState：初始化每个实例的特有的状态
+	componentWillMount：render之前最后一次修改状态的机会
+	render:只能访问this.props和this.state,只有一个顶层组件，不允许修改状态和DOM输出
+	componentDidMount:成功render并渲染完成真实DOM之后触发，可以修改DOM
+
+运行中：componentWillReceiveProps：父组件修改属性触发，可以修改新属性、修改状态
+	shouldComponentUpdate：返回false会阻止render调用
+	componentWillUpdate：不能修改属性和状态
+	render：只能访问this.props和this.state,只有一个顶层组件，不允许修改状态和DOM输出
+	componentDidUpdate：可以修改DOM
+
+销毁：componentWillUnmount：在删除组件之前进行清理操作。比如计时器和事件监听器

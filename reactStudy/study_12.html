@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="contener">
+
+    </div>
+</body>
+<script>
+    let data = [{
+        dept_id: "5f16f6ed23aff54b9765185d0236c254",
+        level_id: 1,
+        name: "1",
+        child:[
+            {
+                dept_id: "86459ea102a311ab8c4b2fa1adb5ecbd",
+                level_id: 2,
+                name: "2",
+                child:[
+                    {
+                        dept_id: "86459ea102a311ab8c4b2fa1adb5ecbd",
+                        level_id: 3,
+                        name: "2.1"
+                    }]
+            },
+            {
+                dept_id: "86459ea102a311ab8c4b2fa1adb5ecbd",
+                level_id: 3,
+                name: "3",
+                child:[
+                    {
+                        dept_id: "86459ea102a311ab8c4b2fa1adb5ecbd",
+                        level_id: 3,
+                        name: "3.1",
+                        child:[
+                            {
+                                dept_id: "86459ea102a311ab8c4b2fa1adb5ecbd",
+                                level_id: 3,
+                                name: "3.1.1",
+                                child:[
+                                    {
+                                        dept_id: "86459ea102a311ab8c4b2fa1adb5ecbd",
+                                        level_id: 3,
+                                        name: "3.1.1.1"
+                                    }
+                                ]
+                            },
+                        ]
+                    },
+                ]
+            },
+        ]
+    }];
+/*
+解决思路：
+* 若数据格式不一致，先转换数据格式为一致。再设计层级嵌套，先写出第一层普通模板，再递归处理
+* */
+//$('#contener').html(iter(data));
+
+
+function iter(data) {
+    let str = `<ul>`;
+    data.forEach(function (item) {
+        str += `<li>`;
+        if(item.child){
+            str += `<div>${item.name}</div>`;
+            str += iter(item.child);
+            str += `</li>`;
+        }else{
+            str += `<div>${item.name}</div></li>`;
+        }
+    });
+    str += `</ul>`;
+    return str;
+}
+test();
+function test(){
+    let str = '1 2 3 4 4 3 2 5 6 7 5 4';
+    console.log([...new Set([1,2,3,4,4,3,2,5,6,7,5,4])]);
+    console.log(Array.from(new Set([1,2,3,4,4,3,2,5,6,7,5,4])));
+    console.log(Array.from(new Set(str.split(' '))));
+}
+
+</script>
+</html>

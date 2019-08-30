@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style media="screen">
+    body{
+        color: #552100;
+    }
+    .mask{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: url(img/bg.jpg) no-repeat;
+        background-size: cover;
+        filter: blur(5px);
+        z-index: -1;
+    }
+    .popup{
+        position: absolute;
+        width: 520px;
+        height: 640px;
+        background: rgba(255,255,255,.8);
+        left: 50%;
+        top: 50%;
+        margin-left: -260px;
+        margin-top: -320px;
+        border: 1px solid #fff;
+        padding:5px;
+        background-clip: content-box;
+        border-radius: 10px;
+    }
+    .title{
+        text-align: center;
+        font-size: 28px;
+        color: #362e2b;
+        display: flex;
+    }
+    .title .tip{
+        padding: 0 20px;
+    }
+    .title .line{
+        flex: 1;
+        background:linear-gradient(
+                                    to bottom,
+                                    rgba(0,0,0,0) 49%,
+                                    #000 49%,
+                                    #000 51%,
+                                    rgba(0,0,0,0) 51%
+                                    );
+    }
+    table{
+        width: 100%;
+    }
+    input,select,textarea{
+        padding:0;
+        outline: none;
+    }
+    .form_left{
+        text-align: right;
+        font-size: 18px;
+        width: 150px;
+    }
+    .form_right input[type="text"],
+    .form_right input[type="password"]{
+        height: 40px;
+        width: 230px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #999;
+        text-indent: 20px;
+        transition: .3s;
+    }
+    .form_right input[type="text"]:hover,
+    .form_right input[type="password"]:hover{
+        border-color:#888;
+    }
+    .popup tr{
+        height: 65px;
+    }
+    .form_right input[type="textarea"]{
+        width: 254px;
+        height: 100px;
+    }
+    .btn input{
+        width:100px;
+        height: 30px;
+        background: #362e2b;
+        color: #fff;
+    }
+    tr.des{
+        height: 120px;
+    }
+    .form_right input[type="text"]:focus,
+    .form_right input[type="password"]:focus{
+        border-bottom-color: #562d2b;
+    }
+    .form_right input[type="text"]:focus~.move:after{
+        transform: translateX(220px);
+    }
+    .form_right input[type="password"]::-webkit-input-placeholder,
+    .form_right input[type="text"]::-webkit-input-placeholder
+    {
+        transition: .5s;
+        font-size: 14px;
+        transform-origin: top left;
+    }
+    .form_right input[type="password"]:focus::-webkit-input-placeholder,
+    .form_right input[type="text"]:focus::-webkit-input-placeholder{
+        transform: scale(.8) translateY(-15px);
+    }
+    input[name="gender"]{
+        display: none;
+    }
+    .sex{
+        padding-left: 30px;
+        position: relative;
+    }
+    .sex:before{
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        position:absolute;
+        right: 22px;
+        top: 1px;
+        padding:5px;
+    }
+    input[name="gender"]:checked+label:before{
+        background: #362e2b;
+        background-clip: content-box;
+    }
+    input[name="food"]{
+        display: none;
+    }
+    .menu{
+        width: 15px;
+        height: 15px;
+        border: 1px solid #000;
+        border-radius: 3px;
+        display: inline-block;
+        margin-right: 5px;
+        position: relative;
+    }
+    input[name="food"]:checked+ .menu:after{
+        content: '';
+        width: 2px;
+        height: 7px;
+        background: black;
+        display: inline-block;
+        transform: rotate(135deg);
+        position: absolute;
+        left:4px;
+        top: 10px;
+    }
+    input[name="food"]:checked+ .menu:before{
+        content: '';
+        width: 2px;
+        height: 15px;
+        background: black;
+        display: inline-block;
+        transform: rotate(20deg);
+        position: absolute;
+        left:10px;
+        top: 2px;
+    }
+</style>
+</head>
+<body>
+    <div class="mask"></div>
+    <section class="popup">
+        <h2 class="title">
+            <span class="line">
+            </span><span class="tip">用户注册</span>
+            <span class="line"></span>
+        </h2>
+        <form action="#">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="form_left">姓名：</td>
+                        <td class="form_right">
+                            <input type="text" name="" placeholder="请输入4-12个字符">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_left">密码：</td>
+                        <td class="form_right">
+                            <input type="password" name="" placeholder="请输入密码">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_left">验证密码：</td>
+                        <td class="form_right"><input type="password" name="" placeholder="请再次输入密码"></td>
+                    </tr>
+                    <tr>
+                        <td class="form_left">性别：</td>
+                        <td class="form_right">
+                            <input id="man" type="radio" name="gender" checked value="男">
+                            <label class="sex" for="man">男</label>
+                            <input id="femal" type="radio" name="gender" value="女">
+                            <label class="sex" for="femal">女</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_left">爱好菜系选择：</td>
+                        <td class="form_right">
+                            <input id="food_c" type="checkbox" name="food" value="川菜">
+                            <label class="menu" for="food_c"></label>川菜
+                            <input id="food_y" type="checkbox" name="food" value="粤菜">
+                            <label class="menu" for="food_y"></label>粤菜
+                            <input id="food_x" type="checkbox" name="food" value="湘菜">
+                            <label class="menu" for="food_x"></label>湘菜
+                            <input id="food_l" type="checkbox" name="food" value="卤菜">
+                            <label class="menu" for="food_l"></label>卤菜
+                            <input id="food_h" type="checkbox" name="food" value="徽菜">
+                            <label class="menu" for="food_h"></label>徽菜
+                            <input id="food_s" type="checkbox" name="food" value="苏菜">
+                            <label class="menu" for="food_s"></label>苏菜
+                            <input id="food_z" type="checkbox" name="food" value="浙菜">
+                            <label class="menu" for="food_z"></label>浙菜
+                        </td>
+                    </tr>
+                    <tr class="des">
+                        <td class="form_left">个人简介</td>
+                        <td class="form_right">
+                            <input type="textarea">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_left"></td>
+                        <td class="form_right btn">
+                            <input type="submit" value="提交">
+                            <input type="reset" value="重置">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </section>
+</body>
+</html>

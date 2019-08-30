@@ -1,0 +1,127 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        html{
+            height:100%;
+        }
+        body{
+            margin: 0;
+            height: 100%;
+        }
+        h2{
+            margin: 0;
+        }
+        #mask{
+            height:100%;
+            background: url(img/bg.jpg);
+            background-size: cover;
+            filter:blur(5px);
+        }
+        .drog{
+            width:520px;
+            height:640px;
+            background: rgba(255,255,255,.8);
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -260px;
+            margin-top: -320px;
+            border:1px solid #fff;
+            background-clip: content-box;
+            padding:10px;
+            border-radius: 10px;
+        }
+        .title{
+            text-align: center;
+            font-size: 28px;
+            margin:24px 0;
+            display: flex;
+        }
+        .title .title_name{
+            padding:0 20px;
+        }
+        .title .line{
+            background: linear-gradient(
+                    transparent 49%,
+                    #000 49%,
+                    #000 51%,
+                    transparent 51%
+            );
+            flex: 1;
+        }
+        table{
+            width:100%;
+        }
+        .td_left{
+            width:150px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+  <div id="mask">
+
+  </div>
+  <div class="drog">
+      <h2 class="title">
+          <span class="line"></span>
+          <span class="title_name">用户注册用户注册</span>
+          <span class="line"></span>
+      </h2>
+      <table>
+          <tbody>
+            <tr>
+                <td class="td_left">姓名：</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="td_left">密码：</td>
+                <td><input type="password"></td>
+            </tr>
+            <tr>
+                <td class="td_left">确认密码：</td>
+                <td><input type="password"></td>
+            </tr>
+            <tr>
+                <td class="td_left">性别：</td>
+                <td>
+                    <input type="radio" name="gender"> 男
+                    <input type="radio" name="gender"> 女
+                </td>
+            </tr>
+            <tr>
+                <td class="td_left">喜爱的菜系：</td>
+                <td>
+                    <input type="checkbox" name="food"> 川菜
+                    <input type="checkbox" name="food"> 湘菜
+                    <input type="checkbox" name="food"> 粤菜
+                    <input type="checkbox" name="food"> 浙菜
+                    <input type="checkbox" name="food"> 苏菜
+                </td>
+            </tr>
+            <tr>
+                <td class="td_left">个人简介：</td>
+                <td>
+                    <textarea></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_left"></td>
+                <td>
+                    <input type="submit">
+                    <input type="reset">
+                </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+<!--
+    flex : 宽度
+
+    根据当前 富裕宽度（剩余可利用空间）/flex总和  =  1 取其中一份
+
+-->
+</body>
+</html>

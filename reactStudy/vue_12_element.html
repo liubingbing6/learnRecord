@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        #app{margin:30px auto;}
+        .el-carousel__item h3 {
+            color: #475669;
+            font-size: 14px;
+            opacity: 0.75;
+            line-height: 200px;
+            margin: 0;
+        }
+
+        .el-carousel__item:nth-child(2n) {
+            background-color: #99a9bf;
+        }
+
+        .el-carousel__item:nth-child(2n+1) {
+            background-color: #d3dce6;
+        }
+        .transition-box {
+            margin-bottom: 10px;
+            width: 200px;
+            height: 100px;
+            border-radius: 4px;
+            background-color: #409EFF;
+            text-align: center;
+            color: #fff;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <template>
+        <el-radio v-model="radio" label="1">备选项</el-radio>
+        <el-radio v-model="radio" label="2">备选项</el-radio>
+    </template>
+    <el-time-select
+            v-model="value1"
+            :picker-options="{
+                start: '08:30',
+                step: '00:15',
+                end: '18:30'
+              }"
+            placeholder="选择时间">
+    </el-time-select>
+    <div class="block">
+        <span class="demonstration">默认</span>
+        <el-date-picker
+                v-model="value2"
+                type="date"
+                placeholder="选择日期"
+                :picker-option = pickerOptions1
+        >
+        </el-date-picker>
+    </div>
+    <button @click="getVal">按钮</button>
+    <template>
+        <el-carousel :interval="4000" type="card" height="200px">
+            <el-carousel-item v-for="item in 6" :key="item">
+                <h3>{{ item }}</h3>
+            </el-carousel-item>
+        </el-carousel>
+    </template>
+    <el-button @click="visible = true">Button</el-button>
+    <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Try Element</p>
+    </el-dialog>
+
+    <template>
+        <div>
+            <el-button @click="show = !show">Click Me</el-button>
+
+            <div style="display: flex; margin-top: 20px; height: 100px;">
+                <transition name="el-fade-in-linear">
+                    <div v-show="show" class="transition-box">.el-fade-in-linear</div>
+                </transition>
+                <transition name="el-fade-in">
+                    <div v-show="show" class="transition-box">.el-fade-in</div>
+                </transition>
+                <transition name="el-zoom-in-center">
+                    <div v-show="show" class="transition-box">.el-fade-in</div>
+                </transition>
+            </div>
+        </div>
+    </template>
+    <template>
+        <div>
+            <el-button @click="show3 = !show3">Click Me</el-button>
+
+            <div style="display: flex; margin-top: 20px; height: 200px;">
+                <el-collapse-transition>
+                    <div v-show="show3">
+                        <div class="transition-box">el-collapse-transition</div>
+                        <div class="transition-box">el-collapse-transition</div>
+                    </div>
+                </el-collapse-transition>
+            </div>
+        </div>
+    </template>
+    <template>
+        <el-select v-model="sel_val" placeholder="请选择" @change="select_change">
+            <el-option
+                    v-for="item,key in options"
+                    :key="key"
+                    :value="item"
+            >
+            </el-option>
+        </el-select>
+    </template>
+
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%">
+            <el-table-column
+                    prop="date"
+                    label="日期"
+                    width="150">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="province"
+                    label="省份"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="city"
+                    label="市区"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="地址"
+                    width="300">
+            </el-table-column>
+  <!--          <el-table-column
+                    prop="zip"
+                    label="邮编"
+                    width="120">
+            </el-table-column>-->
+            <el-table-column
+                    label="积分"
+                    width="200">
+                <template slot-scope="scope">
+                    <el-input placeholder="请输入积分" v-model="scope.row.zip">
+                    </el-input>
+                    <i>天</i>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="操作"
+                    width="100">
+                <template slot-scope="scope">
+                    <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                    <el-button type="text" size="small">编辑</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </template>
+    <el-pagination
+            background
+            :page-size=20
+            layout="prev, pager, next"
+            :total="1000"
+            :current-page="4"
+            @current-change="sizeChange"
+    >
+    </el-pagination>
+    <el-progress type="circle" :percentage="percent" color="#8e71c7"></el-progress>
+</div>
+<script>
+    let tableData = [{
+        date: '2016-05-02',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333
+    }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1517 弄',
+        zip: 200333
+    }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1519 弄',
+        zip: 200333
+    }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1516 弄',
+        zip: 200333
+    }];
+
+    let vm = new Vue({
+        el:'#app',
+        data () {
+            return {
+                tableData,
+                options: [ '黄金糕', '双皮奶','蚵仔煎','龙须面','北京烤鸭'],
+                sel_val: '蚵仔煎',
+                radio: '1',
+                value1: '',
+                percent:80,
+                value2: '',
+                show:true,
+                show3:true,
+                visible: false,
+                pickerOptions1: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                }
+            };
+        },
+        methods:{
+            getVal(){
+                console.log(this.radio);
+                console.log(this.value2);
+            },
+            select_change(val){
+                console.log(val);
+            },
+            sizeChange(val){
+                console.log(val);
+            }
+        }
+    });
+</script>
+</body>
+</html>

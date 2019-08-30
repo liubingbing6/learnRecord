@@ -1,0 +1,51 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        input{
+            outline: none;
+        }
+        .input1{
+            height:50px;
+            border:none;
+            border-bottom:2px solid #000;
+            transition: .5s;
+        }
+        .input1:focus{
+            border-bottom-color: red;
+        }
+        .input1::-webkit-input-placeholder{
+            transition: .5s;
+            transform-origin: left top;
+        }
+        .input1::-moz-placeholder{
+            transition: .5s;
+            transform-origin: left top;
+        }
+        .input1:-ms-input-placeholder{
+            transition: .5s;
+            transform-origin: left top;
+        }
+        .input1:focus::-webkit-input-placeholder{
+            transform: scale(0.7) translateY(-10px);
+        }
+        .input1:focus::-moz-placeholder{
+            transform: scale(0.7) translateY(-10px);
+        }
+        .input1:focus:-ms-input-placeholder{
+            transform: scale(0.7) translateY(-10px);
+        }
+    </style>
+</head>
+<body>
+<input class="input1" type="text" placeholder="4-12个字符">
+<!--
+    用于修改placeholder的样式
+    ::-webkit-input-placeholder webkit
+    ::-moz-placeholder 新版火狐
+    :-ms-input-placeholder IE10+
+
+-->
+</body>
+</html>

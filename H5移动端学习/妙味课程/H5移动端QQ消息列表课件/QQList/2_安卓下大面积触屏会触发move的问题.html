@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+#box {
+	width: 300px;
+	height: 300px;
+	background: red;
+	color: #fff;
+	font-size: 20px;
+	word-break: break-all;
+}	
+</style>
+</head>
+<body>
+<div id="box">
+	<p></p>
+	<p></p>
+</div>
+<script type="text/javascript">
+document.addEventListener('touchstart', function(e) {
+	e.preventDefault();
+});
+(function(){
+	var box = document.querySelector('#box');
+	var child = box.children;
+	var lastPoint = {};
+	box.addEventListener('touchstart', function(e) {
+		var touch = e.changedTouches[0];
+		lastPoint = {
+			x: Math.round(touch.pageX),
+			y: Math.round(touch.pageY)
+		}
+		child[0].innerHTML = "x:"+lastPoint.x+"<br/>y:"+lastPoint.y;
+	});
+	box.addEventListener('touchmove', function(e) {
+		var touch = e.changedTouches[0];
+		var nowPoint = {
+			x: Math.round(touch.pageX),
+			y: Math.round(touch.pageY)
+		}
+		if(lastPoint.x == nowPoint.x && lastPoint.y == nowPoint.y){
+			return;
+		}
+		child[1].innerHTML = "x:"+nowPoint.x+"<br/>y:"+nowPoint.y;
+		
+		lastPoint.x = nowPoint.x;
+		lastPoint.y = nowPoint.y;
+		
+	});
+})();	
+</script>
+</body>
+</html>

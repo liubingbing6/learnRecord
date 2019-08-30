@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #app{
+            width:800px;
+            margin:30px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <constorm-select btn="查询" :list="list1"></constorm-select>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    Vue.component('constorm-select',{
+        data:function () {
+            return {
+                selectShow:true,
+                val:''
+            }
+        },
+        props:['btn','list'],
+        template:`<section>
+                <div>
+                    <div>
+                        <input type="text" :value="val">
+                        <input type="button" :value="btn">
+                        <span></span>
+                    </div>
+                </div>
+                <select-list
+                v-show="selectShow"
+                :list="list"
+                v-on:receive="liChangeItem"
+                ></select-list>`,
+        methods:{
+                liChangeItem:function (value) {
+                    this.val = value;
+                }
+            },
+        });
+    Vue.component('select-list',{
+        props:['list'],
+        template:`<ul class="list">
+                    <li v-for="item in list" v-on:click="getLiValue(item)">{{item}}</li>
+                  <!--  <li>html+css</li>
+                    <li>html5+css</li>
+                    <li>javascript</li>
+                    <li>nodeJs</li>-->
+                </ul>`,
+        methods:{
+            getLiValue:function (item) {
+                //在子组件有交互
+                //告知父级，改变val的值，需要触发一个自定义事件
+                this.$emit('receive',item);
+            }
+        }
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list1:['北京','上海','广州','深圳']
+        }
+    })
+</script>
+</html>

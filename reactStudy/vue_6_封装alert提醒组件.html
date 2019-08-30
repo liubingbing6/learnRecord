@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #app{
+            width:800px;
+            margin:30px auto;
+            border:1px solid #999;
+        }
+        #app i{
+            display: inline-block;
+        }
+        .m-alert-info{
+            background: deepskyblue;
+        }
+        .m-alert-success{
+            background: #ab12df;
+        }
+        .m-alert-error{
+            background: red;
+        }
+        .m-alert-warn{
+            background: #23ab89;
+        }
+        .m-icon-info{
+            background: #fff;
+            width:30px;
+            height:30px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .m-icon-success{
+            background: #ab1345;
+            width:30px;
+            height:30px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .m-icon-error{
+            background: #a34532;
+            width:30px;
+            height:30px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .m-icon-warn{
+            background: #21ab45;
+            width:30px;
+            height:30px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <custom-alert
+                type="warn"
+                title="这里有一个信息提示"
+                v-on:close-btn="closeHandle"
+        ></custom-alert>
+        <custom-alert
+                type="warn"
+                title="这里有一个信息提示"
+                :closeable="false"
+        ></custom-alert>
+    </div>
+</body>
+
+<script>
+    /*
+    alert框有四种状态：
+        info success error warning
+    设置props:
+        type:提醒框类型 默认为info
+        title:提示信息‘这里有一个信息提示'
+        closeable:是否禁用关闭    默认false
+        style:设置提醒框样式    默认{}
+    模板定制：
+        slot:为icomTmp    定制icon模板
+        slot:为titleTmp    定制提示信息结构
+    监控状态变化：
+        事件名：close-click    点击关闭X触发
+    * */
+    Vue.component('custom-alert',{
+        props:{
+            type:{
+                type:String,
+                default:'info'
+            },
+            title:{
+                type:String
+            },
+            closeable:{
+                type:Boolean,
+                default:true
+            }
+        },
+      /*  data:function () {
+            return {
+                type:this.info,
+                title:this.title
+            }
+        },*/
+        computed:{
+            classes:function () {
+                return  `m-alert-${this.type}`;
+            },
+            showIcon:function () {
+                return  `m-icon-${this.type}`;
+            }
+        },
+        template:`<div class="m-alert" :class="classes">
+            <i class="m-icon" :class="showIcon"></i>
+            <div class="m-content">
+                <span class="m-message">{{title}}</span>
+                <i class="m-closebtn m-cion close" v-if="closeable" v-on:click="closeHandle">X</i>
+            </div>
+        </div>`,
+        methods:{
+            closeHandle:function () {
+                this.$emit('close-btn');
+            }
+        }
+    });
+    new Vue({
+        el:'#app',
+        methods:{
+            closeHandle:function () {
+                console.log('afad');
+            }
+        }
+    })
+
+</script>
+</html>

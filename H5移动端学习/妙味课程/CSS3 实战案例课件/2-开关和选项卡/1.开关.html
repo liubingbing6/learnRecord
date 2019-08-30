@@ -1,0 +1,46 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        .wrap{
+            width:42px;
+            height:20px;
+        }
+        input{
+            display: none;
+        }
+        label{
+            display: block;
+            border:1px solid #888;
+            height:20px;
+            border-radius: 15px;
+            transition: .3s;
+        }
+        label span{
+            display: block;
+            width:20px;
+            height:20px;
+            box-shadow: 1px 1px 1px #ccc;
+            border-radius: 50%;
+            background: #fff;
+            transition: .3s;
+        }
+        input:checked+label{
+            background: #14e014;
+        }
+        input:checked+label span{
+            transform: translateX(20px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+      <input id="checkbox" type="checkbox">
+      <label for="checkbox">
+          <span></span>
+      </label>
+  </div>
+</body>
+</html>

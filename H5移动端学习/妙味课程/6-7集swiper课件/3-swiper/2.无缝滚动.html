@@ -1,0 +1,68 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        @keyframes move {
+            0%{
+                transform: translateX(0px);
+            }
+            20%{
+                transform: translateX(0px);
+            }
+            25%{
+                transform: translateX(-200px);
+            }
+            45%{
+                transform: translateX(-200px);
+            }
+            50%{
+                transform: translateX(-400px);
+            }
+            70%{
+                transform: translateX(-400px);
+            }
+            75%{
+                transform: translateX(-600px);
+            }
+            100%{
+                transform: translateX(-600px);
+            }
+        }
+        .wrap{
+            width:200px;
+            border:5px solid red;
+            height:134px;
+            overflow: hidden;
+        }
+        img{
+            vertical-align: top;
+            border: none;
+            width:200px;
+            height:134px;
+        }
+        ul{
+            padding: 0;
+            margin:0;
+            list-style: none;
+        }
+        .list{
+            width:400%;
+            animation: move 5s infinite linear;
+        }
+        .list li{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="list">
+            <li><img src="img/banner1.jpg" alt=""></li>
+            <li><img src="img/banner2.jpg" alt=""></li>
+            <li><img src="img/banner3.jpg" alt=""></li>
+            <li><img src="img/banner1.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+</html>

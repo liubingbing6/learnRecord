@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            height:100px;
+        }
+        .l,.m,.r{
+            height:100px;
+        }
+        .l{
+            float: left;
+            width:200px;
+            background: #eee;
+        }
+        .m{
+            background: #409EFF;
+            margin-left:210px;
+            margin-right:110px;
+        }
+        .r{
+            float: right;
+            width:100px;
+            background: #21ab45;
+        }
+    </style>
+</head>
+<body>
+<!--实现三列布局，中间自适应，两边固定宽度-->
+    <div class="container">
+        <div class="l">左边</div>
+        <div class="r">中间</div>
+        <div class="m">中间</div>
+    </div>
+</body>
+
+<script>
+
+</script>
+</html>

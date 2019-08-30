@@ -7,7 +7,8 @@ window.onload = function () {
 		{'src':'4.jpg'},
 		{'src':'5.jpg'},
 		{'src':'6.jpg'}
-	]};
+	]
+};
 
 	window.onscroll = function () {
 		//checkscrollside();

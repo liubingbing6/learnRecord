@@ -190,7 +190,7 @@ Symbol
 
 
 Promise
-是ES6中新增的一步编程解决方案，体现在代码中它就是一个对象，可以通过Promise构造函数实例化
+是ES6中新增的异步编程解决方案，体现在代码中它就是一个对象，可以通过Promise构造函数实例化
 
 -new Promise(callback)  ==>实例的基本使用 Pending(进行中)ResoLved(已完成) Rejected(已失败)
 
@@ -205,10 +205,11 @@ Promise
 Babel转码器
 创建.babelrc文件：cmd进入根目录，输入   type null>.babelrc  ，回车即可！
 
+defer:在外链js上使用，会在其他的js,dom节点加载完成之后 再加载，多个defer的执行按照先后次序
+<script src="" defer></script>
 
 
-
-
+<script src="" type="module"></script>//定义为模块开发，后面默认会有一个defer。模块内部定义的变量是私有的。外部无法直接访问。
 
 
 

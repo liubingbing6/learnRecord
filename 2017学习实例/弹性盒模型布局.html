@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=.5,maximum-scale=1">
+	<script>
+		window.onload = function(){
+			var html = document.documentElement;
+			var hWidth = html.getBoundingClientRect().width;
+			html.style.fontSize = hWidth/15 + 'px';
+		}
+	</script>
+	<style>
+	*{margin: 0;padding: 0}
+	.wrap{
+		display:flex;
+		display:-webkit-box;
+	}
+	.wrap div a{
+		text-decoration:none;
+		color:#666;
+		font-size:0.44rem;
+		line-height:1.04rem;
+		text-align:center;
+		display:block;
+	}
+	.wrap div{
+		width:0px;
+		flex-grow:1;
+		-webkit-box-flex:1;
+	}
+	.wrap div a:before{
+		content:'';
+		display:block;
+		margin:0 auto;	
+		width:1.72rem;
+		height:1.7rem;
+		background-color:#ff4343;
+	}
+	.wrap h1{
+		font-size:0.44rem;	
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div>
+			<a href="javascript:;">天猫</a>
+            <h1>我也是</h1>
+		</div>
+		<div>
+			<a href="javascript:;">聚划算</a>
+		</div>
+		<div>
+			<a href="javascript:;">天猫国际</a>
+		</div>
+		<div>
+			<a href="javascript:;">外卖</a>
+		</div>
+		<div>
+			<a href="javascript:;">天猫超市</a>
+		</div>
+	</div>
+</body>
+</html>

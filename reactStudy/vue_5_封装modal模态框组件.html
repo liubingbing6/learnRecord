@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #app{
+            width:800px;
+            margin:30px auto;
+            border:1px solid #999;
+        }
+        .modal_box{
+            width:360px;
+            margin:30px auto;
+            padding:20px;
+            -webkit-box-shadow:  0 0 4px #666;
+            -moz-box-shadow:  0 0 4px #666;
+            box-shadow:  0 0 4px #666;
+        }
+        .modal-header{
+            height:60px;
+            line-height:60px;
+            width:100%;
+        }
+        .modal-center{
+            width:100%;
+            margin:10px 0;
+        }
+        .modal-footer{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <custom-modal modal-title="提醒">
+            <div slot="modal-center">hahah</div>
+            <div slot="modal-footer">底部信息</div>
+        </custom-modal>
+        <custom-modal modal-title="提醒" v-on:on-ok="ok" v-on:on-cancle="cancle">
+       <!--     <div slot="modal-center">hahah</div>
+            <div slot="modal-footer">底部信息</div>-->
+        </custom-modal>
+
+    </div>
+</body>
+
+<script>
+    /*
+    * 设置props:
+    *   modalTitle  提醒信息  默认是'这是一个默认模态框'
+    * 定制模板：
+    *   slot为modal-center  定制提醒信息模板
+    *   slot为modal-footer  定制底部模板
+    * 监控状态变化：
+    *   事件名on-ok    点击确定触发
+    *   事件名on-cancel点击取消触发
+    * */
+    Vue.component('custom-modal',{
+        props:{
+            modalTitle:{
+                type:String,
+                default:'这是一个默认模态框1'
+            }
+        },
+        data:function(){
+            return {
+                modalTitle : this.modalTitle
+            }
+        },
+        template:`<div class="modal_box">
+            <div class="modal-header">
+                <h4>{{modalTitle}}</h4>
+            </div>
+            <div class="modal-center">
+                <div>
+                    <slot name="modal-center">在这里填写信息</slot>
+                </div>
+                <slot name="modal-footer">
+                    <div class="modal-footer">
+                        <input type="button" value="确定" v-on:click="okHandle" class="btn blue">
+                        <input type="button" value="取消" class="btn" v-on:click="cancleHandle(modalTitle)">
+                    </div>
+                </slot>
+            </div>
+        </div>`,
+        methods:{
+            okHandle:function(){
+                this.$emit('on-ok');
+            },
+            cancleHandle:function (val) {
+                this.$emit('on-cancle',val);
+            }
+        }
+    });
+
+  new Vue({
+      el:'#app',
+      methods:{
+          ok:function () {
+              console.log(123);
+          },
+          cancle:function (val) {
+              console.log('cancle');
+              console.log(val);
+          }
+      }
+  })
+</script>
+</html>

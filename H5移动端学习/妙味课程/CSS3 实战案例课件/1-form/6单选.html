@@ -1,0 +1,31 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        input{
+            display:none;
+        }
+        label:before{
+            content: '';
+            display: inline-block;
+            width:3px;
+            height:3px;
+            /*background: red;*/
+            border:1px solid red;
+            border-radius: 50%;
+            padding:2px;
+        }
+        input:checked+label:before{
+            background: red;
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+<input id="man" type="radio" name="gender" checked>
+<label for="man">男</label>
+<input id="woman" type="radio" name="gender">
+<label for="woman">女</label>
+</body>
+</html>

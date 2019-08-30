@@ -41,6 +41,8 @@ X轴和Y轴位移不等同但类似于photoshop里面的”角度”和”位置。
 
 当box-shadow的属性值水平和垂直都设置为0时，则表示四周都出现阴影
 
+filter:blur(5px)//模糊
+
 1.垂直对齐
 .verticalcenter{
 position: absolute;
@@ -299,3 +301,14 @@ body:before {
 IE８以下浏览器都不支持 opacity css样式，可以使用IE自带的“滤镜”来实现，如下代码：
 filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
 上面代码的作用设置为 70% 的透明
+
+
+
+
+
+
+
+
+
+
+

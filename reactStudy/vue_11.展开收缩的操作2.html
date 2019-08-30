@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        #app{width:800px;margin:30px auto;}
+        mark{margin:0 10px;}
+        nav{margin:10px 0;}
+        ul{list-style:none}
+        ul li>a{display:inline-block;width:40px;height:30px;text-align:center;}
+        .active{background:#ff4343}
+
+        .page{float: left;margin-right:20px;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <section>
+        <div class="page" v-for="item,index in tabData">
+            <h2 @click="changeHandle(index)">{{item.title}}</h2>
+            <ul v-if="item.status">
+                <li v-for="option,j in item.list">
+                    <a href="javascript:;">{{option}}</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<script>
+
+    let tabData = [
+        {
+            title:'新闻',
+            list:['a','b','c','d']
+        },
+        {
+            title:'娱乐',
+            list:['A','B','C','D']
+        },
+        {
+            title:'社会',
+            list:['aa','bb','cc','dd']
+        },
+        {
+            title:'贵阳',
+            list:['洋芋','土豆','地瓜']
+        }
+    ]
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            tabData:tabData,
+            checked:0
+        },
+        created(){
+            this.tabData.forEach(item=>item.status = false);
+            console.log(this.tabData);
+        },
+        computed:{
+          /*  newTabData(){
+                return this.tabData;
+            }*/
+        },
+        methods:{
+            changeHandle(index){
+                /*
+                * 在Vue官网'重塑数组'一节的注意事项中说明：
+                *   1、当你直接设置一个项的索引时，例如： vm.items[indexOfItem] = newValue
+                *   2、当你修改数组的长度时，例如： vm.items.length = newLength
+                * 为了避免第一种情况，以下两种方式将达到像 vm.items[indexOfItem] = newValue 的效果， 同时也将触发状态更新：
+                *   Vue.set(example1.items, indexOfItem, newValue)
+                *   example1.items.splice(indexOfItem, 1, newValue)
+                * 避免第二种情况，使用 splice：
+                *    example1.items.splice(newLength)
+                * */
+                let arr = [...this.tabData];//扩展内容到新的数组
+                arr[index].status = !this.tabData[index].status;
+                this.tabData.splice(index,1,arr[index]);
+            }
+        },
+    });
+</script>
+</body>
+</html>

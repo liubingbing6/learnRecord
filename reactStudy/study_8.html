@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>
+</head>
+<body>
+    <div id="contener"></div>
+</body>
+<script type="text/babel">
+    class NameForm extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {value:''}
+        }
+        handleSubmit(e){
+            e.preventDefault();
+            console.log('A name was submitted:'+ this.state.value);
+        }
+        handleChange(e){
+            this.setState({value:e.target.value});
+        }
+        render(){
+            /*return (
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <label htmlFor="">
+                            Name:
+                            <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
+                        </label>
+                        <input type="submit" value="Submit"/>
+                    </form>
+            );*/
+            /*return (
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <label htmlFor="">
+                            Name:
+                            <textarea value={this.state.value} onChange={this.handleChange.bind(this)}/>
+                        </label>
+                        <input type="submit" value="Submit"/>
+                    </form>
+            );*/
+            return (
+                    <form onSubmit={this.handleSubmit.bind(this)}>
+                        <label htmlFor="">
+                            Pick your favorite La Croix flavor:
+                            <select onChange={this.handleChange.bind(this)} value={this.state.value}>
+                                <option value="grapefruit">Grapefruit</option>
+                                <option value="lime">Lime</option>
+                                <option value="coconut">Coconut</option>
+                                <option value="mango">Mango</option>
+                            </select>
+                        </label>
+                        <input type="submit" value="Submit"/>
+                    </form>
+            );
+        }
+    }
+    ReactDOM.render(<NameForm/>,document.getElementById('contener'));
+</script>
+</html>

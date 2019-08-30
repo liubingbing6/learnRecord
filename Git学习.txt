@@ -6,6 +6,15 @@ git remote add <主机名><网址> //添加远程主机
 git remote rm <主机名> //删除主机
 git remote rename <原主机名><新主机名> //更改远程主机的名字
 
+初始化本地版本库，然后提交到远程版本库的操作
+    touch README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git remote add origin ssh://liubb@git.f5fz.com:29418/AI/ai-talkcontrol.git
+    git push -u origin master
+
+
 Git clone  ==》
 git clone <版本库的网址> //远程克隆一个版本库
 git clone <版本库的网址><本地目录名>

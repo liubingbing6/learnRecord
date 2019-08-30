@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body:before {
+            content: "";
+            position: fixed;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+            -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+            box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+            z-index: 100;
+        }
+
+        #app{
+            width:800px;
+            margin:30px auto;
+            border:1px solid #999;
+        }
+        .color{
+            color:#ff4343;
+        }
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-active {
+            padding-left: 10px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="checkBtn(1)" :class="{color:isColor===1}">我是按钮1</button>
+        <button v-on:click="checkBtn(2)" :class="{color:isColor===2}">我是按钮2</button>
+        <button v-on:click="checkBtn(3)" :class="{color:isColor===3}">我是按钮3</button>
+        <keep-alive>
+            <component :is="current"></component>
+        </keep-alive>
+
+        <button @click="show = !show">
+            Toggle render
+        </button>
+        <transition name="slide-fade">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+</body>
+
+<script>
+
+    var c1 = Vue.component('custom1',{
+        template:`<div @click="changeBg">我是一个窗口</div>`,
+        methods:{
+            changeBg:function (ev) {
+                ev.target.style.background = 'red';
+            }
+        }
+    });
+    var c2 = Vue.component('custom1',{
+        template:`<div>我是二个窗口</div>`,
+    });
+    var c3 = Vue.component('custom1',{
+        template:`<div>我是三个窗口</div>`,
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            current:c1,
+            isColor:1,
+            show:true
+        },
+        methods:{
+            checkBtn:function (index) {
+                switch (index){
+                    case 1:
+                        this.current = c1;
+                        this.isColor=1;
+                        break;
+                    case 2:
+                        this.current = c2;
+                        this.isColor=2;
+                        break;
+                    case 3:
+                        this.current = c3;
+                        this.isColor=3;
+                        break;
+                }
+            }
+        }
+    })
+
+</script>
+</html>

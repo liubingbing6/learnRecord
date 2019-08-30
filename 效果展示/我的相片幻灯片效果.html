@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 <link href="css/animate.css" rel="stylesheet"/>
+    
+<script src="http://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <style>
 *{
 	margin:0;
@@ -63,9 +65,7 @@ img{
     </div>
     <div id="rotateImg"></div>
     	
-    <audio id="audio" preload="auto" src="" autoplay></audio>
-    
-<script src="jquery-1.11.1.js"></script>
+    <audio id="audio" preload="auto" src="music/宋冬野 - 安和桥.mp3" autoplay></audio>
 <script>
 $(function(){
 	var num = 0;
@@ -84,9 +84,9 @@ $(function(){
 	console.log(arr);
 	var arrMusic = ['宋冬野 - 安和桥.mp3','钢琴曲 - 水边的阿狄丽娜.mp3','G.E.M. 邓紫棋 - 泡沫.mp3','G.E.M. 邓紫棋 - 喜欢你.mp3','邓丽君 - 在水一方.mp3','曲婉婷 - 没有什么不同.mp3'];
 	var oaudio = document.getElementById('audio');
-	var musicNum = 0;
-	$('#audio').attr('src','music/'+arrMusic[musicNum]);
-	musicLoop();
+	var musicNum =0;
+	//$('#audio').attr('src','music/'+arrMusic[musicNum]);
+musicLoop();
 	function musicLoop(){
 		var timerAudio = setInterval(function(){
 			if(oaudio.ended){	
@@ -103,7 +103,8 @@ $(function(){
 		},1000);
 	}
 	$('#rotateImg').click(function(){
-		musicNum++;	
+		musicNum++;
+		musicNum = musicNum % arrMusic.length;
 		$('#audio').attr('src','music/'+arrMusic[musicNum]);
 	});
 

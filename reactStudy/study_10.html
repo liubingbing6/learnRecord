@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>
+</head>
+<body>
+    <div id="contener"></div>
+</body>
+<script type="text/babel">
+    function BoilingVerdict(props) {
+        if (props.celsius >= 100) {
+            return <p>水会烧开</p>;
+        }
+        return <p>水不会烧开</p>;
+    }
+    const scaleNames = {
+        c: 'Celsius',
+        f: 'Fahrenheit'
+    };
+
+    class TemperatureInput extends React.Component {
+        constructor(props) {
+            super(props);
+            this.handleChange = this.handleChange.bind(this);
+            this.state = {temperature: ''};
+        }
+
+        handleChange(e) {
+            this.setState({temperature: e.target.value});
+        }
+
+        render() {
+            const temperature = this.state.temperature;
+            const scale = this.props.scale;
+            return (
+                    <fieldset>
+                        <legend>Enter temperature in {scaleNames[scale]}:</legend>
+                        <input value={temperature}
+                               onChange={this.handleChange} />
+                    </fieldset>
+            );
+        }
+    }
+    class Calculator extends React.Component {
+        render() {
+            return (
+                    <div>
+                        <TemperatureInput scale="c" />
+                        <TemperatureInput scale="f" />
+                    </div>
+            );
+        }
+    }
+    ReactDOM.render(<Calculator />,document.getElementById('contener'));
+</script>
+</html>

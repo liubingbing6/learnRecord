@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>
+</head>
+<body>
+    <div id="contener"></div>
+</body>
+<script type="text/babel">
+    function itear(num) {
+        console.log(num);
+        if(num <=0) return;
+        itear(num-1);
+    }
+//    itear(10);
+    var countDown = function(value,fn){
+        fn(value);
+        return (value>0)?countDown(value-1,fn):value;
+    }
+//    countDown(10,value=>console.log(value));
+    //n! = 1*2*3
+    var itearD = function(num,fn){
+        fn(num,num-1);
+        if(num<=1) return 1;
+        return num+itearD(num-1,fn);
+    }
+    var n = num=> num<=1?num*n(num-1):1;
+    console.log(n(5));
+//    console.log(itearD(5));
+    /*console.log(itearD(5,function (s, v) {
+        console.log(s+v);
+    }));*/
+
+    let items = [
+        "1 lb salmon",
+        "2 cup Plin Nutls",
+        "3 covers of Grarelic"
+    ];
+    const Ingre = props => React.createElement("ul",{className:"ingredients"},props.items.map((ingredient,i)=> React.createElement('li',{key:i},ingredient)));
+
+    ReactDOM.render(<Ingre items={items} />,document.getElementById('contener'));
+</script>
+</html>

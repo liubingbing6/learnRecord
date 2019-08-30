@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .container{
+           /* height:100px;*/
+            display:grid;
+            grid-template-rows: auto;
+            grid-template-columns: 100px auto 50px;
+        }
+        .l{
+            background: #eee;
+        }
+        .m{
+            background: #409EFF;
+            height:300px;
+        }
+        .r{
+            background: #21ab45;
+        }
+    </style>
+</head>
+<body>
+<!--实现三列布局 子div按照中间 左边 右边进行布局-->
+    <div class="container">
+        <div class="l">左边</div>
+        <div class="m">中间5</div>
+        <div class="r">中间</div>
+    </div>
+</body>
+
+<script>
+
+</script>
+</html>

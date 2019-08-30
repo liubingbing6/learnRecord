@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>
+</head>
+<body>
+    <div id="contener"></div>
+</body>
+<script type="text/babel">
+    function LoginInButton(props){
+        return(
+                <button onClick={props.onClick}>Login</button>
+        )
+    }
+    function LoginOutButton(props){
+        return(
+                <button onClick={props.onClick}>Logout</button>
+        )
+    }
+    function UserGreeting(props) {
+        return <h1>Welcome back!</h1>;
+    }
+
+    function GuestGreeting(props) {
+        return <h1>Please sign up.</h1>;
+    }
+    function Greeting(props){
+        const isLoggedIn = props.isLoggedIn;
+        if(isLoggedIn){
+            return <UserGreeting/>
+        }
+        return <GuestGreeting/>;
+    }
+    class LoginControl extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {isLoginIn:true}
+        }
+        handleLoginInClick(){
+            this.setState({
+                isLoginIn:true
+            })
+        }
+        handleLoginOutClick(){
+            this.setState({
+                isLoginIn:false
+            })
+        }
+        render(){
+            const isLoggin = this.state.isLoginIn;
+
+            let button = null;
+            if(isLoggin){
+                button = <LoginOutButton onClick={(e)=>this.handleLoginOutClick()}/>
+//                button = this.loginInButton.bind(this.handleLoginInClick);
+            }else{
+                button = <LoginInButton onClick={this.handleLoginInClick.bind(this)}/>
+            }
+            return (
+                <div>
+                    <Greeting isLoggedIn={isLoggin}/>
+                    {button}
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<LoginControl/>,document.getElementById('contener'));
+</script>
+</html>

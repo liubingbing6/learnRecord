@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://cdn.bootcss.com/pubsub-js/1.7.0/pubsub.js"></script>-->
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .red{
+            color:red;
+        }
+        #js_ul{
+            width:800px;
+            margin:30px auto;
+        }
+        .header{
+            width:100%;
+            height:36px;
+        }
+        .header>input{
+            height:100%;
+            width:100%;
+            font-size: 24px;
+            padding-left:10px;
+        }
+        .tip{
+            height:30px;
+            padding:20px;
+        }
+        .computed{
+            text-decoration: line-through;
+        }
+        ul{
+            list-style:none;
+        }
+        ul>li{
+            width:100%;
+            height:36px;
+            line-height:36px;
+        }
+        ul>li span{
+            display: inline-block;
+            margin:0 100px;
+        }
+        .link>a{
+            display:inline-block;
+            width:120px;
+            height:30px;
+            text-align: center;
+            line-height:30px;
+        }
+        .active{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="js_ul">
+        <div class="header">
+            <input type="text"
+                   placeholder="请输入值，回车即可添加"
+                   v-on:keyup.enter="todoList"
+                   v-model="todo"
+            >
+        </div>
+        <div class="tip" v-show="!list.length">当前没有数据！</div>
+        <div class="link">
+            <a href="#all" :class="{active:visibility=='all'}">所有任务</a>
+            <a href="#finish" :class="{active:visibility=='finish'}">未完成的任务</a>
+            <a href="#unfinish" :class="{active:visibility=='unfinish'}">已完成任务</a>
+        </div>
+        <ul>
+            <li v-for="val in filterListed">
+                <div v-show="tempTodo !== val">
+                    <input type="checkbox" name="" id="" v-model="val.isChecked">
+                    <span v-bind:class="{computed: val.isChecked}" v-on:dblclick="editTodo(val)">{{val.title}}</span>
+                    <button v-on:click="deleteTodo(val)">删除</button>
+                </div>
+                <input type="text" v-foucs="tempTodo === val" v-show="tempTodo === val" v-model="val.title" v-on:blur="saveEdit(val,$event)">
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+
+    var store = {
+        setItem(key,value){
+            localStorage.setItem(key,JSON.stringify(value));
+        },
+        getItem(key){
+            return JSON.parse(localStorage.getItem(key)) || [];
+        }
+    };
+    var list = store.getItem('liubb');
+
+    function watchHashChange() {
+        var hash = window.location.hash.slice(1);
+        vm.visibility = hash;
+    }
+    window.addEventListener('hashchange',watchHashChange);
+/*    var list = [
+        {
+            title:'one',
+            isChecked:true,
+        },
+        {
+            title:'two',
+            isChecked:false,
+        }
+    ]*/
+    var vm = new Vue({
+        el:"#js_ul",
+        data:{
+            list:list,
+            todo:'',
+            tempTodo:'',
+            visibility:'all'//通过hash判断页面内容的改变
+        },
+        methods:{
+            todoList:function () {
+                this.list.push({
+                    title:this.todo,
+                    isChecked:false
+                });
+                this.todo = '';
+            },
+            deleteTodo:function (name) {
+                var index = this.list.indexOf(name);
+                this.list.splice(index,1);
+            },
+            editTodo:function (data) {
+                this.tempTodo = data;
+            },
+            saveEdit:function (data,$ev) {
+                data.title = $ev.target.value;
+                this.tempTodo = '';
+            }
+        },
+        computed:{//计算属性
+            filterListed:function(){
+                var filter = {
+                    all:function (list) {
+                        return list;
+                    },
+                    finish:function (list) {
+                        return list.filter(function (item) {
+                            return !item.isChecked;
+                        });
+                    },
+                    unfinish:function (list) {
+                        return list.filter(function (item) {
+                            return item.isChecked;
+                        });
+                    }
+                }
+                return filter[this.visibility]?filter[this.visibility](this.list):list;
+            }
+        },
+        watch:{
+            /*list:function () {  //浅监控
+                store.setItem('liubb',this.list);
+            }*/
+            list:{
+                handler:function () {
+                    store.setItem('liubb',this.list);
+                },
+                deep:true
+            }
+        },
+        directives:{
+            "foucs":{
+                update(el,binding) {
+                    if(binding.value){
+                        el.focus();
+                        console.log(el);
+                    }
+                }
+            }
+        }
+    });
+</script>
+</html>

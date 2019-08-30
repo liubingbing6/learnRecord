@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        section{
+            width: 500px;
+            height: 500px;
+            background: black;
+            margin: 150px auto;
+            border: 1px solid #000;
+            perspective: 500px;
+        }
+        section:hover #box{
+            transform: rotateX(40deg);
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: red;
+            transition: 1s;
+            margin: 150px auto;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div id="box"></div>
+
+    </section>
+    
+</body>
+</html>

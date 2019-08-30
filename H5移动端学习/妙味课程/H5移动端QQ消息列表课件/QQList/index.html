@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript">
+(function(){
+	var html = document.documentElement;
+	var htmlw = html.clientWidth;
+	html.style.fontSize = htmlw/10.8 + "px";
+})();	
+</script>
+</head>
+<body>
+<header id="header"></header>
+<div id="main">
+	<div id="swiper">
+		<div id="load">
+			<span class="loadImg"></span>
+			<span class="loadImg2"></span>
+			<span class="loadText">下拉刷新</span>
+		</div>
+		<ul id="list">
+		</ul>
+	</div>
+</div>
+<footer id="footer"></footer>	
+<script type="text/javascript" src="js/miaov.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

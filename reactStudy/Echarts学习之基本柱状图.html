@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #container{
+            background: #ddd;
+            margin:30px auto;
+            width:500px;
+            height:250px;
+        }
+    </style>
+</head>
+<body>
+<!--D3学习-->
+    <div id="container"></div>
+</body>
+
+<script src="./script/echarts.js"></script>
+<script>
+    let demo = [
+        {
+            name:'规则pass',
+            val:890
+        },
+        {
+            name:'规则qq',
+            val:190
+        },
+        {
+            name:'规则cc',
+            val:230
+        },
+    ];
+    let newDemoData = [];
+    let newDemo = demo.map((item)=>{
+//        console.log(item.name);
+        newDemoData.push(item.val);
+        return item.name;
+    });
+var myChart = echarts.init(document.getElementById('container'));
+var option = {
+    title:{
+        text:'liubb Echarts入门'
+    },
+ /*   tooltip:{},*/
+    legend:{
+        data:['销量']
+    },
+    yAxis:{
+        data:newDemo
+    },
+    xAxis:{},
+    series:[{
+        name:'销量',
+        type:'bar',
+        data:newDemoData,
+        label: {
+            normal: {
+                show: true,
+                /*formatter: '{b}'*/
+            }
+        },
+    }]
+};
+myChart.setOption(option);
+</script>
+</html>

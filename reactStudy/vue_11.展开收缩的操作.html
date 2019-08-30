@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.min.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        #app{width:800px;margin:30px auto;}
+        mark{margin:0 10px;}
+        nav{margin:10px 0;}
+        ul{list-style:none}
+        ul li>a{display:inline-block;width:40px;height:30px;text-align:center;}
+        .active{background:#ff4343}
+
+        .page{float: left;margin-right:20px;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <section>
+        <div class="page" v-for="item,index in tabData">
+            <h2 @click="showHandle(index)">{{item.title}}</h2>
+            <ul v-if="checked === index">
+                <li v-for="option,j in item.list">
+                    <a href="javascript:;">{{option}}</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<script>
+
+    let tabData = [
+        {
+            title:'新闻',
+            list:['a','b','c','d']
+        },
+        {
+            title:'娱乐',
+            list:['A','B','C','D']
+        },
+        {
+            title:'社会',
+            list:['aa','bb','cc','dd']
+        },
+        {
+            title:'贵阳',
+            list:['洋芋','土豆','地瓜']
+        }
+    ]
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            tabData:tabData,
+            checked:''
+        },
+        methods:{
+            showHandle(index){
+                this.checked = this.checked === index ? '':index;
+            }
+        }
+    });
+</script>
+</body>
+</html>

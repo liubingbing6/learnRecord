@@ -1,0 +1,70 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+    <style>
+        .wrap{
+            width:42px;
+            height:20px;
+        }
+        input{
+            display: none;
+        }
+        label{
+            display: block;
+            border:1px solid #888;
+            height:20px;
+            border-radius: 15px;
+            transition: .3s;
+        }
+        label .move{
+            display: block;
+            width:20px;
+            height:20px;
+            box-shadow: 1px 1px 1px #ccc;
+            border-radius: 50%;
+            background: #fff;
+            transition: .3s;
+            overflow: hidden;
+        }
+        input:checked+label{
+            background: #14e014;
+        }
+        input:checked+label .move{
+            transform: translateX(20px);
+            box-shadow: none;
+        }
+        .move span{
+            width:40px;
+            display: block;
+            height:20px;
+            line-height: 20px;
+            transition: .3s;
+
+        }
+        input:checked+label .move span{
+            transform: translateX(-20px);
+        }
+        em{
+            text-align: center;
+            width:50%;
+            font-size: 12px;
+            font-style: normal;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+      <input id="checkbox" type="checkbox">
+      <label for="checkbox">
+          <span class="move">
+              <span>
+                  <em>on</em>
+                  <em>off</em>
+              </span>
+          </span>
+      </label>
+  </div>
+</body>
+</html>
